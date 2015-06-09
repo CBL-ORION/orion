@@ -1,3 +1,6 @@
+## Setup external/ data
+mkdir ../external && ln -s ../external
+
 ## Vaa3D
 
 ./tool/external/vaa3d/clone-vaa3d
