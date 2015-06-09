@@ -1,0 +1,32 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+mkdir -p vaa3d/src; cd vaa3d/src
+
+if [ "$1" = "update" ]; then
+	cd vaa3d_tools
+		git svn fetch
+		git rebase git-svn
+
+	cd ../
+
+	cd v3d_external
+		git svn fetch
+		git rebase git-svn
+else
+	git svn clone https://svn.janelia.org/penglab/projects/vaa3d/trunk v3d_external
+	git svn clone https://svn.janelia.org/penglab/projects/vaa3d_tools vaa3d_tools
+
+	# Setup Symbolic Directory links for Building Plugins
+	cd vaa3d_tools
+	ln -s -T ../v3d_external/v3d_main v3d_main
+	ln -s -T ../v3d_external/bin bin
+	cd ../v3d_external
+	ln -s -T ../vaa3d_tools/released_plugins released_plugins_more
+
+	git remote add gh-mirror git@github.com:zmughal/Vaa3D-mirror.git
+	git fetch gh-mirror
+fi

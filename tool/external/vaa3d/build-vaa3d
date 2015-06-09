@@ -1,0 +1,92 @@
+#!/bin/bash
+set -e
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+TOP=`pwd -P`
+function qt_version_down_install() {
+	VERSION="$1"
+	URL="$2"
+
+	mkdir -p Qt; cd Qt # external/dep/QT
+	QT_DIR=$(pwd -P)
+
+	# Download Qt and build it {{{
+	# via <https://download.qt.io/archive/qt/>
+	if [ ! -f "qt-everywhere-opensource-src-${VERSION}.tar.gz" ]; then
+		wget -c "$URL"
+	fi
+	cd $QT_DIR
+	QT_SRC_DIR=$QT_DIR/qt-everywhere-opensource-src-${VERSION}
+	QT_BUILT_DIR=$QT_DIR/Qt-${VERSION}
+	export PATH="$QT_BUILT_DIR/bin:$PATH"
+	if [ ! -d "$QT_SRC_DIR" ]; then
+		# Extract it
+		tar xzvf qt-everywhere-opensource-src-${VERSION}.tar.gz
+
+		# Now build it
+		cd "$QT_SRC_DIR"
+		./configure -prefix "$QT_BUILT_DIR" && make && make install
+	fi #}}}
+}
+
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+[ -d dep/ ]  || mkdir -p dep/; cd dep
+
+# Clean out Vaa3D {{{
+if [ "$VAA3D_CLEAN" = 1 ]; then
+	cd $TOP/external/vaa3d/src/v3d_external
+	git clean -dxf
+	cd $TOP/external/vaa3d/src/vaa3d_tools
+	git clean -dxf
+fi
+#}}}
+
+cd $TOP/external/dep
+
+# <https://code.google.com/p/vaa3d/wiki/BuildVaa3D>
+
+# Qt {{{
+# Alternative on Debian:
+#     apt-get install libqt4-dev
+if !which qmake > /dev/null || [ $VAA3D_USE_OWN_QT = 1 ] ; then
+	#qt_version_down_install '4.8.6' 'https://download.qt.io/archive/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz'
+	#qt_version_down_install '4.8.7' 'http://download.qt.io/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz'
+	qt_version_down_install '4.7.4' "https://download.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz"
+	#qt_version_down_install '4.7.1' "https://download.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.1.tar.gz"
+
+	# Pre-built Qt-4.7.1#{{{
+	# This is for Mac OSX
+	# --strip-components=3 :  usr/local/Trolltech/Qt-4.7.1 -> Qt-4.7.1
+	if [ "$(uname)" == "Darwin" ]; then
+		cd $QT_DIR
+		wget -c 'http://home.penglab.com/tmp/qt7.tar.gz'
+		QT_BUILT_4_7_1_DIR=$QT_DIR/Qt-4.7.1
+		if [ ! -d "$QT_BUILT_4_7_1_DIR" ]; then
+			tar xvf qt7.tar.gz  --strip-components=3
+		fi
+		export PATH="$QT_BUILT_4_7_1_DIR/bin:$PATH"
+	fi #}}}
+fi #}}}
+
+echo "# Checking qmake version"
+echo "# Should be Qt4"
+qmake --version
+echo "===="
+
+
+# Setup Symbolic Directory links for Building Plugins {{{
+cd $TOP/external/vaa3d/src/vaa3d_tools
+ln -fs -T ../v3d_external/v3d_main v3d_main
+ln -fs -T ../v3d_external/bin bin
+cd $TOP/external/vaa3d/src/v3d_external
+ln -fs -T ../vaa3d_tools/released_plugins released_plugins_more
+#}}}
+
+# Build Vaa3D {{{
+cd $TOP/external/vaa3d/src/v3d_external
+#./build.linux -B -j4
+./build.linux -j4
+#}}}
+
+# vim: fdm=marker

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+mkdir -p vaa3d; cd vaa3d
+
+# http://www.nitrc.org/projects/v3d/
+# http://home.penglab.com/proj/vaa3d/Vaa3D/About_Vaa3D.html
+# https://code.google.com/p/vaa3d/wiki/BuildVaa3D
+# https://code.google.com/p/vaa3d/wiki/CompilePlugins
+# https://code.google.com/p/vaa3d/wiki/PluginAPI
+# https://code.google.com/p/vaa3d/wiki/PluginList
+# https://code.google.com/p/vaa3d/wiki/Vaa3DNeuron1
+# http://penglab.janelia.org/proj/v3d/peng-v3d-testdata.zip
+#
+# svn co https://svn.janelia.org/penglab/projects/vaa3d/trunk v3d_external
+# svn co https://svn.janelia.org/penglab/projects/vaa3d_tools vaa3d_tools
+
+mkdir -p pre-built/linux
+mkdir -p pre-built/mswin64
+
+# NOTE: it may be best to build Vaa3D from source on Linux
+wget -c -pP info -nH --cut-dirs=3 -k 'http://home.penglab.com/proj/vaa3d/Vaa3D/Download.html'
+wget -c -P pre-built/linux 'http://home.penglab.com/proj/vaa3d/v2921/vaa3d_redhat_fedora_ubuntu_64bit_v2.921.zip'
+wget -c -P pre-built/mswin64 'http://home.penglab.com/proj/vaa3d/v2921/vaa3d_bin_msvc_64bit_v2921_a.zip'
