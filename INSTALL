@@ -1,4 +1,4 @@
 ## Vaa3D
 
 ./tool/external/vaa3d/clone-vaa3d
-./tool/external/vaa3d/build-vaa3d
+VAA3D_USE_OWN_QT=1 ./tool/external/vaa3d/build-vaa3d
