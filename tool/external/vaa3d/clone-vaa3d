@@ -6,6 +6,10 @@ cd "$CURDIR/../../.."
 cd external/ || ( echo "Need external/ symlink/directory" && exit )
 mkdir -p vaa3d/src; cd vaa3d/src
 
+if ! git svn; then
+	echo "Requires git-svn"; exit
+fi
+
 if [ "$1" = "update" ]; then
 	cd vaa3d_tools
 		git svn fetch

@@ -30,6 +30,7 @@ function qt_version_down_install() {
 	fi #}}}
 }
 
+[ -d external -o -L external ] || mkdir external
 cd external/ || ( echo "Need external/ symlink/directory" && exit )
 [ -d dep/ ]  || mkdir -p dep/; cd dep
 
@@ -49,9 +50,9 @@ cd $TOP/external/dep
 # Qt {{{
 # Alternative on Debian:
 #     apt-get install libqt4-dev
-if !which qmake > /dev/null || [ $VAA3D_USE_OWN_QT = 1 ] ; then
+if ! which qmake > /dev/null || [ $VAA3D_USE_OWN_QT = 1 ] ; then
 	#qt_version_down_install '4.8.6' 'https://download.qt.io/archive/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz'
-	#qt_version_down_install '4.8.7' 'http://download.qt.io/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz'
+	#qt_version_down_install '4.8.7' 'https://download.qt.io/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz'
 	qt_version_down_install '4.7.4' "https://download.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz"
 	#qt_version_down_install '4.7.1' "https://download.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.1.tar.gz"
 
