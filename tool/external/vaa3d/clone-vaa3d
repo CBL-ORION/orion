@@ -19,6 +19,7 @@ if [ "$1" = "update" ]; then
 
 	cd v3d_external
 		git svn fetch
+		git checkout master
 		git rebase git-svn
 else
 	git svn clone https://svn.janelia.org/penglab/projects/vaa3d/trunk v3d_external
@@ -32,5 +33,5 @@ else
 	ln -s -T ../vaa3d_tools/released_plugins released_plugins_more
 
 	git remote add gh-mirror git@github.com:zmughal/Vaa3D-mirror.git
-	git fetch gh-mirror
+	git fetch gh-mirror && git checkout fix/unix-build
 fi
