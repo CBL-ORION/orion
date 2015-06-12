@@ -5,3 +5,8 @@ mkdir ../external && ln -s ../external
 
 ./tool/external/vaa3d/clone-vaa3d
 VAA3D_USE_OWN_QT=1 ./tool/external/vaa3d/build-vaa3d
+
+
+## Run Vaa3D
+
+./external/vaa3d/src/v3d_external/bin/vaa3d &
