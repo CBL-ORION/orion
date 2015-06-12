@@ -10,4 +10,5 @@ cmake_install.cmake
 
 /ComputeFrangi/V01/ComputeEigenValue_Sorted_Frangi
 /ComputeFrangi/V01/Makefile
+/ComputeFrangi/ComputeEigenValue_Sorted_Frangi
  
