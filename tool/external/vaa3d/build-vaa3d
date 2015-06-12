@@ -85,6 +85,7 @@ ln -fs -T ../vaa3d_tools/released_plugins released_plugins_more
 #}}}
 
 # Build Vaa3D {{{
+export LD_LIBRARY_PATH="$QT_BUILT_DIR/lib:$LD_LIBRARY_PATH"
 cd $TOP/external/vaa3d/src/v3d_external
 #./build.linux -B -j4
 ./build.linux -j4
