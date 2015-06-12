@@ -8,7 +8,9 @@ CMakeFiles
 ITKIOFactoryRegistration
 cmake_install.cmake
 
-/ComputeFrangi/V01/ComputeEigenValue_Sorted_Frangi
-/ComputeFrangi/V01/Makefile
+/ComputeFrangi/Makefile
 /ComputeFrangi/ComputeEigenValue_Sorted_Frangi
  
+/data
+
+
