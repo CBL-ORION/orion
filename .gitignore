@@ -2,3 +2,15 @@
 /external/dep/Qt
 /external/vaa3d/src/v3d_external
 /external/vaa3d/src/vaa3d_tools
+
+CMakeCache.txt
+CMakeFiles
+ITKIOFactoryRegistration
+cmake_install.cmake
+
+/ComputeFrangi/Makefile
+/ComputeFrangi/ComputeEigenValue_Sorted_Frangi
+ 
+/data
+
+
