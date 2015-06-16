@@ -19,6 +19,8 @@
 #include "itkImageFileWriter.h"
 //Here goes the function for Sato 
 
+#include "EigenSato.h"
+
 OutputImageArrayType ComputeSato( InternalImageType::Pointer inputVolume, float sigma)
 {
      typedef   itk::HessianRecursiveGaussianImageFilter< InternalImageType >       HessianFilterType;

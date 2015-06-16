@@ -18,6 +18,8 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 
+#include "EigenFrangi.h"
+
 OutputImageArrayType ComputeFrangi( InternalImageType::Pointer inputVolume, float sigma ) {
 	typedef   itk::HessianRecursiveGaussianImageFilter< InternalImageType >    HessianFilterType;
 	typedef   HessianFilterType::OutputImageType                               HessianImageType;

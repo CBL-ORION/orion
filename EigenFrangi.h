@@ -23,6 +23,7 @@
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h" 
 
+#include "FilterCommon.h"
 
 // This is the content of the .h file, which is where the declarations go
 OutputImageArrayType ComputeFrangi( InternalImageType::Pointer inputVolume, float sigma );
