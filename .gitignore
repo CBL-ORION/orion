@@ -10,7 +10,11 @@ cmake_install.cmake
 
 /ComputeFrangi/Makefile
 /ComputeFrangi/ComputeEigenValue_Sorted_Frangi
+
+ComputeFilter
  
 /data
 
 
+*~
+*.a
