@@ -6,7 +6,7 @@ cd "$CURDIR/../../.."
 cd external/ || ( echo "Need external/ symlink/directory" && exit )
 mkdir -p vaa3d/src; cd vaa3d/src
 
-if ! git svn; then
+if ! git svn --help > /dev/null 2>&1; then
 	echo "Requires git-svn"; exit
 fi
 
