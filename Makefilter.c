@@ -28,7 +28,7 @@ int flipx, flipy, flipz;
 
 int flag = 1;
 
-double hdaf(int ndaf, float sigma, float Kxyz);
+float hdaf(int ndaf, float sigma, float Kxyz, float vec3d);
 
 
 int main() {
@@ -70,7 +70,9 @@ int main() {
   
 
  float Kxyz[arraylenx][arrayleny][arraylenz];
-  
+ 
+ float vec3d[arraylenx][arrayleny][arraylenz];
+ 
   for( ix = 0; ix < arraylenx; ix++ ) {
     for( iy = 0; iy < arrayleny; iy++ ) {
       for( iz = 0; iz < arraylenz; iz++ ) {
@@ -119,7 +121,8 @@ int main() {
       for(iy=0;iy<nhy;iy++){
 	for(iz=0;iz<nhz;iz++){
 	  
-	  //help from zaki
+	  filt[ix][iy][iz]= hdaf(ndaf,sigma,Kxyz,vec3d) * Kxyz[ix][iy][iz];
+
 	}
       }
     }
@@ -133,9 +136,7 @@ int main() {
     */
   }
 
-
-
-  elseif (flag==2){
+ elseif (flag==2){
 
     //filt=zeros(3,nx,ny,nz);
     
@@ -189,11 +190,11 @@ int main() {
 
 
 
-double hdaf(int ndaf, float  sigma, float Kxyz){
+float hdaf(int ndaf, float  sigma, float Kxyz,float vec3d){
 
     int en = 1;
     int ft[ndaf][1]={0};
-    double val;
+    
     
     ft(0)=1;
     if(n>1){
@@ -206,12 +207,18 @@ double hdaf(int ndaf, float  sigma, float Kxyz){
     }
     
     for(y=0;y<ndaf;y++){
+      for(ix=0;ix<arraylenx;ix++){
+	for(iy=0;iy<arrayleny;iy++){
+	  for(iz=0;iz<arraylenz;iz++){
       
-      en = en + ((pow((Kxyz*sigma*sigma)/2),y) / ft[y]);
+	    en = en + (pow(((Kxyz[ix][iy][iz]*sigma*sigma)/2),y) / ft[y]);
+    
+	    vec3d[ix][iy][iz]=(en * exp((-1.0)*Kxyz[ix][iy][iz]*(sigma*sigma)/2));
+	 
+	  }
+	}
+      }
     }
     
-    val=(en * exp((-1.0)*Kxyz*(sigma*sigma)/2));
-
-    
-    return val;
+    return vec3d;
 }
