@@ -2,7 +2,7 @@
  * This is a test plugin, you can use it as a demo. xyzzy
  * 2015-6-10 : by xyzzy
  */
- 
+
 #include "v3d_message.h"
 #include <vector>
 #include "basic_surf_objs.h"
@@ -19,10 +19,10 @@ struct input_PARA
 };
 
 void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool bmenu);
- 
+
 QStringList XYZZYTestPlugin::menulist() const
 {
-	return QStringList() 
+	return QStringList()
 		<<tr("tracing_menu")
 		<<tr("about");
 }

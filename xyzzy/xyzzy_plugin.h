@@ -2,7 +2,7 @@
  * This is a test plugin, you can use it as a demo. xyzzy
  * 2015-6-10 : by xyzzy
  */
- 
+
 #ifndef __XYZZY_PLUGIN_H__
 #define __XYZZY_PLUGIN_H__
 
