@@ -27,6 +27,7 @@ int flipx, flipy, flipz;
 int flag = 1;
 
 #include "ndarray3.h"
+#include "util.h"
 
 ndarray3* hdaf(int ndaf, float sigma, ndarray3* Kxyz, ndarray3* vec3d);
 
@@ -59,25 +60,20 @@ int main() {
 	ndarray3* Kxyz = ndarray3_create( fx, fy, fz );
 	ndarray3* vec3d = ndarray3_create( fx, fy, fz );
 
-	float vec3d[fx][fy][fz];
-
 	for( ix = 0; ix < fx; ix++ ) {
 		for( iy = 0; iy < fy; iy++ ) {
 			for( iz = 0; iz < fz; iz++ ) {
-			/*
-			Kx[ix][iy][iz] = kx[ix];
-			Ky[ix][iy][iz] = ky[iy];
-			Kz[ix][iy][iz] = kz[iz];
+				/*
+				Kx[ix][iy][iz] = kx[ix];
+				Ky[ix][iy][iz] = ky[iy];
+				Kz[ix][iy][iz] = kz[iz];
 
-			Kxyz[ix][iy][iz] =
-			    Kx[ix][iy][iz]*Kx[ix][iy][iz] // (Kx^2)
-			  + Ky[ix][iy][iz]*Ky[ix][iy][iz]
-			  + Kz[ix][iy][iz]*Kz[ix][iy][iz];
-			*/
-			Kxyz[ix][iy][iz] =
-				kx[ix]*kx[ix]
-				+ ky[iy]*ky[iy]
-				+ kz[iz]*kz[iz];
+				Kxyz[ix][iy][iz] =
+				    Kx[ix][iy][iz]*Kx[ix][iy][iz] // (Kx^2)
+				  + Ky[ix][iy][iz]*Ky[ix][iy][iz]
+				  + Kz[ix][iy][iz]*Kz[ix][iy][iz];
+				*/
+				ndarray3_set(Kxyz,ix,iy,iz,  SQUARED(kx[ix]) + SQUARED(ky[iy]) + SQUARED(kz[iz]) );
 			}
 		}
 	}
