@@ -3,8 +3,10 @@
 
 #include <stdlib.h>
 
+#include "datatype.h"
+
 typedef struct {
-	float* p;
+	pixel_type_t* p;
 	size_t sz[3];
 	int wrap;
 } ndarray3;
@@ -19,9 +21,9 @@ typedef struct {
 ndarray3* ndarray3_create(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
 /** TODO
-    ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
+    ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
  */
-ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
+ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
 
 /***** DESTRUCTORS *****/
 
@@ -34,7 +36,7 @@ void ndarray3_destroy( ndarray3* n );
 /** TODO
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
  */
-#define _INDEX3D(_i, _j, _k, _sz_x, _sz_y, _sz_z)   ((_z*_sz_y+_j) * _sz_x + _i)
+#define _INDEX3D(_i, _j, _k, _sz_x, _sz_y, _sz_z)   ((_k*_sz_y+_j) * _sz_x + _i)
 
 #define _ndarray3_index(_n, _n_i, _n_j, _n_k) \
 ( \
@@ -43,9 +45,9 @@ void ndarray3_destroy( ndarray3* n );
 
 
 /** TODO
-    ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, float value )
+    ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type_t value )
  */
-#define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = val }
+#define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = val } while(0)
 
 /** TODO
     ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
