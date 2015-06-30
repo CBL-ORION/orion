@@ -15,6 +15,8 @@ ComputeFilter
  
 /data
 
+/.build
+/.deps
 
 *~
 *.a
