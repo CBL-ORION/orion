@@ -1,4 +1,4 @@
-#include "ndarray3.h"
+#include "ndarray/ndarray3.h"
 
 ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
 	ndarray3* n = (ndarray3*)malloc( sizeof(ndarray3) );

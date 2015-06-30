@@ -26,7 +26,7 @@ int flipx, flipy, flipz;
 
 int flag = 1;
 
-#include "ndarray3.h"
+#include "ndarray/ndarray3.h"
 #include "util.h"
 
 ndarray3* hdaf(int ndaf, float sigma, ndarray3* Kxyz, ndarray3* vec3d);
