@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+mkdir -p c-tap-harness; cd c-tap-harness
+
+if [ ! -d "c-tap-harness" ]; then
+	git clone git://git.eyrie.org/devel/c-tap-harness.git
+fi
