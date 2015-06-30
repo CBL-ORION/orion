@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-#include "datatype.h"
+#include "config/datatype.h"
 
 typedef struct {
 	pixel_type_t* p;
@@ -14,26 +14,26 @@ typedef struct {
 
 /***** CONSTRUCTORS *****/
 
-/** TODO
+/** TODO document
     ndarray3* ndarray3_create(const size_t sz_x, const size_t sz_y, const size_t sz_z)
  */
 
 ndarray3* ndarray3_create(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
-/** TODO
+/** TODO document
     ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
  */
 ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
 
 /***** DESTRUCTORS *****/
 
-/** TODO
+/** TODO document
     ndarray3_destroy( ndarray3* n )
  */
 
 void ndarray3_destroy( ndarray3* n );
 
-/** TODO
+/** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
  */
 #define _INDEX3D(_i, _j, _k, _sz_x, _sz_y, _sz_z)   ((_k*_sz_y+_j) * _sz_x + _i)
@@ -44,12 +44,12 @@ void ndarray3_destroy( ndarray3* n );
 )
 
 
-/** TODO
+/** TODO document
     ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type_t value )
  */
 #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = val } while(0)
 
-/** TODO
+/** TODO document
     ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
  */
 #define ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
