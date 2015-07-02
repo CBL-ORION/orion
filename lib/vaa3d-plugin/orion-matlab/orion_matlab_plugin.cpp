@@ -1,14 +1,14 @@
-/* xyzzy_plugin.cpp
- * This is a test plugin, you can use it as a demo. xyzzy
- * 2015-6-10 : by xyzzy
+/* orion_matlab_plugin.cpp
+ * This is a test plugin, you can use it as a demo. orion_matlab
+ * 2015-6-10 : by orion_matlab
  */
 
 #include "v3d_message.h"
 #include <vector>
 #include "basic_surf_objs.h"
 
-#include "xyzzy_plugin.h"
-Q_EXPORT_PLUGIN2(xyzzy, XYZZYTestPlugin);
+#include "orion_matlab_plugin.h"
+Q_EXPORT_PLUGIN2(orion_matlab, ORION_MATLABTestPlugin);
 
 using namespace std;
 
@@ -20,21 +20,21 @@ struct input_PARA
 
 void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PARA &PARA, bool bmenu);
 
-QStringList XYZZYTestPlugin::menulist() const
+QStringList ORION_MATLABTestPlugin::menulist() const
 {
 	return QStringList()
 		<<tr("tracing_menu")
 		<<tr("about");
 }
 
-QStringList XYZZYTestPlugin::funclist() const
+QStringList ORION_MATLABTestPlugin::funclist() const
 {
 	return QStringList()
 		<<tr("tracing_func")
 		<<tr("help");
 }
 
-void XYZZYTestPlugin::domenu(const QString &menu_name, V3DPluginCallback2 &callback, QWidget *parent)
+void ORION_MATLABTestPlugin::domenu(const QString &menu_name, V3DPluginCallback2 &callback, QWidget *parent)
 {
 	if (menu_name == tr("tracing_menu"))
 	{
@@ -45,12 +45,12 @@ void XYZZYTestPlugin::domenu(const QString &menu_name, V3DPluginCallback2 &callb
 	}
 	else
 	{
-		v3d_msg(tr("This is a test plugin, you can use it as a demo. xyzzy. "
-			"Developed by xyzzy, 2015-6-10"));
+		v3d_msg(tr("This is a test plugin, you can use it as a demo. orion_matlab. "
+			"Developed by orion_matlab, 2015-6-10"));
 	}
 }
 
-bool XYZZYTestPlugin::dofunc(const QString & func_name, const V3DPluginArgList & input, V3DPluginArgList & output, V3DPluginCallback2 & callback,  QWidget * parent)
+bool ORION_MATLABTestPlugin::dofunc(const QString & func_name, const V3DPluginArgList & input, V3DPluginArgList & output, V3DPluginCallback2 & callback,  QWidget * parent)
 {
 	if (func_name == tr("tracing_func"))
 	{
@@ -79,8 +79,8 @@ bool XYZZYTestPlugin::dofunc(const QString & func_name, const V3DPluginArgList &
         ////HERE IS WHERE THE DEVELOPERS SHOULD UPDATE THE USAGE OF THE PLUGIN
 
 
-		printf("**** Usage of xyzzy tracing **** \n");
-		printf("vaa3d -x xyzzy -f tracing_func -i <inimg_file> -p <channel> <other parameters>\n");
+		printf("**** Usage of orion_matlab tracing **** \n");
+		printf("vaa3d -x orion_matlab -f tracing_func -i <inimg_file> -p <channel> <other parameters>\n");
         printf("inimg_file       The input image\n");
         printf("channel          Data channel for tracing. Start from 1 (default 1).\n");
 
@@ -172,8 +172,8 @@ void reconstruction_func(V3DPluginCallback2 &callback, QWidget *parent, input_PA
 
     //Output
     NeuronTree nt;
-	QString swc_name = PARA.inimg_file + "_xyzzy.swc";
-	nt.name = "xyzzy";
+	QString swc_name = PARA.inimg_file + "_orion_matlab.swc";
+	nt.name = "orion_matlab";
     writeSWC_file(swc_name.toStdString().c_str(),nt);
 
     if(!bmenu)

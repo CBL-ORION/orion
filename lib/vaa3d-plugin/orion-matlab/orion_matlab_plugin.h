@@ -1,15 +1,15 @@
-/* xyzzy_plugin.h
- * This is a test plugin, you can use it as a demo. xyzzy
- * 2015-6-10 : by xyzzy
+/* orion_matlab_plugin.h
+ * This is a test plugin, you can use it as a demo. orion_matlab
+ * 2015-6-10 : by orion_matlab
  */
 
-#ifndef __XYZZY_PLUGIN_H__
-#define __XYZZY_PLUGIN_H__
+#ifndef __ORION_MATLAB_PLUGIN_H__
+#define __ORION_MATLAB_PLUGIN_H__
 
 #include <QtGui>
 #include <v3d_interface.h>
 
-class XYZZYTestPlugin : public QObject, public V3DPluginInterface2_1
+class ORION_MATLABTestPlugin : public QObject, public V3DPluginInterface2_1
 {
 	Q_OBJECT
 	Q_INTERFACES(V3DPluginInterface2_1);
