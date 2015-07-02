@@ -1,4 +1,4 @@
-include config.mk
+include make/config.mk
 
 HASHMARK = \#
 
@@ -29,10 +29,7 @@ LIB_OBJ:= $(call OBJ_PATHSUBST,$(LIB_SRC))
 
 TEST_OBJ:= $(call TEST_PATHSUBST,$(TEST))
 
-FILTER_OBJ := $(BUILDDIR)/vesselness-filter/libEigenFrangi.a \
-	      $(BUILDDIR)/vesselness-filter/libEigenSato.a
-FILTER_BIN := $(BINDIR)/compute-filter/ComputeFilter$(EXEEXT)
-
+include make/vesselness-filter.mk
 
 ## Rules
 all: $(OUTPUT_DIRS) $(LIB_OBJ) $(FILTER_OBJ) $(FILTER_BIN)
@@ -55,20 +52,6 @@ $(BUILDDIR)/%.o : $(LIBDIR)/%.c
 	@$(MKDIR_BUILD)
 	$(COMPILE.c) -o $@ $<
 
-## Filters
-
-$(BUILDDIR)/vesselness-filter/libEigenFrangi.a: $(LIBDIR)/vesselness-filter/frangi/EigenFrangi.cxx
-	@$(MKDIR_BUILD)
-	$(CMAKE.generate) -B$(BUILDDIR)/vesselness-filter -H$(LIBDIR)/vesselness-filter
-	$(MAKE) -C$(BUILDDIR)/vesselness-filter
-$(BUILDDIR)/vesselness-filter/libEigenSato.a: $(LIBDIR)/vesselness-filter/sato/EigenSato.cxx
-	@$(MKDIR_BUILD)
-	$(CMAKE.generate) -B$(BUILDDIR)/vesselness-filter -H$(LIBDIR)/vesselness-filter
-	$(MAKE) -C$(BUILDDIR)/vesselness-filter
-
-$(BINDIR)/compute-filter/ComputeFilter$(EXEEXT): $(SRCDIR)/compute-filter/ComputeFilter.cxx $(FILTER_OBJ)
-	$(MKDIR_BIN)
-	$(CMAKE.generate) -B$(BINDIR)/compute-filter -H$(SRCDIR)/compute-filter
-	$(MAKE) -C$(BINDIR)/compute-filter
-
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
+
+include make/vesselness-filter-rules.mk

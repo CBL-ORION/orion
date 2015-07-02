@@ -11,3 +11,9 @@ TEST_LDLIBS   := -ltap
 CPPFLAGS := $(CPPFLAGS) $(TEST_CPPFLAGS)
 LDFLAGS  := $(LDFLAGS)  $(TEST_LDFLAGS)
 LDLIBS   := $(LDLIBS)   $(TEST_LDLIBS)
+
+
+## Vaa3D
+VAA3D_PATH := external/vaa3d/src/v3d_external
+
+FULL_VAA3D_PATH := `cd ${VAA3D_PATH}; pwd`
