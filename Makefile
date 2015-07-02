@@ -26,10 +26,8 @@ MKDIR_BUILD = mkdir -p `dirname $(call OBJ_PATHSUBST,$<)`
 MKDIR_BIN   = mkdir -p `dirname $(call BIN_PATHSUBST,$<)`
 
 LIB_OBJ:= $(call OBJ_PATHSUBST,$(LIB_SRC))
-#LIB_OBJ:= $(patsubst $(LIBDIR)/%.c,$(BUILDDIR)/%.o,$(LIB_SRC))
 
 TEST_OBJ:= $(call TEST_PATHSUBST,$(TEST))
-#TEST_OBJ:= $(patsubst $(TESTDIR)/%.c,$(BUILDDIR)/%.o,$(TEST))
 
 FILTER_OBJ := $(BUILDDIR)/vesselness-filter/libEigenFrangi.a \
 	      $(BUILDDIR)/vesselness-filter/libEigenSato.a
@@ -49,7 +47,7 @@ $(OUTPUT_DIRS): # multiple targets
 ### Clean
 clean:
 	find -type f -name '*.o' -delete
-	rm -Rf .build/ .deps/
+	rm -Rf $(OUTPUT_DIRS)
 
 ### Implict rules
 $(BUILDDIR)/%.o : $(LIBDIR)/%.c
