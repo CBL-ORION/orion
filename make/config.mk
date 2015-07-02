@@ -44,5 +44,5 @@ FULL_BUILDDIR := `cd ${BUILDDIR}; pwd`
 ### Set variables to pass into CMakeLists.txt
 CMAKEFLAGS := -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
 
-include dep.mk
-include platform.mk
+include make/dep.mk
+include make/platform.mk
