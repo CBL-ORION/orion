@@ -17,6 +17,7 @@ ComputeFilter
 
 /.build
 /.deps
+/bin
 
 *~
 *.a
