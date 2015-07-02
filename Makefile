@@ -30,9 +30,12 @@ LIB_OBJ:= $(call OBJ_PATHSUBST,$(LIB_SRC))
 TEST_OBJ:= $(call TEST_PATHSUBST,$(TEST))
 
 include make/vesselness-filter.mk
+include make/vaa3d-plugin.mk
 
 ## Rules
-all: $(OUTPUT_DIRS) $(LIB_OBJ) $(FILTER_OBJ) $(FILTER_BIN)
+all: $(OUTPUT_DIRS) $(LIB_OBJ) \
+	$(FILTER_OBJ) $(FILTER_BIN) \
+	$(ORION_MATLAB_LIB_OBJ)
 
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
@@ -45,6 +48,7 @@ $(OUTPUT_DIRS): # multiple targets
 clean:
 	find -type f -name '*.o' -delete
 	rm -Rf $(OUTPUT_DIRS)
+	rm $(ORION_MATLAB_LIB_OBJ)
 
 ### Implict rules
 $(BUILDDIR)/%.o : $(LIBDIR)/%.c
@@ -55,3 +59,4 @@ $(BUILDDIR)/%.o : $(LIBDIR)/%.c
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 
 include make/vesselness-filter-rules.mk
+include make/vaa3d-plugin-rules.mk
