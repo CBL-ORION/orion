@@ -68,7 +68,7 @@ $(BUILDDIR)/vesselness-filter/libEigenSato.a: $(LIBDIR)/vesselness-filter/sato/E
 
 $(BINDIR)/compute-filter/ComputeFilter$(EXEEXT): $(SRCDIR)/compute-filter/ComputeFilter.cxx $(FILTER_OBJ)
 	$(MKDIR_BIN)
-	$(CMAKE.generate) -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR} -B$(BINDIR)/compute-filter -H$(SRCDIR)/compute-filter
+	$(CMAKE.generate) -B$(BINDIR)/compute-filter -H$(SRCDIR)/compute-filter
 	$(MAKE) -C$(BINDIR)/compute-filter
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)

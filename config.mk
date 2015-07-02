@@ -41,5 +41,8 @@ OUTPUT_DIRS := $(BUILDDIR) $(DEPDIR) $(BINDIR)
 FULL_LIBDIR := `cd ${LIBDIR}; pwd`
 FULL_BUILDDIR := `cd ${BUILDDIR}; pwd`
 
+### Set variables to pass into CMakeLists.txt
+CMAKEFLAGS := -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
+
 include dep.mk
 include platform.mk
