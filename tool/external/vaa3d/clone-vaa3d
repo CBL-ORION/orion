@@ -32,6 +32,6 @@ else
 	cd ../v3d_external
 	ln -s -T ../vaa3d_tools/released_plugins released_plugins_more
 
-	git remote add gh-mirror git@github.com:zmughal/Vaa3D-mirror.git
+	git remote add gh-mirror git@github.com:CBL-ORION/Vaa3D-mirror.git
 	git fetch gh-mirror && git checkout fix/unix-build
 fi
