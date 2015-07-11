@@ -32,7 +32,7 @@ all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
 test: CPPFLAGS += $(TEST_CPPFLAGS)
-test: LDFLAGS  += $(TEST_LDFLAGS) $(TEST_CPPFLAGS)
+test: LDFLAGS  += $(TEST_LDFLAGS)
 test: LDLIBS   += $(TEST_LDLIBS)
 
 ### Output directories
@@ -55,7 +55,7 @@ $(BUILDDIR)/%.o : $(LIBDIR)/%.c
 
 $(BUILDTESTDIR)/ndarray/ndarray: $(BUILDDIR)/ndarray/ndarray3.o
 
-$(BUILDTESTDIR)/liborion3mat/test: $(TESTDIR)/liborion3mat/test.c ${ORION3MAT_LIB_OBJ}
+$(BUILDTESTDIR)/liborion3mat/test: ${ORION3MAT_LIB_OBJ}
 $(BUILDTESTDIR)/liborion3mat/test: CFLAGS   += $(LIBORION3MAT_CFLAGS)   $(MCR_CFLAGS)
 $(BUILDTESTDIR)/liborion3mat/test: CPPFLAGS += $(LIBORION3MAT_CPPFLAGS) $(MCR_CPPFLAGS)
 $(BUILDTESTDIR)/liborion3mat/test: LDFLAGS  += $(LIBORION3MAT_LDFLAGS)  $(MCR_LDFLAGS)
