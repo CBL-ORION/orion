@@ -1,21 +1,12 @@
+include make/helper.mk
 include make/config.mk
-
-HASHMARK = \#
 
 ## Source files
 BIN_SRC  := src/compute-filter/ComputeFilter.cxx
 LIB_SRC  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/hdaf-filter/Makefilter.c
 TEST := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c
 
-## Dependency generation
-df = $(DEPDIR)/$(*)
-MAKEDEPEND.c = gcc -M $(CPPFLAGS) -o $(df).d $<
-MKDIR_DEPEND.c = mkdir -p `dirname $(df).d`; $(MAKEDEPEND.c); \
-	    $(CP) $(df).d $(df).P; \
-	    sed -e 's/$(HASHMARK).*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-	        -e '/^$$/ d' -e 's/$$/ :/' < $(df).d >> $(df).P; \
-	    $(RM) $(df).d
-
+include make/autodep.mk
 
 ## Target files
 OBJ_PATHSUBST  = $(patsubst $(LIBDIR)/%.c,$(BUILDDIR)/%.o,$(1))
