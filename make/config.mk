@@ -1,6 +1,8 @@
+include make/platform.mk
+
 CPPFLAGS := -Ilib
 CFLAGS   := -std=c11
-LDFLAGS  := -lm
+LDFLAGS  := -lm $(CPPFLAGS)
 CMAKEFLAGS :=
 
 DEBUGFLAGS := -g
@@ -32,6 +34,7 @@ TESTDIR  := lib/t
 
 # output of ${LIBDIR} and ${TESTDIR}
 BUILDDIR := .build
+BUILDTESTDIR := $(BUILDDIR)/t
 
 # output used to build deps information for make(1)
 DEPDIR   := .deps
@@ -45,4 +48,3 @@ FULL_BUILDDIR := `cd ${BUILDDIR}; pwd`
 CMAKEFLAGS := -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
 
 include make/dep.mk
-include make/platform.mk
