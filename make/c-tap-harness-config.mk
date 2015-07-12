@@ -1,0 +1,10 @@
+## Tests
+C_TAP_HARNESS_PATH := external/c-tap-harness/c-tap-harness
+
+#RUNTESTS := $(C_TAP_HARNESS_PATH)/tests/runtest
+RUNTESTS := $(C_TAP_HARNESS_PATH)/tests/runtests
+
+TEST_CFLAGS   :=
+TEST_CPPFLAGS := -I$(C_TAP_HARNESS_PATH) -I$(C_TAP_HARNESS_PATH)/tests
+TEST_LDFLAGS  := -L$(C_TAP_HARNESS_PATH)/tests/tap
+TEST_LDLIBS   := -ltap

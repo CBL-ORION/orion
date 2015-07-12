@@ -20,9 +20,9 @@ LIB_OBJ:= $(call OBJ_PATHSUBST,$(LIB_SRC))
 
 TEST_OBJ:= $(call TEST_PATHSUBST,$(TEST))
 
-include make/vesselness-filter.mk
-include make/vaa3d-plugin.mk
-include make/liborion3mat.mk
+include make/vesselness-filter-config.mk
+include make/vaa3d-plugin-config.mk
+include make/liborion3mat-config.mk
 
 ## Rules
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
