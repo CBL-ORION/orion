@@ -1,14 +1,17 @@
 ## liborion3mat
 ORION3MAT_PATH := external/orion3mat
+
+# The following are relative to ORION3MAT_PATH
 # Functions to make available
-ORION3MAT_MCC_FUNCTION := ${ORION3MAT_PATH}/main/ORION3.m
+ORION3MAT_MCC_FUNCTION := main/ORION3.m
 # Paths that should be in the ctfroot
-ORION3MAT_MCC_ADD_PATH := -a ${ORION3MAT_PATH}
+ORION3MAT_MCC_ADD_PATH := -a .
 
 ORION3MAT_LIB_BASE := orion3mat
 ORION3MAT_LIB_NAME := lib${ORION3MAT_LIB_BASE}
 ORION3MAT_LIB_OBJ_PATH := $(BUILDDIR)/${ORION3MAT_LIB_NAME}
 ORION3MAT_LIB_OBJ  := ${ORION3MAT_LIB_OBJ_PATH}/${ORION3MAT_LIB_NAME}.${SO}
+FULL_ORION3MAT_LIB_OBJ_PATH := $(shell pwd)/${ORION3MAT_LIB_OBJ_PATH}
 
 # List of MATLAB toolboxes that are needed
 #   - Image Processing Toolbox
