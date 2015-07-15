@@ -2,23 +2,26 @@ include make/helper.mk
 include make/config.mk
 
 ## Source files
-BIN_SRC  := src/compute-filter/ComputeFilter.cxx
-LIB_SRC  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/hdaf-filter/Makefilter.c
-TEST := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c $(TESTDIR)/liborion3mat/test.c
+BIN_SRC.cc  := $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
+LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/hdaf-filter/Makefilter.c
+TEST.c := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c $(TESTDIR)/liborion3mat/test.c
 
 include make/autodep.mk
 
 ## Target files
-OBJ_PATHSUBST  = $(patsubst $(LIBDIR)/%.c,$(BUILDDIR)/%.o,$(1))
-TEST_PATHSUBST = $(patsubst $(TESTDIR)/%.c,$(BUILDTESTDIR)/%$(EXEEXT),$(1))
-BIN_PATHSUBST  = $(patsubst $(SRCDIR)/%.c,$(BINDIR)/%$(EXEEXT),$(1))
+OBJ_PATHSUBST.c  = $(patsubst $(LIBDIR)/%.c,$(BUILDDIR)/%.o,$(1))
+TEST_PATHSUBST.c = $(patsubst $(TESTDIR)/%.c,$(BUILDTESTDIR)/%$(EXEEXT),$(1))
+BIN_PATHSUBST.c  = $(patsubst $(SRCDIR)/%.c,$(BINDIR)/%$(EXEEXT),$(1))
+BIN_PATHSUBST.cc  = $(patsubst $(SRCDIR)/%.cxx,$(BINDIR)/%$(EXEEXT),$(1))
 
-MKDIR_BUILD = mkdir -p `dirname $(call OBJ_PATHSUBST,$<)`
-MKDIR_BIN   = mkdir -p `dirname $(call BIN_PATHSUBST,$<)`
+MKDIR_BUILD = mkdir -p `dirname $(call OBJ_PATHSUBST.c,$<)`
+MKDIR_BIN   = mkdir -p `dirname $(call BIN_PATHSUBST.c,$<)`
 
-LIB_OBJ:= $(call OBJ_PATHSUBST,$(LIB_SRC))
+LIB_OBJ:= $(call OBJ_PATHSUBST.c,$(LIB_SRC.c))
 
-TEST_OBJ:= $(call TEST_PATHSUBST,$(TEST))
+TEST_OBJ:= $(call TEST_PATHSUBST.c,$(TEST.c))
+
+BIN_BIN.cc := $(call BIN_PATHSUBST.cc,$(BIN_SRC.cc))
 
 include make/vesselness-filter-config.mk
 include make/vaa3d-plugin-config.mk
@@ -27,6 +30,7 @@ include make/liborion3mat-config.mk
 ## Rules
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(FILTER_OBJ) $(FILTER_BIN) \
+	$(BIN_BIN.cc) \
 	$(VAA3D_ORION_MATLAB_LIB_OBJ)
 
 test: $(TEST_OBJ)
@@ -71,3 +75,4 @@ run.with-mcr-env: $(BUILDTESTDIR)/liborion3mat/test
 include make/vesselness-filter-rules.mk
 include make/liborion3mat-rules.mk
 include make/vaa3d-plugin-rules.mk
+include make/util-rules.mk
