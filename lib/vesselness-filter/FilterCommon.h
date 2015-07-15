@@ -4,10 +4,7 @@
 #include "itkImage.h"
 #include "itkFixedArray.h"
 
-typedef   unsigned short  InputPixelType;
-
-typedef   float           InternalPixelType;
-const     unsigned int    Dimension = 3;
+#include "config/datatype.h"
 
 typedef itk::Image< InternalPixelType, Dimension >	InternalImageType;
 typedef itk::FixedArray<InternalImageType::Pointer, Dimension > OutputImageArrayType;

@@ -6,6 +6,7 @@ project(ComputeFilter)
 find_package(ITK REQUIRED)
 include(${ITK_USE_FILE})
 
+include_directories(${LIBDIR})
 include_directories(${LIBDIR}/vesselness-filter)
 include_directories(${LIBDIR}/vesselness-filter/frangi)
 include_directories(${LIBDIR}/vesselness-filter/sato)
