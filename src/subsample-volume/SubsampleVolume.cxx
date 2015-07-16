@@ -28,11 +28,6 @@
 //  Software Guide : EndLatex
 
 
-#include "itkImage.h"
-#include "itkImageFileReader.h"
-#include "itkImageFileWriter.h"
-
-
 // Software Guide : BeginLatex
 //
 // The most important headers to include here are those corresponding to the
@@ -51,7 +46,7 @@
 
 #include "itkCastImageFilter.h"
 
-#include "config/datatype.h"
+#include "config/itkdatatype.h"
 
 
 int main( int argc, char * argv[] )
@@ -74,20 +69,9 @@ int main( int argc, char * argv[] )
 // Software Guide : EndLatex
 
 // Software Guide : BeginCodeSnippet
-  const     unsigned int    Dimension = 3;
 
-  typedef   unsigned char   InputPixelType;
-
-  typedef   float           InternalPixelType;
-  typedef   unsigned char   OutputPixelType;
-
-  typedef itk::Image< InputPixelType,    Dimension >   InputImageType;
-  typedef itk::Image< InternalPixelType, Dimension >   InternalImageType;
-  typedef itk::Image< OutputPixelType,   Dimension >   OutputImageType;
 // Software Guide : EndCodeSnippet
 
-
-  typedef itk::ImageFileReader< InputImageType  >  ReaderType;
 
   ReaderType::Pointer reader = ReaderType::New();
 
@@ -338,8 +322,6 @@ int main( int argc, char * argv[] )
 //
 // Software Guide : EndLatex
 
-
-  typedef itk::ImageFileWriter< OutputImageType >  WriterType;
 
   WriterType::Pointer writer = WriterType::New();
 

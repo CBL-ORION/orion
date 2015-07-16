@@ -4,9 +4,8 @@
 #include "itkImage.h"
 #include "itkFixedArray.h"
 
-#include "config/datatype.h"
+#include "config/itkdatatype.h"
 
-typedef itk::Image< InternalPixelType, Dimension >	InternalImageType;
 typedef itk::FixedArray<InternalImageType::Pointer, Dimension > OutputImageArrayType;
 
 #endif /* FILTERCOMMON_H */

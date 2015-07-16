@@ -3,13 +3,14 @@
 
 /* type used for calculations */
 typedef float             pixel_type_t;
-typedef pixel_type_t      InternalPixelType; /* standard name for ITK filters */
 
 /* type used for reading in files */
 typedef unsigned short       input_pixel_type_t;
-typedef input_pixel_type_t   InputPixelType; /* standard name for ITK filters */
+
+/* type used for writing out files */
+typedef unsigned short       output_pixel_type_t;
 
 /* number of dimensions for images */
-const     unsigned int    Dimension = 3;
+const unsigned int PIXEL_NDIMS = 3;
 
 #endif /* DATATYPE_H */
