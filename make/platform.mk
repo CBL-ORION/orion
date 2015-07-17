@@ -1,3 +1,4 @@
+TEST_DIR_EXIST = $(if $(wildcard $(1)/.),TRUE,FALSE)
 # EXEEXT: extension for executables (includes the .)
 # SO: extension for shared objects (does not include the .)
 ifdef COMSPEC

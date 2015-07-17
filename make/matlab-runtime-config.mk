@@ -3,7 +3,14 @@
 #     mex -v 2>/dev/null | grep "MATLAB *="
 MATLAB   := /usr/local/MATLAB/R2013a
 # MATLAB Compiler Runtime (v8.1)
-MCR := /usr/local/MATLAB/MATLAB_Compiler_Runtime/v81
+MCR_DEFAULT := /usr/local/MATLAB/MATLAB_Compiler_Runtime/v81
+MCR_EXTERNAL := external/liborion3mat-mcr-minimal/MATLAB_Compiler_Runtime/v81
+ifeq ($(call TEST_DIR_EXIST,$(MCR_DEFAULT)),TRUE)
+    MCR := $(MCR_DEFAULT)
+else
+    #$(info using $(MCR_EXTERNAL) as the MCR path)
+    MCR := $(MCR_EXTERNAL)
+endif
 
 MATLAB_LD_PRELOAD := /lib/x86_64-linux-gnu/libgcc_s.so.1${PATHSEP}/usr/lib/x86_64-linux-gnu/libstdc++.so.6
 MCR_LD_PRELOAD := ${MATLAB_LD_PRELOAD}
