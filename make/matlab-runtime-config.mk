@@ -8,8 +8,14 @@ MCR_EXTERNAL := external/liborion3mat-mcr-minimal/MATLAB_Compiler_Runtime/v81
 ifeq ($(call TEST_DIR_EXIST,$(MCR_DEFAULT)),TRUE)
     MCR := $(MCR_DEFAULT)
 else
+  ifeq ($(call TEST_DIR_EXIST,$(MCR_EXTERNAL)),TRUE)
     #$(info using $(MCR_EXTERNAL) as the MCR path)
     MCR := $(MCR_EXTERNAL)
+  else
+    $(info Need to install MCR. Run)
+    $(info $(TABMARK)git clone git@github.com:CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal)
+    $(error Missing MCR dependency)
+  endif
 endif
 
 MATLAB_LD_PRELOAD := /lib/x86_64-linux-gnu/libgcc_s.so.1${PATHSEP}/usr/lib/x86_64-linux-gnu/libstdc++.so.6
