@@ -5,6 +5,11 @@ SHELL := bash
 .DELETE_ON_ERROR:
 .SUFFIXES:
 
+# unused variables from the default GNU make database: ensure that they are empty
+TARGET_ARCH :=
+LOADLIBES :=
+
+
 BLANKMARK :=
 HASHMARK = \#
 SPACEMARK := $(BLANKMARK) $(BLANKMARK)
