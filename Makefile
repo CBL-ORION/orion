@@ -16,6 +16,7 @@ BIN_PATHSUBST.cc  = $(patsubst $(SRCDIR)/%.cxx,$(BINDIR)/%$(EXEEXT),$(1))
 
 MKDIR_BUILD = mkdir -p `dirname $(call OBJ_PATHSUBST.c,$<)`
 MKDIR_BIN   = mkdir -p `dirname $(call BIN_PATHSUBST.c,$<)`
+MKDIR_BUILDTESTDIR = mkdir -p `dirname $(call TEST_PATHSUBST.c,$<)`
 
 LIB_OBJ:= $(call OBJ_PATHSUBST.c,$(LIB_SRC.c))
 
@@ -54,6 +55,11 @@ $(BUILDDIR)/%.o : $(LIBDIR)/%.c
 	@$(MKDIR_DEPEND.c)
 	@$(MKDIR_BUILD)
 	$(COMPILE.c) -o $@ $<
+
+$(BUILDTESTDIR)/%: $(TESTDIR)/%.c
+	@$(MKDIR_DEPEND.c)
+	@$(MKDIR_BUILDTESTDIR)
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 
