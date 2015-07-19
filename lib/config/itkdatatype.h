@@ -13,7 +13,7 @@ typedef input_pixel_type_t      InputPixelType;
 typedef pixel_type_t         InternalPixelType; /* standard name for ITK filters */
 typedef output_pixel_type_t    OutputPixelType; /* standard name for ITK filters */
 
-const   unsigned int   Dimension = PIXEL_NDIMS;
+extern const   unsigned int   Dimension;
 
 typedef itk::Image< InputPixelType,    Dimension >   InputImageType;
 typedef itk::Image< InternalPixelType, Dimension >   InternalImageType;

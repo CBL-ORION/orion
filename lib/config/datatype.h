@@ -11,6 +11,6 @@ typedef unsigned short       input_pixel_type_t;
 typedef unsigned short       output_pixel_type_t;
 
 /* number of dimensions for images */
-const unsigned int PIXEL_NDIMS = 3;
+extern const unsigned int PIXEL_NDIMS;
 
 #endif /* DATATYPE_H */
