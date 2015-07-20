@@ -21,6 +21,9 @@ def test():
 	iren = vtk.vtkRenderWindowInteractor()
 	iren.SetRenderWindow(renWin)
 
+	level = 0.5
+	antique_white = [ 0.9804, 0.9216, 0.8431 ]
+
 	cone = vtk.vtkConeSource()
 	for cone in [cone]:
 		for s in [cone]:
@@ -46,9 +49,8 @@ def test():
 			centreline_actor = vtk.vtkActor()
 			for a in [centreline_actor]:
 				a.SetMapper( centerline_mapper )
+				a.GetProperty().SetColor( *antique_white )
 
-	level = 0.5
-	antique_white = [ 0.9804, 0.9216, 0.8431 ]
 	# Create transfer mapping scalar value to opacity
 	opacity_transfer_function = vtk.vtkPiecewiseFunction()
 	for tf in [opacity_transfer_function]:
@@ -58,10 +60,11 @@ def test():
 	color_transfer_function = vtk.vtkColorTransferFunction()
 	for tf in [color_transfer_function]:
 		tf.AddRGBPoint(0.0, 0.0, 0.0, 0.0)
-		tf.AddRGBPoint(64.0, 1.0, 0.0, 0.0)
+		tf.AddRGBPoint(64.0, 0.2, 0.0, 0.0)
 		tf.AddRGBPoint(128.0, 0.0, 0.0, 1.0)
 		tf.AddRGBPoint( 192.0, 0.0, 1.0, 0.0)
 		tf.AddRGBPoint( 255.0, 0.0, 0.2, 0.0)
+		tf.SetColorSpaceToDiverging()
 	# The property describes how the data will look
 	volume_property = vtk.vtkVolumeProperty()
 	for vp in [volume_property]:
@@ -69,32 +72,32 @@ def test():
 		vp.SetScalarOpacity(opacity_transfer_function)
 
 	segmentation = vtk.vtkMetaImageReader()
-	for r in [segmentation]:
-		r.SetFileName( segmented_volume )
-		r.Update()
+	for segmentation in [segmentation]:
+		for r in [segmentation]:
+			r.SetFileName( segmented_volume )
+			r.Update()
 
-	segmentation_outline_filter = vtk.vtkOutlineFilter()
-	for f in [segmentation_outline_filter]:
-		f.SetInputData( segmentation.GetOutput() )
-	segmentation_outline_mapper = vtk.vtkPolyDataMapper()
-	for m in [segmentation_outline_mapper]:
-		m.SetInputConnection( segmentation_outline_filter.GetOutputPort() )
-	segmentation_outline_actor = vtk.vtkActor()
-	for a in [segmentation_outline_actor]:
-		a.SetMapper( segmentation_outline_mapper )
+		segmentation_outline_filter = vtk.vtkOutlineFilter()
+		for f in [segmentation_outline_filter]:
+			f.SetInputData( segmentation.GetOutput() )
+		segmentation_outline_mapper = vtk.vtkPolyDataMapper()
+		for m in [segmentation_outline_mapper]:
+			m.SetInputConnection( segmentation_outline_filter.GetOutputPort() )
+		segmentation_outline_actor = vtk.vtkActor()
+		for a in [segmentation_outline_actor]:
+			a.SetMapper( segmentation_outline_mapper )
 
-	segmentation_filter = vtk.vtkContourFilter()
-	for f in [segmentation_filter]:
-		f.SetInputData( segmentation.GetOutput() )
-		f.SetValue( 0, level )
-	segmentation_mapper = vtk.vtkSmartVolumeMapper()
-	for m in [segmentation_mapper]:
-		m.SetInputData( segmentation.GetOutput() )
-	segmentation_actor = vtk.vtkVolume()
-	for a in [segmentation_actor]:
-		a.SetMapper( segmentation_mapper )
-		a.SetProperty( volume_property )
-		#a.GetProperty().SetColor( *antique_white )
+		segmentation_filter = vtk.vtkContourFilter()
+		for f in [segmentation_filter]:
+			f.SetInputData( segmentation.GetOutput() )
+			f.SetValue( 0, level )
+		segmentation_mapper = vtk.vtkSmartVolumeMapper()
+		for m in [segmentation_mapper]:
+			m.SetInputData( segmentation.GetOutput() )
+		segmentation_actor = vtk.vtkVolume()
+		for a in [segmentation_actor]:
+			a.SetMapper( segmentation_mapper )
+			a.SetProperty( volume_property )
 
 
 
