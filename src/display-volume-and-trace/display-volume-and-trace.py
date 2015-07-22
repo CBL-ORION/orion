@@ -1,17 +1,23 @@
 #!/usr/bin/python
 
 import vtk
+import sys, os
 
 WIDTH = 640
 HEIGHT = 480
 
-#segmented_volume = '/home/zaki/r/experiment-confocal-radii_20141121/V081005Ab3_Segmentation__MultiscaleDENDRITES_s_1_2_3_4_5_6_7_8_9_10_b_500_thr_0.5_tra_0.995_min_c8000.mhd'
-#ground_truth_centreline = '/home/zaki/r/data/vol_and_trace/081005A.SuperVolume.FourStacks/trace/20070607_final.vtk'
+def main(argv):
+	if len(argv) < 3:
+		sys.stderr.write("Usage: %s <volume.mhd> <trace.vtk>\n" % argv[0])
+		return 1
 
-segmented_volume = 'test-data/DIADEM/NPF/03_Reconstruction/rec_NPF026/Raw_reg.mhd'
-ground_truth_centreline = 'test-data/DIADEM/NPF/03_Reconstruction/rec_NPF026/Raw_reg.swc.vtk'
+	segmented_volume_filename, trace_filename = argv[1:3]
 
-def test():
+	for filename in [ segmented_volume_filename, trace_filename ]:
+		if not os.path.exists(filename):
+			sys.stderr.write("file '%s' not found\n" % filename)
+			return 1
+
 	ren = vtk.vtkRenderer()
 	renWin = vtk.vtkRenderWindow()
 	renWin.AddRenderer(ren)
@@ -21,25 +27,13 @@ def test():
 	iren = vtk.vtkRenderWindowInteractor()
 	iren.SetRenderWindow(renWin)
 
-	level = 0.5
 	antique_white = [ 0.9804, 0.9216, 0.8431 ]
-
-	cone = vtk.vtkConeSource()
-	for cone in [cone]:
-		for s in [cone]:
-			s.SetResolution( 60 )
-			s.SetCenter( -2,0,0 )
-		coneMapper = vtk.vtkPolyDataMapper()
-		for m in [coneMapper]:
-			m.SetInputConnection( cone.GetOutputPort() )
-		coneActor = vtk.vtkActor()
-		for a in [coneActor]:
-			a.SetMapper( coneMapper )
+	line_width = 5
 
 	centerline = vtk.vtkPolyDataReader()
 	for centerline in [centerline]:
 		for r in [centerline]:
-			r.SetFileName( ground_truth_centreline )
+			r.SetFileName( trace_filename )
 			r.ReadAllVectorsOn()
 			r.ReadAllScalarsOn()
 			r.Update()
@@ -50,6 +44,7 @@ def test():
 			for a in [centreline_actor]:
 				a.SetMapper( centerline_mapper )
 				a.GetProperty().SetColor( *antique_white )
+				a.GetProperty().SetLineWidth( line_width );
 
 	# Create transfer mapping scalar value to opacity
 	opacity_transfer_function = vtk.vtkPiecewiseFunction()
@@ -74,7 +69,7 @@ def test():
 	segmentation = vtk.vtkMetaImageReader()
 	for segmentation in [segmentation]:
 		for r in [segmentation]:
-			r.SetFileName( segmented_volume )
+			r.SetFileName( segmented_volume_filename )
 			r.Update()
 
 		segmentation_outline_filter = vtk.vtkOutlineFilter()
@@ -87,10 +82,6 @@ def test():
 		for a in [segmentation_outline_actor]:
 			a.SetMapper( segmentation_outline_mapper )
 
-		segmentation_filter = vtk.vtkContourFilter()
-		for f in [segmentation_filter]:
-			f.SetInputData( segmentation.GetOutput() )
-			f.SetValue( 0, level )
 		segmentation_mapper = vtk.vtkSmartVolumeMapper()
 		for m in [segmentation_mapper]:
 			m.SetInputData( segmentation.GetOutput() )
@@ -111,4 +102,5 @@ def test():
 	iren.Start()
 
 
-test()
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))
