@@ -21,3 +21,19 @@ ${ORION3MAT_LIB_OBJ}: ${ORION3MAT_PATH}/${ORION3MAT_MCC_FUNCTION}
 			${ORION3MAT_MCC_ADD_PATH}; \
 		perl -pi -e 's|/.*orion/|orion/|g' ${FULL_ORION3MAT_LIB_OBJ_PATH}/liborion3mat.[ch]; \
 	fi
+
+$(BUILDTESTDIR)/liborion3mat/test: ${ORION3MAT_LIB_OBJ}
+$(BUILDTESTDIR)/liborion3mat/test: CFLAGS   += $(LIBORION3MAT_CFLAGS)   $(MCR_CFLAGS)
+$(BUILDTESTDIR)/liborion3mat/test: CPPFLAGS += $(LIBORION3MAT_CPPFLAGS) $(MCR_CPPFLAGS)
+$(BUILDTESTDIR)/liborion3mat/test: LDFLAGS  += $(LIBORION3MAT_LDFLAGS)  $(MCR_LDFLAGS)
+$(BUILDTESTDIR)/liborion3mat/test: LDLIBS   += $(LIBORION3MAT_LDLIBS)   $(MCR_LDLIBS)
+
+.PHONY: liborion3mat.run.with-matlab-env liborion3mat.run.with-mcr-env
+
+liborion3mat.run.with-matlab-env: $(BUILDTESTDIR)/liborion3mat/test
+	# Running using MATLAB for loading dynamic libraries
+	LD_PRELOAD=${MATLAB_LD_PRELOAD} LD_LIBRARY_PATH=${ORION3MAT_LIB_OBJ_PATH}:${MATLAB_LD_LIBRARY_PATH} $<
+liborion3mat.run.with-mcr-env: $(BUILDTESTDIR)/liborion3mat/test test-data/DIADEM/NPF/NPF026/NPF026.raw $(BUILDTESTDIR)/liborion3mat/test test-data/DIADEM/NPF/NPF023/NPF023.raw
+	# Running using MATLAB Compiler Runtime for loading dynamic libraries
+	LD_PRELOAD=${MCR_LD_PRELOAD} LD_LIBRARY_PATH=${ORION3MAT_LIB_OBJ_PATH}:${MCR_LD_LIBRARY_PATH} $<
+

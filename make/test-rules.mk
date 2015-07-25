@@ -1,0 +1,5 @@
+test: $(TEST_OBJ)
+	$(RUNTESTS) $(TEST_OBJ)
+test: CPPFLAGS += $(TEST_CPPFLAGS)
+test: LDFLAGS  += $(TEST_LDFLAGS)
+test: LDLIBS   += $(TEST_LDLIBS)
