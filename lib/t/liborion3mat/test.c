@@ -10,7 +10,7 @@ int main() {
 		fprintf(stderr,  "Could not initialize liborion3mat properly.\n" );
 		exit(EXIT_FAILURE);
 	}
-	char* path_to_input = "/home/zaki/research-code/matlab-deploy-R2013a/Input_NPF026_D.txt";
+	char* path_to_input = "test-data/DIADEM/NPF/Input_NPF023_D.txt";
 	mxArray* path_to_input_mx = mxCreateString( path_to_input ); /* allocate */
 	mlfORION3(path_to_input_mx);
 	mxDestroyArray(path_to_input_mx); /* free */
