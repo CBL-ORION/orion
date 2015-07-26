@@ -23,22 +23,25 @@ void usage(char* program_name) {
 
 void parse_arguments( int argc, char * argv[], orion_parameters* param ) {
 	int arg_idx = 0;
-	WARN_UNIMPLEMENTED;
 	for( arg_idx = 0; arg_idx < argc; arg_idx++ ) {
 		if( strcmp( argv[arg_idx], "--help" ) == 0 ) {
 			usage( argv[0] );
 			exit(EXIT_SUCCESS);
 		} else if( strcmp( argv[arg_idx], "--scale" ) == 0 ) {
-			if( (arg_idx+1) < argc )
+			if( arg_idx+1 < argc )
 				array_add_float( param->scales, atof( argv[arg_idx + 1] ) );
 			else
 				die("Missing argument to --scale");
 		} else if( strcmp( argv[arg_idx], "--input" ) == 0 ) {
-			WARN_UNIMPLEMENTED;
-			safe_malloc_and_strcpy(param->input_filename, argv[arg_idx+1]);
+			if( arg_idx+1 < argc )
+				safe_malloc_and_strcpy(param->input_filename, argv[arg_idx+1]);
+			else
+				die("Missing argument to --input");
 		} else if(  strcmp( argv[arg_idx], "--output" ) == 0 ) {
-			WARN_UNIMPLEMENTED;
-			safe_malloc_and_strcpy(param->input_filename, argv[arg_idx+1]);
+			if( arg_idx+1 < argc )
+				safe_malloc_and_strcpy(param->input_filename, argv[arg_idx+1]);
+			else
+				die("Missing argument to --output");
 		}
 	}
 
