@@ -1,7 +1,7 @@
 include make/platform.mk
 
 CPPFLAGS := -Ilib
-CFLAGS   := -std=c99 -fsanitize=address -O2
+CFLAGS   := -std=c99 -fsanitize=address -O2 -Wall
 #CFLAGS   := -std=c11
 LDFLAGS  := -lm $(CPPFLAGS)
 CMAKEFLAGS :=
