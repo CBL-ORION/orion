@@ -17,7 +17,7 @@
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
-//Here goes the function for Sato 
+//Here goes the function for Sato
 
 #include "EigenSato.h"
 
@@ -69,12 +69,12 @@ OutputImageArrayType ComputeSato( InternalImageType::Pointer inputVolume, float 
 
      m_Hessian->SetSigma(sigma);
      m_Hessian->Update();
-     
+
      m_EigenFilter->SetInput( m_Hessian->GetOutput() );
      m_EigenFilter->OrderEigenValuesBy( EigenAnalysisFilterType::FunctorType::OrderByValue );
      m_EigenFilter->Update();
 
-     
+
      accessor1.SetEigenIdx( 0 );
      m_EigenAdaptor1->SetImage( m_EigenFilter->GetOutput() );
      m_EigenAdaptor1->SetPixelAccessor( accessor1 );
@@ -91,7 +91,7 @@ OutputImageArrayType ComputeSato( InternalImageType::Pointer inputVolume, float 
      m_EigenCastfilter2->SetInput( m_EigenAdaptor2 );
      m_EigenCastfilter3->SetInput( m_EigenAdaptor1 );
 
-     
+
      m_EigenCastfilter1->Update();
      m_EigenCastfilter2->Update();
      m_EigenCastfilter3->Update();
