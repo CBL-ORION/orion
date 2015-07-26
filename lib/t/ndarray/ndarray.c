@@ -1,12 +1,17 @@
-#include <stddef.h>
+#include <stdlib.h>
 #include <tap/basic.h>
 
 #include "ndarray/ndarray3.h"
 
 int main(void) {
-	plan(1);
-	ndarray3* nd_test = ndarray3_new(3, 3, 3);
-	ok(1, "the first test");
+	plan(4);
+	ndarray3* nd_test = ndarray3_new(3, 4, 5);
 
-	return 0;
+	ok(nd_test != NULL, "array created");
+
+	is_int(nd_test->sz[0], 3, "size of first dim is correct");
+	is_int(nd_test->sz[1], 4, "size of second dim is correct");
+	is_int(nd_test->sz[2], 5, "size of second dim is correct");
+
+	return EXIT_SUCCESS;
 }
