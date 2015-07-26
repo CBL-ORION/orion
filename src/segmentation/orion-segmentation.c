@@ -30,7 +30,7 @@ void parse_arguments( int argc, char * argv[], orion_parameters* param ) {
 			exit(EXIT_SUCCESS);
 		} else if( strcmp( argv[arg_idx], "--scale" ) == 0 ) {
 			if( (arg_idx+1) < argc )
-				array_insert_float( param->scales, atof( argv[arg_idx + 1] ) );
+				array_add_float( param->scales, atof( argv[arg_idx + 1] ) );
 			else
 				die("Missing argument to --scale");
 		} else if( strcmp( argv[arg_idx], "--input" ) == 0 ) {
