@@ -32,6 +32,13 @@
 #endif /* COMPILE_WARN_UNIMPLEMENTED */
 
 extern void die(const char* format, ...);
-extern void safe_malloc_and_strcpy(char* dest, char* src);
+extern char* safe_malloc_and_strcpy(char* dest, char* src);
+
+#define NEW_COUNT(_var, _type, _count) \
+	do { \
+		if( !( (_var) = (_type*)malloc( (_count) * sizeof(_type) ) ) ) \
+			die("%s Error: Could not allocate memory: [type: %s, count: %d]", SHOWORIGIN, STRINGIZE(_type), (_count)); \
+	} while(0)
+#define NEW(_var, _type) NEW_COUNT(_var, _type, 1)
 
 #endif /* UTIL_H */

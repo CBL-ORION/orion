@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "config/datatype.h"
+#include "util.h"
 
 typedef struct {
 	pixel_type_t* p;

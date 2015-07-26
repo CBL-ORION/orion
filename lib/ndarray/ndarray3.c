@@ -1,7 +1,9 @@
 #include "ndarray/ndarray3.h"
 
 ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
-	ndarray3* n = (ndarray3*)malloc( sizeof(ndarray3) );
+	ndarray3* n;
+	NEW(n, ndarray3);
+
 	n->wrap = 1;
 
 	n->sz[0] = sz_x;
@@ -12,9 +14,10 @@ ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, c
 }
 
 ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
-	ndarray3* n = (ndarray3*)malloc( sizeof(ndarray3) );
+	ndarray3* n;
+	NEW(n, ndarray3);
 
-	n->p = (float*) malloc( sizeof(float) * sz_x * sz_y * sz_z );
+	NEW_COUNT( n->p, pixel_type_t, sz_x * sz_y * sz_y );
 	n->wrap = 0;
 
 	n->sz[0] = sz_x;
@@ -28,5 +31,3 @@ void ndarray3_destroy( ndarray3* n ) {
 	if( ! n->wrap ) free( n->p );
 	free( n );
 }
-
-

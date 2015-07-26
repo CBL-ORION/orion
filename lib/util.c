@@ -1,5 +1,7 @@
 #include "util.h"
 
+#include <string.h>
+
 void die(const char* msg_fmt, ...) {
 	va_list args;
 	va_start(args, msg_fmt); \
@@ -8,10 +10,8 @@ void die(const char* msg_fmt, ...) {
 	exit(EXIT_FAILURE);
 }
 
-void safe_malloc_and_strcpy(char* dest, char* src) {
-	/* strlen()
-	 * if( malloc ) perror()
-	 * strncpy()
-	 */
-	WARN_UNIMPLEMENTED;
+char* safe_malloc_and_strcpy(char* dest, char* src) {
+	size_t len = strlen(src);
+	NEW_COUNT(dest, char, len);
+	return strncpy(dest, src, len);
 }

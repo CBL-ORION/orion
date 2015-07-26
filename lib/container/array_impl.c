@@ -9,14 +9,9 @@ const size_t ARRAY_IMPL_RESIZE_FACTOR = 2;
 TYPED_NAME(array)* TYPED_NAME(array_new)( size_t capacity ) {
 	TYPED_NAME(array)* array;
 
-	array = malloc( sizeof( TYPED_NAME(array) ) );
-	if( !array ) {
-		die("Could not allocate %s\n", STRINGIZE(TYPED_NAME(array)));
-	}
-	array->data = (TYPE*) ( malloc( capacity * sizeof(TYPE) ) );
-	if( !array->data ) {
-		die("Could not allocate %s internal data\n", STRINGIZE(TYPED_NAME(array)));
-	}
+	NEW(array, TYPED_NAME(array));
+	NEW_COUNT(array->data, TYPE, capacity);
+
 	array->capacity = capacity;
 	array->length = 0;
 
