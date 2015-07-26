@@ -30,11 +30,14 @@ include make/vesselness-filter-config.mk
 include make/vaa3d-plugin-config.mk
 include make/liborion3mat-config.mk
 
+.PHONY: tags
+
 ## Rules
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
-	$(VAA3D_ORION_MATLAB_LIB_OBJ)
+	$(VAA3D_ORION_MATLAB_LIB_OBJ) \
+	tags
 
 ### Output directories
 $(OUTPUT_DIRS): # multiple targets
@@ -57,6 +60,9 @@ $(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion
 		$(BUILDDIR)/param/param.o $(BUILDDIR)/container/array.o
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
+
+tags:
+	ctags --exclude=external -R .
 
 include make/vesselness-filter-rules.mk
 include make/liborion3mat-rules.mk
