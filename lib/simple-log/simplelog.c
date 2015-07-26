@@ -1,4 +1,5 @@
 #include "simplelog.h"
+#include "util.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,14 +18,19 @@ void LOG_FORMAT(const char* tag, const char* message, va_list args) {
 	fprintf(SIMPLE_LOG_FILE, "\n");
 }
 
+#define LOG_FUNCTION_NAME(TYPE_OF_LOG_MESSAGE)  LOG_ ## TYPE_OF_LOG_MESSAGE
+
 #define LOG_TAG_FUNCTION(X)  \
-	void LOG_## X(const char* message, ...) { \
+	void LOG_FUNCTION_NAME(X)(const char* message, ...) { \
 		va_list args; \
 		va_start(args, message); \
-		LOG_FORMAT( # X , message, args); \
+		LOG_FORMAT( STRINGIZE(X) , message, args); \
 		va_end(args); \
 	}
 
 LOG_TAG_FUNCTION(ERROR);
 LOG_TAG_FUNCTION(INFO);
 LOG_TAG_FUNCTION(DEBUG);
+
+#undef LOG_FUNCTION_NAME
+#undef LOG_TAG_FUNCTION
