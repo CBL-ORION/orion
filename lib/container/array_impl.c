@@ -1,6 +1,11 @@
 #include "container/array_impl.h"
 #include "assert.h"
 
+#ifndef ARRAY_IMPL_RESIZE_FACTOR_GUARD
+#define ARRAY_IMPL_RESIZE_FACTOR_GUARD
+const size_t ARRAY_IMPL_RESIZE_FACTOR = 2;
+#endif /* ARRAY_IMPL_RESIZE_FACTOR_GUARD */
+
 TYPED_NAME(array)* TYPED_NAME(array_new)( size_t capacity ) {
 	TYPED_NAME(array)* array;
 
@@ -53,7 +58,9 @@ void TYPED_NAME(array_set) ( TYPED_NAME(array)* array, size_t index, TYPE data )
 
 void TYPED_NAME(array_add) ( TYPED_NAME(array)* array, TYPE data ) {
 	assert( array != NULL );
-	assert( array->length + 1 < array->length );
+	if(  array->length + 1 > array->capacity ) {
+		TYPED_NAME(array_resize)(array, array->capacity * ARRAY_IMPL_RESIZE_FACTOR);
+	}
 
 	array->data[ array->length++ ] = data;
 }
