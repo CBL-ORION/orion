@@ -3,9 +3,9 @@ include make/config.mk
 
 ## Source files
 BIN_SRC.c   := $(SRCDIR)/segmentation/orion-segmentation.c
-BIN_SRC.cc  := $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
+BIN_SRC.cc  := # $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
 LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/hdaf-filter/Makefilter.c
-TEST.c := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c $(TESTDIR)/liborion3mat/test.c
+TEST.c := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c $(TESTDIR)/liborion3mat/test.c $(TESTDIR)/container/array.c
 
 include make/autodep.mk
 
@@ -32,7 +32,6 @@ include make/liborion3mat-config.mk
 
 ## Rules
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
-	$(FILTER_OBJ) $(FILTER_BIN) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
 	$(VAA3D_ORION_MATLAB_LIB_OBJ)
@@ -43,13 +42,19 @@ $(OUTPUT_DIRS): # multiple targets
 
 ### Clean
 clean:
-	-find -type f -name '*.o' -delete
+	-find . -type f -name '*.o' -delete
 	-rm -Rf $(OUTPUT_DIRS)
 	-rm $(VAA3D_ORION_MATLAB_LIB_OBJ)
 
 include make/00-implicit-rules.mk
 
-$(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion-segmentation.c $(BUILDDIR)/simple-log/simplelog.o
+$(BUILDDIR)/container/array.o: $(LIBDIR)/container/array_impl.h $(LIBDIR)/container/array_impl.c
+
+$(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
+
+$(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion-segmentation.c \
+		$(BUILDDIR)/simple-log/simplelog.o $(BUILDDIR)/util.o \
+		$(BUILDDIR)/param/param.o $(BUILDDIR)/container/array.o
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 

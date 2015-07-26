@@ -6,9 +6,9 @@ SHELL := bash
 .SUFFIXES:
 
 # unused variables from the default GNU make database: ensure that they are empty
-TARGET_ARCH :=
-LOADLIBES :=
-LDLIBS :=
+TARGET_ARCH ?=
+LOADLIBES ?=
+LDLIBS ?=
 
 BLANKMARK :=
 HASHMARK = \#

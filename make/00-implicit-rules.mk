@@ -13,3 +13,8 @@ $(BINDIR)/%$(EXEEXT): $(SRCDIR)/%.c
 	@$(MKDIR_DEPEND.c)
 	@$(MKDIR_BIN)
 	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+$(BINDIR)/%.o : $(SRCDIR)/%.c
+	@$(MKDIR_DEPEND.c)
+	@$(MKDIR_BIN)
+	$(COMPILE.c) -o $@ $<
