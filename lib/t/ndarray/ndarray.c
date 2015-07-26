@@ -9,9 +9,9 @@ int main(void) {
 
 	ok(nd_test != NULL, "array created");
 
-	is_int(nd_test->sz[0], 3, "size of first dim is correct");
-	is_int(nd_test->sz[1], 4, "size of second dim is correct");
-	is_int(nd_test->sz[2], 5, "size of second dim is correct");
+	is_int(3, nd_test->sz[0], "size of first dim is correct");
+	is_int(4, nd_test->sz[1], "size of second dim is correct");
+	is_int(5, nd_test->sz[2], "size of second dim is correct");
 
 	return EXIT_SUCCESS;
 }
