@@ -1,4 +1,4 @@
- #include <stddef.h>
+ #include <stdlib.h>
  #include <tap/basic.h>
 
  int main(void) {
@@ -9,5 +9,5 @@
      diag("a diagnostic, ignored by the harness");
      /*skip("a skipped test");*/
 
-     return 0;
+     return EXIT_SUCCESS;
  }
