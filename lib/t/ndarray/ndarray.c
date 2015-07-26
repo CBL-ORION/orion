@@ -5,7 +5,7 @@
 
 int main(void) {
 	plan(1);
-	ndarray3* nd_test = ndarray3_create(3, 3, 3);
+	ndarray3* nd_test = ndarray3_new(3, 3, 3);
 	ok(1, "the first test");
 
 	return 0;

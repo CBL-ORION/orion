@@ -11,7 +11,7 @@ ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, c
 	return n;
 }
 
-ndarray3* ndarray3_create(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
+ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
 	ndarray3* n = (ndarray3*)malloc( sizeof(ndarray3) );
 
 	n->p = (float*) malloc( sizeof(float) * sz_x * sz_y * sz_z );

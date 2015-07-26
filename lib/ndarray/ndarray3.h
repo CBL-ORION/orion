@@ -15,10 +15,10 @@ typedef struct {
 /***** CONSTRUCTORS *****/
 
 /** TODO document
-    ndarray3* ndarray3_create(const size_t sz_x, const size_t sz_y, const size_t sz_z)
+    ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z)
  */
 
-ndarray3* ndarray3_create(const size_t sz_x, const size_t sz_y, const size_t sz_z);
+ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
 /** TODO document
     ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
