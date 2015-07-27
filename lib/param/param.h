@@ -3,8 +3,14 @@
 
 #include "container/array.h"
 
+/* TODO restructure this so that the structure has separate parameters for
+ * different parts of the pipeline
+ *
+ * - segmentation
+ * - registration
+ */
 typedef struct {
-	array_float* scales;
+	array_float* scales;     /* sigma */
 	char* input_filename;
 	char* output_filename;
 } orion_parameters;
