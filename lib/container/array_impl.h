@@ -28,4 +28,4 @@ extern void TYPED_NAME(array_set) ( TYPED_NAME(array)* array, size_t index, TYPE
 extern void TYPED_NAME(array_add) ( TYPED_NAME(array)* array, TYPE data );
 
 /* ==== memory management ==== */
-extern void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t length );
+extern void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t new_capacity );

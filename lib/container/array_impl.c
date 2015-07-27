@@ -60,8 +60,8 @@ void TYPED_NAME(array_add) ( TYPED_NAME(array)* array, TYPE data ) {
 	array->data[ array->length++ ] = data;
 }
 
-void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t length ) {
+void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t new_capacity ) {
 	assert( array != NULL );
-
-	WARN_UNIMPLEMENTED;
+	RESIZE_COUNT(array->data, TYPE, new_capacity);
+	array->capacity = new_capacity;
 }
