@@ -31,7 +31,10 @@
 	} while(0)
 #endif /* COMPILE_WARN_UNIMPLEMENTED */
 
-extern void die(const char* format, ...);
+
+extern void _real_die(const char* msg_fmt, const char* origin, ...);
+#define die(_msg_fmt, ...) _real_die(_msg_fmt, SHOWORIGIN, __VA_ARGS__)
+
 extern char* safe_malloc_and_strcpy(char* dest, char* src);
 
 #define NEW_COUNT(_var, _type, _count) \

@@ -2,10 +2,12 @@
 
 #include <string.h>
 
-void die(const char* msg_fmt, ...) {
+void _real_die(const char* msg_fmt, const char* origin, ...) {
 	va_list args;
-	va_start(args, msg_fmt); \
+	va_start(args, origin); \
+	fprintf(stderr, "%s ", origin);
 	vfprintf(stderr, msg_fmt, args);
+	fprintf(stderr, "\n");
 	va_end(args);
 	exit(EXIT_FAILURE);
 }
