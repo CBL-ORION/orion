@@ -4,6 +4,7 @@
 
 #include "simple-log/simplelog.h"
 #include "param/param.h"
+#include "util.h"
 
 void usage(char* program_name) {
 	fprintf( stderr,
@@ -31,17 +32,17 @@ void parse_arguments( int argc, char * argv[], orion_parameters* param ) {
 			if( arg_idx+1 < argc )
 				array_add_float( param->scales, atof( argv[arg_idx + 1] ) );
 			else
-				die("Missing argument to --scale");
+				die("Missing argument to --scale at %d", arg_idx+1);
 		} else if( strcmp( argv[arg_idx], "--input" ) == 0 ) {
 			if( arg_idx+1 < argc )
 				safe_malloc_and_strcpy(param->input_filename, argv[arg_idx+1]);
 			else
-				die("Missing argument to --input");
+				die("Missing argument to --input at %d", arg_idx+1);
 		} else if(  strcmp( argv[arg_idx], "--output" ) == 0 ) {
 			if( arg_idx+1 < argc )
 				safe_malloc_and_strcpy(param->input_filename, argv[arg_idx+1]);
 			else
-				die("Missing argument to --output");
+				die("Missing argument to --output at %d", arg_idx + 1);
 		}
 	}
 
