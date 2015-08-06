@@ -3,7 +3,7 @@
 
 #ifndef ARRAY_IMPL_RESIZE_FACTOR_GUARD
 #define ARRAY_IMPL_RESIZE_FACTOR_GUARD
-const size_t ARRAY_IMPL_RESIZE_FACTOR = 2;
+const float ARRAY_IMPL_RESIZE_FACTOR = 1.5;
 #endif /* ARRAY_IMPL_RESIZE_FACTOR_GUARD */
 
 TYPED_NAME(array)* TYPED_NAME(array_new)( size_t capacity ) {
