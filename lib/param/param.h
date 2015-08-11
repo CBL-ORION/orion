@@ -17,5 +17,6 @@ typedef struct {
 
 extern orion_parameters* orion_parameters_new();
 extern void orion_parameters_free(orion_parameters* param);
+extern void orion_parameters_set_default_scales( orion_parameters* param );
 
 #endif /* PARAM_PARAM_H */
