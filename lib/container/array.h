@@ -19,4 +19,7 @@
 #undef TYPE
 #undef TYPED_NAME
 
+/* TODO make more generic */
+void array_dump_float(array_float* array);
+
 #endif /* CONTAINER_ARRAY_H */

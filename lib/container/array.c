@@ -23,5 +23,5 @@ void array_dump_float(array_float* array) {
 	for( int i = 0; i < len; i++ ) {
 		fprintf(stderr, "\t%f", array_get_float(array, i));
 	}
-	fprintf(stderr, "[\n");
+	fprintf(stderr, "\n]\n");
 }
