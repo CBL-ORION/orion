@@ -64,6 +64,7 @@ int main( int argc, char * argv[] ) {
 	parse_arguments(argc, argv, param);
 
 	orion_io_param_dump(param->io);
+	orion_segmentation_param_dump(param->segmentation);
 
 	LOG_INFO("Stopping %s", argv[0] );
 	return EXIT_SUCCESS;
