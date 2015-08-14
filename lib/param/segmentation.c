@@ -5,6 +5,7 @@ orion_segmentation_param* orion_segmentation_param_new() {
 	orion_segmentation_param* param;
 	NEW( param, orion_segmentation_param );
 	param->scales = array_new_float( 10 );
+	param->percentage_threshold_intensity = ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT;
 	return param;
 }
 
@@ -22,4 +23,10 @@ void orion_segmentation_param_set_default_scales( orion_segmentation_param* para
 void orion_segmentation_param_free(orion_segmentation_param* param) {
 	free(param->scales);
 	free(param);
+}
+
+void orion_segmentation_param_dump( orion_segmentation_param* param ) {
+	fprintf(stderr, "orion_segmentation_param: %x\n", param);
+	if( param->scales )
+		array_dump_float( param->scales );
 }

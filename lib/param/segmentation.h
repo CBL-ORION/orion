@@ -3,6 +3,8 @@
 
 #include "container/array.h"
 
+#define ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT 0.9
+
 typedef struct {
 	array_float* scales;     /* sigma */
 	float percentage_threshold_intensity;/* default: 0.9 */
