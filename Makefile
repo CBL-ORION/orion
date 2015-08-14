@@ -57,7 +57,8 @@ $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
 
 $(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion-segmentation.c \
 		$(BUILDDIR)/simple-log/simplelog.o $(BUILDDIR)/util.o \
-		$(BUILDDIR)/param/param.o $(BUILDDIR)/container/array.o
+		$(BUILDDIR)/param/segmentation.o $(BUILDDIR)/param/param.o \
+		$(BUILDDIR)/container/array.o
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 
