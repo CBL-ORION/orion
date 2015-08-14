@@ -1,5 +1,6 @@
 #include "container/array_impl.h"
 #include "assert.h"
+#include "stdio.h"
 
 #ifndef ARRAY_IMPL_RESIZE_FACTOR_GUARD
 #define ARRAY_IMPL_RESIZE_FACTOR_GUARD

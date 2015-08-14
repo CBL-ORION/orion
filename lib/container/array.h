@@ -13,4 +13,10 @@
 #undef TYPE
 #undef TYPED_NAME
 
+#define TYPE char*
+#define TYPED_NAME(x) x ## _ ## str
+#include "array_impl.h"
+#undef TYPE
+#undef TYPED_NAME
+
 #endif /* CONTAINER_ARRAY_H */
