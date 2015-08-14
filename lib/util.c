@@ -12,8 +12,8 @@ void _real_die(const char* msg_fmt, const char* origin, ...) {
 	exit(EXIT_FAILURE);
 }
 
-char* safe_malloc_and_strcpy(char* dest, char* src) {
+char* safe_malloc_and_strcpy(char** dest, char* src) {
 	size_t len = strlen(src);
-	NEW_COUNT(dest, char, len);
-	return strncpy(dest, src, len);
+	NEW_COUNT(*dest, char, len);
+	return strncpy(*dest, src, len);
 }
