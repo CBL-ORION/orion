@@ -1,6 +1,11 @@
 #ifndef PARAM_ORION3_H
 #define PARAM_ORION3_H 1
 
+#include <stdio.h>
+#include <stdbool.h>
+
+#include "container/array.h"
+
 typedef struct {
 	array_float* scales;     /* sigma */
 
@@ -15,13 +20,15 @@ typedef struct {
 
 	bool remove_pipette;
 
-	char* report_file_name;
+	char* report_filename;
 
-	bool has_registration_parameters_file_name;
-	char* registration_parameters_file_name;
+	bool has_registration_parameters_filename;
+	char* registration_parameters_filename;
 
 	bool has_starting_coordinate;
 	float starting_coordinate[3]; /* TODO should this be a size_t? */
 } orion3_param;
+
+extern void orion3_param_dump( orion3_param* param );
 
 #endif /* PARAM_ORION3_H */

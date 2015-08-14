@@ -14,5 +14,6 @@ typedef struct {
 extern orion_segmentation_param* orion_segmentation_param_new();
 extern void orion_segmentation_param_free(orion_segmentation_param* param);
 extern void orion_segmentation_param_set_default_scales( orion_segmentation_param* param );
+extern void orion_segmentation_param_dump( orion_segmentation_param* param );
 
 #endif /* PARAM_SEGMENTATION_H */
