@@ -40,12 +40,12 @@ void parse_arguments( int argc, char * argv[], param_parse* param ) {
 				die("Missing argument to --scale at %d", arg_idx+1);
 		} else if( strcmp( argv[arg_idx], "--input" ) == 0 ) {
 			if( arg_idx+1 < argc )
-				safe_malloc_and_strcpy(param->io->input_filename, argv[arg_idx+1]);
+				safe_malloc_and_strcpy(&(param->io->input_filename), argv[arg_idx+1]);
 			else
 				die("Missing argument to --input at %d", arg_idx+1);
 		} else if(  strcmp( argv[arg_idx], "--output" ) == 0 ) {
 			if( arg_idx+1 < argc )
-				safe_malloc_and_strcpy(param->io->output_filename, argv[arg_idx+1]);
+				safe_malloc_and_strcpy(&(param->io->output_filename), argv[arg_idx+1]);
 			else
 				die("Missing argument to --output at %d", arg_idx + 1);
 		}
@@ -62,6 +62,8 @@ int main( int argc, char * argv[] ) {
 	param->segmentation = orion_segmentation_param_new();
 
 	parse_arguments(argc, argv, param);
+
+	orion_io_param_dump(param->io);
 
 	LOG_INFO("Stopping %s", argv[0] );
 	return EXIT_SUCCESS;
