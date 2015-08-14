@@ -1,22 +1,25 @@
 #ifndef PARAM_PARAM_H
 #define PARAM_PARAM_H 1
 
+#include <stdbool.h>
 #include "container/array.h"
 
-/* TODO restructure this so that the structure has separate parameters for
- * different parts of the pipeline
+/* each structure has separate parameters for * different parts of the pipeline
  *
  * - segmentation
  * - registration
  */
+
+#include "param/segmentation.h"
+#include "param/registration.h"
+#include "param/orion3.h"
+
 typedef struct {
-	array_float* scales;     /* sigma */
 	char* input_filename;
 	char* output_filename;
-} orion_parameters;
+} orion_io_param;
 
-extern orion_parameters* orion_parameters_new();
-extern void orion_parameters_free(orion_parameters* param);
-extern void orion_parameters_set_default_scales( orion_parameters* param );
+extern orion_io_param* orion_io_param_new();
+extern void orion_io_param_free(orion_io_param* param);
 
 #endif /* PARAM_PARAM_H */
