@@ -1,5 +1,5 @@
-#ifndef UTIL_H
-#define UTIL_H 1
+#ifndef UTIL_UTIL_H
+#define UTIL_UTIL_H 1
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -50,4 +50,4 @@ extern char* safe_malloc_and_strcpy(char** dest, char* src);
 			die("%s Error: Could not reallocate memory: [type: %s, count: %d]", SHOWORIGIN, STRINGIZE(_type), (_count)); \
 	} while(0)
 
-#endif /* UTIL_H */
+#endif /* UTIL_UTIL_H */

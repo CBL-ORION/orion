@@ -5,7 +5,7 @@
     #error "missing declaration TYPED_NAME"
 #endif
 
-#include "util.h"
+#include "util/util.h"
 
 typedef struct {
 	size_t capacity; /* maximum size */

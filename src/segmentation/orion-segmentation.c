@@ -4,7 +4,7 @@
 
 #include "simple-log/simplelog.h"
 #include "param/param.h"
-#include "util.h"
+#include "util/util.h"
 
 typedef struct {
 	orion_io_param* io;

@@ -2,7 +2,7 @@
 #define PARAM_IO_H 1
 
 #include <stdio.h>
-#include "util.h"
+#include "util/util.h"
 
 typedef struct {
 	char* input_filename;

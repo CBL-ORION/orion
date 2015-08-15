@@ -1,12 +1,4 @@
 #include "simplelog.h"
-#include "util.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-#include <time.h>
-
 
 void LOG_FORMAT(const char* tag, const char* message, va_list args) {
 	time_t now;

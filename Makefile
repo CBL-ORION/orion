@@ -55,20 +55,9 @@ include make/00-implicit-rules.mk
 
 
 $(BUILDDIR)/param/orion3.o: $(BUILDDIR)/container/array.o
-
-$(BUILDTESTDIR)/orion3-config-parser/parse-file: $(BUILDDIR)/util.o $(BUILDDIR)/simple-log/simplelog.o \
-	$(BUILDDIR)/param/param.o $(BUILDDIR)/param/orion3.o \
-	$(BUILDDIR)/orion3-config-parser/parser.o $(BUILDDIR)/container/array.o
-
 $(BUILDDIR)/container/array.o: $(LIBDIR)/container/array_impl.h $(LIBDIR)/container/array_impl.c
 
 $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
-
-$(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion-segmentation.c \
-		$(BUILDDIR)/simple-log/simplelog.o $(BUILDDIR)/util.o \
-		$(BUILDDIR)/param/segmentation.o $(BUILDDIR)/param/io.o \
-		$(BUILDDIR)/param/param.o \
-		$(BUILDDIR)/container/array.o
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 
