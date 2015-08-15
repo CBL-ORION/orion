@@ -26,7 +26,7 @@ void orion_segmentation_param_free(orion_segmentation_param* param) {
 }
 
 void orion_segmentation_param_dump( orion_segmentation_param* param ) {
-	fprintf(stderr, "orion_segmentation_param: %x\n", param);
+	fprintf(stderr, "orion_segmentation_param: %p\n", param);
 	if( param->scales )
 		array_dump_float( param->scales );
 }
