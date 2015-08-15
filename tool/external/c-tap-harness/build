@@ -14,4 +14,6 @@ if ! which autoconf >/dev/null; then
 fi
 ./autogen && ./configure && make
 
+# "CFLAGS+=-fsanitize=address"
+
 # vim: fdm=marker
