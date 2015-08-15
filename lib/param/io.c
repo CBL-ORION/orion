@@ -15,7 +15,7 @@ void orion_io_param_free(orion_io_param* param) {
 }
 
 void orion_io_param_dump( orion_io_param* param ) {
-	fprintf(stderr, "orion_io_param: %x\n", param);
+	fprintf(stderr, "orion_io_param: %p\n", param);
 	if( param->input_filename )
 		fprintf(stderr, "\tinput: %s\n", param->input_filename);
 	if( param->output_filename )
