@@ -10,7 +10,7 @@ int main(void) {
 	char* path_to_input = "test-data/DIADEM/NPF/Input_NPF023_D.txt";
 	orion3_param* p = orion3_param_read_input_file(path_to_input);
 
-	/*orion3_param_dump( p );*/
+	/*[>DEBUG<]orion3_param_dump( p );*/
 
 /* 1 test */
 	ok( p != NULL, "orion3 parameters non-NULL" );
