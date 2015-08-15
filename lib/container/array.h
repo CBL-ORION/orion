@@ -20,6 +20,7 @@
 #undef TYPED_NAME
 
 /* TODO make more generic */
-void array_dump_float(array_float* array);
+extern void array_dump_float(array_float* array);
+extern void array_dump_str(array_str* array);
 
 #endif /* CONTAINER_ARRAY_H */

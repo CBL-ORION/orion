@@ -20,8 +20,17 @@
 void array_dump_float(array_float* array) {
 	size_t len = array_length_float( array );
 	fprintf(stderr, "[\n");
-	for( int i = 0; i < len; i++ ) {
+	for( size_t i = 0; i < len; i++ ) {
 		fprintf(stderr, "\t%f", array_get_float(array, i));
 	}
 	fprintf(stderr, "\n]\n");
+}
+
+void array_dump_str(array_str* array) {
+	size_t len = array_length_str( array );
+	fprintf(stderr, "[\n");
+	for( size_t i = 0; i < len; i++ ) {
+		fprintf(stderr, "\t%s\n", array_get_str(array, i));
+	}
+	fprintf(stderr, "]\n");
 }
