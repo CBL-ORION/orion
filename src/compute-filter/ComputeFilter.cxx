@@ -11,16 +11,16 @@
 #include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
 #include "itkHessianRecursiveGaussianImageFilter.h"
 #include "itkImageAdaptor.h"
-#include "PixelAccessors.h"
+#include "PixelAccessors.hxx"
 #include "itkSymmetricEigenAnalysisImageFilter.h"
 #include "itkCastImageFilter.h"
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 
-#include "FilterCommon.h"
-#include "EigenSato.h"
-#include "EigenFrangi.h"
+#include "FilterCommon.hxx"
+#include "EigenSato.hxx"
+#include "EigenFrangi.hxx"
 
 const int nSigmas = 1;
 

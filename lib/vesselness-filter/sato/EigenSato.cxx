@@ -11,7 +11,7 @@
 #include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
 #include "itkHessianRecursiveGaussianImageFilter.h"
 #include "itkImageAdaptor.h"
-#include "PixelAccessors.h"
+#include "PixelAccessors.hxx"
 #include "itkSymmetricEigenAnalysisImageFilter.h"
 #include "itkCastImageFilter.h"
 
@@ -19,7 +19,7 @@
 #include "itkImageFileWriter.h"
 //Here goes the function for Sato
 
-#include "EigenSato.h"
+#include "EigenSato.hxx"
 
 OutputImageArrayType ComputeSato( InternalImageType::Pointer inputVolume, float sigma)
 {

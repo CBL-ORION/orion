@@ -1,4 +1,4 @@
-/* orion_matlab_plugin.h
+/* orion_matlab_plugin.hxx
  * This is a test plugin, you can use it as a demo. orion_matlab
  * 2015-6-10 : by orion_matlab
  */

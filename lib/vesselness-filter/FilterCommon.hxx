@@ -4,7 +4,7 @@
 #include "itkImage.h"
 #include "itkFixedArray.h"
 
-#include "config/itkdatatype.h"
+#include "config/itkdatatype.hxx"
 
 typedef itk::FixedArray<InternalImageType::Pointer, Dimension > OutputImageArrayType;
 

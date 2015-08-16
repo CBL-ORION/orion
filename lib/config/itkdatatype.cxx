@@ -1,3 +1,3 @@
-#include "config/itkdatatype.h"
+#include "config/itkdatatype.hxx"
 
 const   unsigned int   Dimension = PIXEL_NDIMS;

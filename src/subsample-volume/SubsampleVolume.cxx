@@ -46,7 +46,7 @@
 
 #include "itkCastImageFilter.h"
 
-#include "config/itkdatatype.h"
+#include "config/itkdatatype.hxx"
 
 
 int main( int argc, char * argv[] )

@@ -11,14 +11,14 @@
 #include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
 #include "itkHessianRecursiveGaussianImageFilter.h"
 #include "itkImageAdaptor.h"
-#include "PixelAccessors.h"
+#include "PixelAccessors.hxx"
 #include "itkSymmetricEigenAnalysisImageFilter.h"
 #include "itkCastImageFilter.h"
 
 #include "itkImageFileReader.h"
 #include "itkImageFileWriter.h"
 
-#include "EigenFrangi.h"
+#include "EigenFrangi.hxx"
 
 OutputImageArrayType ComputeFrangi( InternalImageType::Pointer inputVolume, float sigma ) {
 	typedef   itk::HessianRecursiveGaussianImageFilter< InternalImageType >    HessianFilterType;

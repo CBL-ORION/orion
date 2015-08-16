@@ -1,7 +1,7 @@
 vaa3d-plugin-orion-matlab: ${VAA3D_ORION_MATLAB_LIB_OBJ}
 
 $(VAA3D_ORION_MATLAB_LIB_OBJ): \
-		${VAA3D_ORION_MATLAB_LIB_SRC_PATH}/orion_matlab_plugin.cpp \
+		${VAA3D_ORION_MATLAB_LIB_SRC_PATH}/orion_matlab_plugin.cxx \
 		${ORION3MAT_LIB_OBJ}
 	mkdir -p $(VAA3D_ORION_MATLAB_LIB_BUILD_PATH)
 	qmake  -makefile \

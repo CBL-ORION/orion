@@ -1,4 +1,4 @@
-/* orion_matlab_plugin.cpp
+/* orion_matlab_plugin.cxx
  * This is a test plugin, you can use it as a demo. orion_matlab
  * 2015-6-10 : by orion_matlab
  */
@@ -7,7 +7,7 @@
 #include <vector>
 #include "basic_surf_objs.h"
 
-#include "orion_matlab_plugin.h"
+#include "orion_matlab_plugin.hxx"
 Q_EXPORT_PLUGIN2(orion_matlab, ORION_MATLABTestPlugin);
 
 using namespace std;

@@ -12,7 +12,7 @@ include_directories(${LIBDIR}/vesselness-filter/frangi)
 include_directories(${LIBDIR}/vesselness-filter/sato)
 link_directories(${BUILDDIR}/vesselness-filter)
 
-#PixelAccessors.h EigenFrangi.h EigenSato.h
+#PixelAccessors.hxx EigenFrangi.hxx EigenSato.hxx
 
 add_executable(ComputeFilter ComputeFilter.cxx )
 target_link_libraries(ComputeFilter ${ITK_LIBRARIES} EigenFrangi EigenSato)
