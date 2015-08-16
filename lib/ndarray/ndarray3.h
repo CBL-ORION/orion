@@ -7,7 +7,7 @@
 #include "util/util.h"
 
 typedef struct {
-	pixel_type_t* p;
+	pixel_type* p;
 	size_t sz[3];
 	int wrap;
 } ndarray3;
@@ -22,9 +22,9 @@ typedef struct {
 ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
 /** TODO document
-    ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
+    ndarray3* ndarray3_wrap( const pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
  */
-ndarray3* ndarray3_wrap( const pixel_type_t* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
+ndarray3* ndarray3_wrap( const pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
 
 /***** DESTRUCTORS *****/
 
@@ -46,7 +46,7 @@ void ndarray3_destroy( ndarray3* n );
 
 
 /** TODO document
-    ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type_t value )
+    ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type value )
  */
 #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = val } while(0)
 

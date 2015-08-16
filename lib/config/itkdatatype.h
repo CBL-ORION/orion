@@ -9,9 +9,9 @@
 
 
 /* standard names for ITK filters */
-typedef input_pixel_type_t      InputPixelType;
-typedef pixel_type_t         InternalPixelType; /* standard name for ITK filters */
-typedef output_pixel_type_t    OutputPixelType; /* standard name for ITK filters */
+typedef input_pixel_type      InputPixelType;
+typedef pixel_type         InternalPixelType; /* standard name for ITK filters */
+typedef output_pixel_type    OutputPixelType; /* standard name for ITK filters */
 
 const   unsigned int   Dimension = 3; /* should be PIXEL_NDIMS, but needed for ITK templates */
 
