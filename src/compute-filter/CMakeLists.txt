@@ -7,10 +7,10 @@ find_package(ITK REQUIRED)
 include(${ITK_USE_FILE})
 
 include_directories(${LIBDIR})
-include_directories(${LIBDIR}/vesselness-filter)
-include_directories(${LIBDIR}/vesselness-filter/frangi)
-include_directories(${LIBDIR}/vesselness-filter/sato)
-link_directories(${BUILDDIR}/vesselness-filter)
+include_directories(${LIBDIR}/filter/vesselness)
+include_directories(${LIBDIR}/filter/vesselness/frangi)
+include_directories(${LIBDIR}/filter/vesselness/sato)
+link_directories(${BUILDDIR}/filter/vesselness)
 
 #PixelAccessors.hxx EigenFrangi.hxx EigenSato.hxx
 

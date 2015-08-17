@@ -4,7 +4,7 @@ include make/config.mk
 ## Source files
 BIN_SRC.c   := $(SRCDIR)/segmentation/orion-segmentation.c
 BIN_SRC.cc  := # $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
-LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/hdaf-filter/Makefilter.c
+LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/filter/hdaf/Makefilter.c
 TEST.c := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c $(TESTDIR)/liborion3mat/test.c $(TESTDIR)/container/array.c \
 	$(TESTDIR)/orion3-config-parser/parse-file.c
 
@@ -27,7 +27,7 @@ TEST_OBJ:= $(call TEST_PATHSUBST.c,$(TEST.c))
 BIN_BIN.c := $(call BIN_PATHSUBST.c,$(BIN_SRC.c))
 BIN_BIN.cc := $(call BIN_PATHSUBST.cc,$(BIN_SRC.cc))
 
-include make/vesselness-filter-config.mk
+include make/filter-vesselness-config.mk
 include make/vaa3d-plugin-config.mk
 include make/liborion3mat-config.mk
 
@@ -66,7 +66,7 @@ tags:
 	# add the ORION 3 code to the tags so that it is easy to jump to the other codebase
 	ctags -R -a ../../trunk/ORION\ 3/
 
-include make/vesselness-filter-rules.mk
+include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk
 include make/vaa3d-plugin-rules.mk
 include make/test-rules.mk
