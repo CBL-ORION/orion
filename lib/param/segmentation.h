@@ -7,8 +7,9 @@
 
 typedef struct {
 	array_float* scales;     /* sigma */
-	float percentage_threshold_intensity;/* default: 0.9 */
+	float percentage_threshold_intensity; /* default: 0.9 */
 	size_t number_of_stacks; /* length of volume_names */
+	int min_conn_comp_to_remove; /* Used in the multiscale only. */
 } orion_segmentation_param;
 
 extern orion_segmentation_param* orion_segmentation_param_new();
