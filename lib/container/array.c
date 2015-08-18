@@ -19,7 +19,7 @@
 /* TODO: move to array_impl.c */
 void array_dump_float(array_float* array) {
 	size_t len = array_length_float( array );
-	fprintf(stderr, "[\n");
+	fprintf(stderr, "array_float %p [\n", array);
 	for( size_t i = 0; i < len; i++ ) {
 		fprintf(stderr, "\t%f", array_get_float(array, i));
 	}
@@ -28,7 +28,7 @@ void array_dump_float(array_float* array) {
 
 void array_dump_str(array_str* array) {
 	size_t len = array_length_str( array );
-	fprintf(stderr, "[\n");
+	fprintf(stderr, "array_str %p [\n", array);
 	for( size_t i = 0; i < len; i++ ) {
 		fprintf(stderr, "\t%s\n", array_get_str(array, i));
 	}
