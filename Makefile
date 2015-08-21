@@ -65,7 +65,7 @@ $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
 tags:
 	ctags --exclude=external -R .
 	# add the ORION 3 code to the tags so that it is easy to jump to the other codebase
-	ctags -R -a ../../trunk/ORION\ 3/
+	ctags -R -a ${ORION3MAT_PATH}
 
 include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk
