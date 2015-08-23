@@ -1,4 +1,3 @@
-
 #include <stdbool.h>
 #include "container/vector.h"
 #include "ndarray/ndarray3.h"
