@@ -13,7 +13,7 @@ else
     MCR := $(MCR_EXTERNAL)
   else
     $(info Need to install MCR. Run)
-    $(info $(TABMARK)git clone git@github.com:CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal)
+    $(info $(TABMARK)git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal)
     $(error Missing MCR dependency)
   endif
 endif
