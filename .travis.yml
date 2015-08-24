@@ -4,7 +4,7 @@ compiler:
   - gcc
   - clang
 install:
-  - sudo apt-get install libinsighttoolkit3-dev
+  - sudo apt-get install libinsighttoolkit3-dev libgdcm2-dev
   - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
 script:
   - make
