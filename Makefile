@@ -34,12 +34,17 @@ include make/liborion3mat-config.mk
 
 .PHONY: tags
 
+ifdef PROD
+  DEV_TARGETS :=
+else
+  DEV_TARGETS := tags $(VAA3D_ORION_MATLAB_LIB_OBJ)
+endif
+
 ## Rules
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
-	tags
-	#$(VAA3D_ORION_MATLAB_LIB_OBJ) \
+	$(DEV_TARGETS) \
 
 ### Output directories
 $(OUTPUT_DIRS): # multiple targets
