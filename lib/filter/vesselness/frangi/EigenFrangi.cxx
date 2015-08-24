@@ -1,9 +1,3 @@
-
-// Software Guide : BeginCodeSnippet
-#include "itkConnectedThresholdImageFilter.h"
-// Software Guide : EndCodeSnippet
-
-
 #include "itkImage.h"
 #include "itkCastImageFilter.h"
 #include "itkCurvatureFlowImageFilter.h"

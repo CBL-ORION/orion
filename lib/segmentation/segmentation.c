@@ -23,18 +23,22 @@ void orion_segmentation_method_occen( orion_segmentation_param* param ) {
 	 *
 	 * call segmentation/laplacian-negative-samples/background.c
 	 */
+	orion_readNegativeSamples();
 
 	/* TODO
 	 * Step 2: Extract local shape information (features)
 	 *
 	 * Refactor: getFeatures
 	 */
+	orion_getFeatures();
 
 	/* TODO
 	 * Step 3: Learn discriminant function
 	 *
 	 * Refactor: compute2D_DiscrimantFunction
 	 */
+	orion_compute2D_DiscrimantFunction();
+
 	/* TODO
 	 * Step 4: Segment neurons
 	 *
@@ -42,9 +46,12 @@ void orion_segmentation_method_occen( orion_segmentation_param* param ) {
 	 *
 	 * percentage_threshold_intensity
 	 */
+	orion_percentage_threshold_intensity();
+
 	/* TODO
 	 * Step 5: Post-process the segmentation result
 	 */
+	orion_postprocess_segmentation();
 }
 
 orion_segmentation_method_occen_set_default_param( orion_segmentation_param* param ) {

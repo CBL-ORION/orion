@@ -3,7 +3,7 @@ include make/config.mk
 
 ## Source files
 BIN_SRC.c   := $(SRCDIR)/segmentation/orion-segmentation.c
-BIN_SRC.cc  := # $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
+BIN_SRC.cc  := $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
 LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/filter/hdaf/Makefilter.c
 TEST.c := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c $(TESTDIR)/liborion3mat/test.c \
 	$(TESTDIR)/container/array.c $(TESTDIR)/container/vector.c \
@@ -52,13 +52,6 @@ clean:
 	-rm $(VAA3D_ORION_MATLAB_LIB_OBJ)
 
 include make/00-implicit-rules.mk
-
-
-
-$(BUILDDIR)/param/orion3.o: $(BUILDDIR)/container/array.o
-$(BUILDDIR)/container/array.o: $(LIBDIR)/container/array_impl.h $(LIBDIR)/container/array_impl.c
-
-$(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
 
 -include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 
