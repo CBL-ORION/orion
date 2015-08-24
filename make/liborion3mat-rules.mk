@@ -2,7 +2,7 @@
 #
 # Have to cd to make sure that the CTF archive is clean. Otherwise it will
 # contain the full path.
-${ORION3MAT_LIB_OBJ}: ${ORION3MAT_PATH}/${ORION3MAT_MCC_FUNCTION}
+${ORION3MAT_LIB_OBJ}: # ${ORION3MAT_PATH}/${ORION3MAT_MCC_FUNCTION}
 	if [ -d external/${ORION3MAT_LIB_NAME}  ]; then \
 		cp -puvr external/${ORION3MAT_LIB_NAME} ${ORION3MAT_LIB_OBJ_PATH}; \
 	else \
