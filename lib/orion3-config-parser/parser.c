@@ -30,7 +30,7 @@ orion3_param* orion3_param_read_input_file(char* filename) {
 		int sscanf_count = -1;
 		int buffer_offset = 0; /* not size_t, used in %n */
 		float single_scale = 0.0;
-		while( sscanf_count = sscanf(sscanf_buffer, "%f%n", &single_scale, &buffer_offset) ) {
+		while( 0 != ( sscanf_count = sscanf(sscanf_buffer, "%f%n", &single_scale, &buffer_offset) ) ) {
 			if( sscanf_count < 1 )
 				break;
 			sscanf_buffer += buffer_offset;
