@@ -38,8 +38,8 @@ include make/liborion3mat-config.mk
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
-	$(VAA3D_ORION_MATLAB_LIB_OBJ) \
 	tags
+	#$(VAA3D_ORION_MATLAB_LIB_OBJ) \
 
 ### Output directories
 $(OUTPUT_DIRS): # multiple targets
