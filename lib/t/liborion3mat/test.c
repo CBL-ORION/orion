@@ -1,4 +1,4 @@
-#include "liborion3mat.h"
+#include "liborion3mat/liborion3mat-shim.h"
 
 int main() {
 	/* Initialize the MATLAB Compiler Runtime global state */
