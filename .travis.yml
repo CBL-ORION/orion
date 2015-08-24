@@ -6,6 +6,7 @@ compiler:
 install:
   - sudo apt-get install libinsighttoolkit3-dev libgdcm2-dev
   - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
+  - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-deploy.git external/liborion3mat
 script:
   - make
 branches:
