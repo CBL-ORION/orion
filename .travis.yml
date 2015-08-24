@@ -8,7 +8,7 @@ install:
   - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
   - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-deploy.git external/liborion3mat
 script:
-  - make
+  - make && make test
 branches:
   except:
     - /^wip\//
