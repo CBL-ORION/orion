@@ -13,7 +13,7 @@ typedef input_pixel_type      InputPixelType;
 typedef pixel_type         InternalPixelType; /* standard name for ITK filters */
 typedef output_pixel_type    OutputPixelType; /* standard name for ITK filters */
 
-const   unsigned int   Dimension = 3; /* should be PIXEL_NDIMS, but needed for ITK templates */
+const   unsigned int   Dimension = 3; /* should be PIXEL_NDIMS (in "config/datatype.h"), but needed for ITK templates */
 
 typedef itk::Image< InputPixelType,    Dimension >   InputImageType;
 typedef itk::Image< InternalPixelType, Dimension >   InternalImageType;
