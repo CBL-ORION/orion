@@ -71,3 +71,4 @@ include make/vaa3d-plugin-rules.mk
 include make/test-rules.mk
 include make/ndarray-rules.mk
 include make/util-rules.mk
+include make/misc-rules.mk
