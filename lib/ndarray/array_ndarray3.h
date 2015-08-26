@@ -3,7 +3,7 @@
 
 #include "ndarray3.h"
 
-#define TYPE ndarray3
+#define TYPE ndarray3*
 #define TYPED_NAME(x) x ## _ ## ndarray3
 #include "container/array_impl.h"
 #undef TYPE
