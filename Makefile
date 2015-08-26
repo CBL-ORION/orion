@@ -45,6 +45,7 @@ all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
 	$(DEV_TARGETS) \
+	$(BUILDDIR)/integration/itk/IntegrationITK.a
 
 ### Output directories
 $(OUTPUT_DIRS): # multiple targets
