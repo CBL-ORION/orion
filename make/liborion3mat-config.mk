@@ -1,6 +1,8 @@
 ## liborion3mat
 ORION3MAT_PATH := external/orion3mat
 
+ifdef FEAT_LIBORION3MAT
+
 # The following are relative to ORION3MAT_PATH
 # Functions to make available
 ORION3MAT_MCC_FUNCTION := main/ORION3.m
@@ -31,3 +33,5 @@ LIBORION3MAT_CFLAGS       :=
 LIBORION3MAT_CPPFLAGS     := -I${ORION3MAT_LIB_OBJ_PATH}
 LIBORION3MAT_LDFLAGS      := -L${ORION3MAT_LIB_OBJ_PATH}
 LIBORION3MAT_LDLIBS       := -l${ORION3MAT_LIB_BASE}
+
+endif # FEAT_LIBORION3MAT

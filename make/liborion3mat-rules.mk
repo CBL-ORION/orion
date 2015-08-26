@@ -1,3 +1,5 @@
+ifdef FEAT_LIBORION3MAT
+
 # NOTE: only need to keep: liborion3mat.so liborion3mat.h readme.txt
 #
 # Have to cd to make sure that the CTF archive is clean. Otherwise it will
@@ -30,6 +32,10 @@ $(BUILDTESTDIR)/liborion3mat/test: LDLIBS   += $(LIBORION3MAT_LDLIBS)   $(MCR_LD
 
 .PHONY: liborion3mat.run.with-matlab-env liborion3mat.run.with-mcr-env
 
+# add the MCR to the LD_LIBRARY_PATH
+test: LD_PRELOAD := ${MCR_LD_PRELOAD}:${LD_PRELOAD}
+test: LD_LIBRARY_PATH := ${ORION3MAT_LIB_OBJ_PATH}:${MCR_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}
+
 liborion3mat.run.with-matlab-env: $(BUILDTESTDIR)/liborion3mat/test
 	# Running using MATLAB for loading dynamic libraries
 	LD_PRELOAD=${MATLAB_LD_PRELOAD} LD_LIBRARY_PATH=${ORION3MAT_LIB_OBJ_PATH}:${MATLAB_LD_LIBRARY_PATH} $<
@@ -37,3 +43,4 @@ liborion3mat.run.with-mcr-env: $(BUILDTESTDIR)/liborion3mat/test test-data/DIADE
 	# Running using MATLAB Compiler Runtime for loading dynamic libraries
 	LD_PRELOAD=${MCR_LD_PRELOAD} LD_LIBRARY_PATH=${ORION3MAT_LIB_OBJ_PATH}:${MCR_LD_LIBRARY_PATH} $<
 
+endif # FEAT_LIBORION3MAT
