@@ -1,13 +1,13 @@
- #include <stdlib.h>
- #include <tap/basic.h>
+#include <stdlib.h>
+#include <tap/basic.h>
 
- int main(void) {
-     plan(2);
+int main(void) {
+	plan(2);
 
-     ok(1, "the first test");
-     is_int(42, 42, NULL);
-     diag("a diagnostic, ignored by the harness");
-     /*skip("a skipped test");*/
+	ok(1, "the first test");
+	is_int(42, 42, NULL);
+	diag("a diagnostic, ignored by the harness");
+	/*skip("a skipped test");*/
 
-     return EXIT_SUCCESS;
- }
+	return EXIT_SUCCESS;
+}
