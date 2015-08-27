@@ -29,10 +29,10 @@ ndarray3* ndarray3_wrap( const pixel_type* p, const size_t sz_x, const size_t sz
 /***** DESTRUCTORS *****/
 
 /** TODO document
-    ndarray3_destroy( ndarray3* n )
+    ndarray3_free( ndarray3* n )
  */
 
-void ndarray3_destroy( ndarray3* n );
+void ndarray3_free( ndarray3* n );
 
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )

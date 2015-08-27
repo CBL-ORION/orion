@@ -27,7 +27,7 @@ ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) 
 	return n;
 }
 
-void ndarray3_destroy( ndarray3* n ) {
+void ndarray3_free( ndarray3* n ) {
 	if( ! n->wrap ) free( n->p );
 	free( n );
 }
