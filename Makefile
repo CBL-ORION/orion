@@ -26,6 +26,7 @@ MKDIR_BUILDTESTDIR = mkdir -p `dirname $(call TEST_PATHSUBST.c,$<)`
 
 include make/filter-vesselness-config.mk
 include make/vaa3d-plugin-config.mk
+include make/test-config.mk
 include make/liborion3mat-config.mk
 
 ## Generate the targets

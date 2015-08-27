@@ -36,10 +36,10 @@ $(BUILDTESTDIR)/liborion3mat/test: LDLIBS   += $(LIBORION3MAT_LDLIBS)   $(MCR_LD
 test: LD_PRELOAD := ${MCR_LD_PRELOAD}:${LD_PRELOAD}
 test: LD_LIBRARY_PATH := ${ORION3MAT_LIB_OBJ_PATH}:${MCR_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}
 
-liborion3mat.run.with-matlab-env: $(BUILDTESTDIR)/liborion3mat/test
+liborion3mat.run.with-matlab-env: $(BUILDTESTDIR)/liborion3mat/test $(TEST_DATA_NPF023)
 	# Running using MATLAB for loading dynamic libraries
 	LD_PRELOAD=${MATLAB_LD_PRELOAD} LD_LIBRARY_PATH=${ORION3MAT_LIB_OBJ_PATH}:${MATLAB_LD_LIBRARY_PATH} $<
-liborion3mat.run.with-mcr-env: $(BUILDTESTDIR)/liborion3mat/test test-data/DIADEM/NPF/NPF026/NPF026.raw $(BUILDTESTDIR)/liborion3mat/test test-data/DIADEM/NPF/NPF023/NPF023.raw
+liborion3mat.run.with-mcr-env: $(BUILDTESTDIR)/liborion3mat/test $(TEST_DATA_NPF023)
 	# Running using MATLAB Compiler Runtime for loading dynamic libraries
 	LD_PRELOAD=${MCR_LD_PRELOAD} LD_LIBRARY_PATH=${ORION3MAT_LIB_OBJ_PATH}:${MCR_LD_LIBRARY_PATH} $<
 
