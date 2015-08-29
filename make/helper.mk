@@ -16,6 +16,7 @@ SPACEMARK := $(BLANKMARK) $(BLANKMARK)
 TABMARK :=$(BLANKMARK)	$(BLANKMARK)
 
 GUNZIP := gunzip
+ZCAT := zcat
 
 %: %.gz
-	$(GUNZIP) -k $<
+	$(ZCAT) < $< > $@
