@@ -5,6 +5,8 @@
 #include "itkFixedArray.h"
 #include "itkImportImageFilter.h"
 
+#include "config/itkdatatype.hxx"
+
 #include "FilterCommon.hxx"
 #include "EigenSato.hxx"
 #include "EigenFrangi.hxx"
@@ -73,7 +75,7 @@ array_ndarray3* _orion_convert_itkFixedArray_to_array_ndarray( OutputImageArrayT
 	/* get the size of the arr_itk and create an array_ndarray3* of the
 	 * same size */
 	OutputImageArrayType::SizeType sz = arr_itk.Size();
-	array_ndarray3* arr_eig = array_new_ndarray3(sz);
+	array_ndarray3* arr_eig = array_new_ndarray3((size_t)sz);
 
 	/* fill `arr_eig` with the ndarray3* volumes converted from `arr_eig_itk`'s
 	 * elements */
@@ -85,7 +87,7 @@ array_ndarray3* _orion_convert_itkFixedArray_to_array_ndarray( OutputImageArrayT
 	return arr_eig;
 }
 
-array_ndarray3* ApplyFilterSato( ndarray3* vol, float sigma ) {
+array_ndarray3* orion_filter_method_sato( ndarray3* vol, float sigma ) {
 	InternalImageType::Pointer vol_itk = _orion_convert_ndarray3_to_itkImage( vol );
 
 	OutputImageArrayType arr_eig_itk  = ComputeSato( vol_itk, sigma );
@@ -94,7 +96,7 @@ array_ndarray3* ApplyFilterSato( ndarray3* vol, float sigma ) {
 	return arr_eig;
 }
 
-array_ndarray3* ApplyFilterFrangi( ndarray3* vol, float sigma ) {
+array_ndarray3* orion_filter_method_frangi( ndarray3* vol, float sigma ) {
 	InternalImageType::Pointer vol_itk = _orion_convert_ndarray3_to_itkImage( vol );
 
 	OutputImageArrayType arr_eig_itk  = ComputeFrangi( vol_itk, sigma );
@@ -103,6 +105,6 @@ array_ndarray3* ApplyFilterFrangi( ndarray3* vol, float sigma ) {
 	return arr_eig;
 }
 
-array_ndarray3* ApplyFilterSingleEigenvalue( ndarray3* vol, float sigma ) {
+array_ndarray3* orion_filter_method_single_eigenvalue( ndarray3* vol, float sigma ) {
 	WARN_UNIMPLEMENTED;
 }
