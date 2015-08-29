@@ -8,79 +8,138 @@ $(BUILDTESTDIR)/orion3-config-parser/parse-file$(EXEEXT): $(BUILDDIR)/util/util.
 
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDFLAGS += -lstdc++ # needs to add C++ library to link to lib libIntegrationITK.a
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): \
-		$(BUILDDIR)/io/format/mhd.o \
-		$(BUILDDIR)/ndarray/array_ndarray3.o \
-		$(BUILDDIR)/ndarray/ndarray3.o \
 		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/ndarray/ndarray3.o \
+		$(BUILDDIR)/ndarray/array_ndarray3.o \
+		$(BUILDDIR)/io/format/mhd.o \
 		$(BUILDDIR)/integration/itk/libIntegrationITK.a \
+		$(BUILDDIR)/filter/vesselness/libEigenFrangi.a \
+		$(BUILDDIR)/filter/vesselness/libEigenSato.a \
 		| $(TEST_DATA_NPF023)
 
-
-include temp/itk-config.mk
+ITK_VERSION_SUFFIX := -4.8
 ITK_LDFLAGS += -msse2 -rdynamic
 ITK_LDLIBS := \
-	/usr/local/lib/libitkdouble-conversion-4.8.a /usr/local/lib/libitksys-4.8.a \
-	/usr/local/lib/libitkvnl_algo-4.8.a /usr/local/lib/libitkvnl-4.8.a \
-	/usr/local/lib/libitkv3p_netlib-4.8.a /usr/local/lib/libITKCommon-4.8.a \
-	/usr/local/lib/libitkNetlibSlatec-4.8.a /usr/local/lib/libITKStatistics-4.8.a \
-	/usr/local/lib/libITKIOImageBase-4.8.a /usr/local/lib/libITKIOBMP-4.8.a \
-	/usr/local/lib/libITKIOBioRad-4.8.a /usr/local/lib/libITKEXPAT-4.8.a \
-	/usr/local/lib/libitkzlib-4.8.a /usr/local/lib/libitkgdcmDICT-4.8.a \
-	/usr/local/lib/libitkgdcmMSFF-4.8.a /usr/local/lib/libITKIOGDCM-4.8.a \
-	/usr/local/lib/libITKIOGIPL-4.8.a /usr/local/lib/libitkjpeg-4.8.a \
-	/usr/local/lib/libITKIOJPEG-4.8.a /usr/local/lib/libitktiff-4.8.a \
-	/usr/local/lib/libITKIOTIFF-4.8.a /usr/local/lib/libITKIOLSM-4.8.a \
-	/usr/local/lib/libITKMetaIO-4.8.a /usr/local/lib/libITKIOMeta-4.8.a \
-	/usr/local/lib/libITKznz-4.8.a /usr/local/lib/libITKniftiio-4.8.a \
-	/usr/local/lib/libITKIONIFTI-4.8.a /usr/local/lib/libITKNrrdIO-4.8.a \
-	/usr/local/lib/libITKIONRRD-4.8.a /usr/local/lib/libitkpng-4.8.a \
-	/usr/local/lib/libITKIOPNG-4.8.a /usr/local/lib/libITKIOStimulate-4.8.a \
-	/usr/local/lib/libITKIOVTK-4.8.a /usr/local/lib/libITKMesh-4.8.a \
-	/usr/local/lib/libITKSpatialObjects-4.8.a /usr/local/lib/libITKPath-4.8.a \
-	/usr/local/lib/libITKLabelMap-4.8.a /usr/local/lib/libITKQuadEdgeMesh-4.8.a \
-	/usr/local/lib/libITKOptimizers-4.8.a /usr/local/lib/libITKPolynomials-4.8.a \
-	/usr/local/lib/libITKBiasCorrection-4.8.a /usr/local/lib/libITKBioCell-4.8.a \
-	/usr/local/lib/libITKDICOMParser-4.8.a /usr/local/lib/libITKIOXML-4.8.a \
-	/usr/local/lib/libITKIOSpatialObjects-4.8.a /usr/local/lib/libITKFEM-4.8.a \
-	/usr/local/lib/libITKgiftiio-4.8.a /usr/local/lib/libITKIOMesh-4.8.a \
-	/usr/local/lib/libitkhdf5_cpp-4.8.a /usr/local/lib/libitkhdf5-4.8.a \
-	/usr/local/lib/libITKIOCSV-4.8.a /usr/local/lib/libITKIOIPL-4.8.a \
-	/usr/local/lib/libITKIOGE-4.8.a /usr/local/lib/libITKIOSiemens-4.8.a \
-	/usr/local/lib/libITKIOHDF5-4.8.a /usr/local/lib/libITKIOMRC-4.8.a \
-	/usr/local/lib/libITKIOTransformBase-4.8.a \
-	/usr/local/lib/libITKIOTransformHDF5-4.8.a \
-	/usr/local/lib/libITKIOTransformInsightLegacy-4.8.a \
-	/usr/local/lib/libITKIOTransformMatlab-4.8.a \
-	/usr/local/lib/libITKKLMRegionGrowing-4.8.a /usr/local/lib/libITKVTK-4.8.a \
-	/usr/local/lib/libITKWatersheds-4.8.a /usr/local/lib/libITKOptimizersv4-4.8.a \
-	/usr/local/lib/libITKVideoCore-4.8.a /usr/local/lib/libITKVideoIO-4.8.a \
-	/usr/local/lib/libitkgdcmMSFF-4.8.a /usr/local/lib/libitkgdcmDICT-4.8.a \
-	/usr/local/lib/libitkgdcmIOD-4.8.a /usr/local/lib/libitkgdcmDSED-4.8.a \
-	/usr/local/lib/libitkgdcmCommon-4.8.a /usr/local/lib/libitkgdcmjpeg8-4.8.a \
-	/usr/local/lib/libitkgdcmjpeg12-4.8.a /usr/local/lib/libitkgdcmjpeg16-4.8.a \
-	/usr/local/lib/libitkgdcmopenjpeg-4.8.a /usr/local/lib/libitkgdcmcharls-4.8.a \
-	/usr/local/lib/libitkgdcmuuid-4.8.a /usr/local/lib/libITKIOTIFF-4.8.a \
-	/usr/local/lib/libitktiff-4.8.a /usr/local/lib/libitkjpeg-4.8.a \
-	/usr/local/lib/libITKNrrdIO-4.8.a /usr/local/lib/libitkpng-4.8.a \
-	/usr/local/lib/libITKPolynomials-4.8.a /usr/local/lib/libITKIOXML-4.8.a \
-	/usr/local/lib/libITKMetaIO-4.8.a /usr/local/lib/libITKgiftiio-4.8.a \
-	/usr/local/lib/libITKEXPAT-4.8.a /usr/local/lib/libITKniftiio-4.8.a \
-	/usr/local/lib/libITKznz-4.8.a /usr/local/lib/libITKIOGE-4.8.a \
-	/usr/local/lib/libITKIOIPL-4.8.a /usr/local/lib/libitkhdf5_cpp-4.8.a \
-	/usr/local/lib/libitkhdf5-4.8.a /usr/local/lib/libitkzlib-4.8.a \
-	/usr/local/lib/libITKIOTransformBase-4.8.a \
-	/usr/local/lib/libITKSpatialObjects-4.8.a /usr/local/lib/libITKMesh-4.8.a \
-	/usr/local/lib/libITKPath-4.8.a /usr/local/lib/libITKOptimizers-4.8.a \
-	/usr/local/lib/libITKStatistics-4.8.a /usr/local/lib/libitkNetlibSlatec-4.8.a \
-	/usr/local/lib/libITKIOImageBase-4.8.a /usr/local/lib/libITKVideoCore-4.8.a \
-	/usr/local/lib/libITKCommon-4.8.a /usr/local/lib/libitkdouble-conversion-4.8.a \
-	/usr/local/lib/libitksys-4.8.a /usr/local/lib/libITKVNLInstantiation-4.8.a \
-	/usr/local/lib/libitkvnl_algo-4.8.a /usr/local/lib/libitkv3p_lsqr-4.8.a \
-	/usr/local/lib/libitkvnl-4.8.a /usr/local/lib/libitkvcl-4.8.a \
-	/usr/local/lib/libitkv3p_netlib-4.8.a -lm -lpthread -ldl -lm
+	-litkdouble-conversion$(ITK_VERSION_SUFFIX) \
+	-litksys$(ITK_VERSION_SUFFIX) \
+	-litkvnl_algo$(ITK_VERSION_SUFFIX) \
+	-litkvnl$(ITK_VERSION_SUFFIX) \
+	-litkv3p_netlib$(ITK_VERSION_SUFFIX) \
+	-lITKCommon$(ITK_VERSION_SUFFIX) \
+	-litkNetlibSlatec$(ITK_VERSION_SUFFIX) \
+	-lITKStatistics$(ITK_VERSION_SUFFIX) \
+	-lITKIOImageBase$(ITK_VERSION_SUFFIX) \
+	-lITKIOBMP$(ITK_VERSION_SUFFIX) \
+	-lITKIOBioRad$(ITK_VERSION_SUFFIX) \
+	-lITKEXPAT$(ITK_VERSION_SUFFIX) \
+	-litkzlib$(ITK_VERSION_SUFFIX) \
+	-litkgdcmDICT$(ITK_VERSION_SUFFIX) \
+	-litkgdcmMSFF$(ITK_VERSION_SUFFIX) \
+	-lITKIOGDCM$(ITK_VERSION_SUFFIX) \
+	-lITKIOGIPL$(ITK_VERSION_SUFFIX) \
+	-litkjpeg$(ITK_VERSION_SUFFIX) \
+	-lITKIOJPEG$(ITK_VERSION_SUFFIX) \
+	-litktiff$(ITK_VERSION_SUFFIX) \
+	-lITKIOTIFF$(ITK_VERSION_SUFFIX) \
+	-lITKIOLSM$(ITK_VERSION_SUFFIX) \
+	-lITKMetaIO$(ITK_VERSION_SUFFIX) \
+	-lITKIOMeta$(ITK_VERSION_SUFFIX) \
+	-lITKznz$(ITK_VERSION_SUFFIX) \
+	-lITKniftiio$(ITK_VERSION_SUFFIX) \
+	-lITKIONIFTI$(ITK_VERSION_SUFFIX) \
+	-lITKNrrdIO$(ITK_VERSION_SUFFIX) \
+	-lITKIONRRD$(ITK_VERSION_SUFFIX) \
+	-litkpng$(ITK_VERSION_SUFFIX) \
+	-lITKIOPNG$(ITK_VERSION_SUFFIX) \
+	-lITKIOStimulate$(ITK_VERSION_SUFFIX) \
+	-lITKIOVTK$(ITK_VERSION_SUFFIX) \
+	-lITKMesh$(ITK_VERSION_SUFFIX) \
+	-lITKSpatialObjects$(ITK_VERSION_SUFFIX) \
+	-lITKPath$(ITK_VERSION_SUFFIX) \
+	-lITKLabelMap$(ITK_VERSION_SUFFIX) \
+	-lITKQuadEdgeMesh$(ITK_VERSION_SUFFIX) \
+	-lITKOptimizers$(ITK_VERSION_SUFFIX) \
+	-lITKPolynomials$(ITK_VERSION_SUFFIX) \
+	-lITKBiasCorrection$(ITK_VERSION_SUFFIX) \
+	-lITKBioCell$(ITK_VERSION_SUFFIX) \
+	-lITKDICOMParser$(ITK_VERSION_SUFFIX) \
+	-lITKIOXML$(ITK_VERSION_SUFFIX) \
+	-lITKIOSpatialObjects$(ITK_VERSION_SUFFIX) \
+	-lITKFEM$(ITK_VERSION_SUFFIX) \
+	-lITKgiftiio$(ITK_VERSION_SUFFIX) \
+	-lITKIOMesh$(ITK_VERSION_SUFFIX) \
+	-litkhdf5_cpp$(ITK_VERSION_SUFFIX) \
+	-litkhdf5$(ITK_VERSION_SUFFIX) \
+	-lITKIOCSV$(ITK_VERSION_SUFFIX) \
+	-lITKIOIPL$(ITK_VERSION_SUFFIX) \
+	-lITKIOGE$(ITK_VERSION_SUFFIX) \
+	-lITKIOSiemens$(ITK_VERSION_SUFFIX) \
+	-lITKIOHDF5$(ITK_VERSION_SUFFIX) \
+	-lITKIOMRC$(ITK_VERSION_SUFFIX) \
+	-lITKIOTransformBase$(ITK_VERSION_SUFFIX) \
+	-lITKIOTransformHDF5$(ITK_VERSION_SUFFIX) \
+	-lITKIOTransformInsightLegacy$(ITK_VERSION_SUFFIX) \
+	-lITKIOTransformMatlab$(ITK_VERSION_SUFFIX) \
+	-lITKKLMRegionGrowing$(ITK_VERSION_SUFFIX) \
+	-lITKVTK$(ITK_VERSION_SUFFIX) \
+	-lITKWatersheds$(ITK_VERSION_SUFFIX) \
+	-lITKOptimizersv4$(ITK_VERSION_SUFFIX) \
+	-lITKVideoCore$(ITK_VERSION_SUFFIX) \
+	-lITKVideoIO$(ITK_VERSION_SUFFIX) \
+	-litkgdcmMSFF$(ITK_VERSION_SUFFIX) \
+	-litkgdcmDICT$(ITK_VERSION_SUFFIX) \
+	-litkgdcmIOD$(ITK_VERSION_SUFFIX) \
+	-litkgdcmDSED$(ITK_VERSION_SUFFIX) \
+	-litkgdcmCommon$(ITK_VERSION_SUFFIX) \
+	-litkgdcmjpeg8$(ITK_VERSION_SUFFIX) \
+	-litkgdcmjpeg12$(ITK_VERSION_SUFFIX) \
+	-litkgdcmjpeg16$(ITK_VERSION_SUFFIX) \
+	-litkgdcmopenjpeg$(ITK_VERSION_SUFFIX) \
+	-litkgdcmcharls$(ITK_VERSION_SUFFIX) \
+	-litkgdcmuuid$(ITK_VERSION_SUFFIX) \
+	-lITKIOTIFF$(ITK_VERSION_SUFFIX) \
+	-litktiff$(ITK_VERSION_SUFFIX) \
+	-litkjpeg$(ITK_VERSION_SUFFIX) \
+	-lITKNrrdIO$(ITK_VERSION_SUFFIX) \
+	-litkpng$(ITK_VERSION_SUFFIX) \
+	-lITKPolynomials$(ITK_VERSION_SUFFIX) \
+	-lITKIOXML$(ITK_VERSION_SUFFIX) \
+	-lITKMetaIO$(ITK_VERSION_SUFFIX) \
+	-lITKgiftiio$(ITK_VERSION_SUFFIX) \
+	-lITKEXPAT$(ITK_VERSION_SUFFIX) \
+	-lITKniftiio$(ITK_VERSION_SUFFIX) \
+	-lITKznz$(ITK_VERSION_SUFFIX) \
+	-lITKIOGE$(ITK_VERSION_SUFFIX) \
+	-lITKIOIPL$(ITK_VERSION_SUFFIX) \
+	-litkhdf5_cpp$(ITK_VERSION_SUFFIX) \
+	-litkhdf5$(ITK_VERSION_SUFFIX) \
+	-litkzlib$(ITK_VERSION_SUFFIX) \
+	-lITKIOTransformBase$(ITK_VERSION_SUFFIX) \
+	-lITKSpatialObjects$(ITK_VERSION_SUFFIX) \
+	-lITKMesh$(ITK_VERSION_SUFFIX) \
+	-lITKPath$(ITK_VERSION_SUFFIX) \
+	-lITKOptimizers$(ITK_VERSION_SUFFIX) \
+	-lITKStatistics$(ITK_VERSION_SUFFIX) \
+	-litkNetlibSlatec$(ITK_VERSION_SUFFIX) \
+	-lITKIOImageBase$(ITK_VERSION_SUFFIX) \
+	-lITKVideoCore$(ITK_VERSION_SUFFIX) \
+	-lITKCommon$(ITK_VERSION_SUFFIX) \
+	-litkdouble-conversion-4.8 \
+	-litksys$(ITK_VERSION_SUFFIX) \
+	-lITKVNLInstantiation$(ITK_VERSION_SUFFIX) \
+	-litkvnl_algo$(ITK_VERSION_SUFFIX) \
+	-litkv3p_lsqr$(ITK_VERSION_SUFFIX) \
+	-litkvnl$(ITK_VERSION_SUFFIX) \
+	-litkvcl$(ITK_VERSION_SUFFIX) \
+	-litkv3p_netlib$(ITK_VERSION_SUFFIX) \
+	-lm -lpthread -ldl -lm
 
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
-test: CPPFLAGS += $(TEST_CPPFLAGS) $(ITK_CPPFLAGS)
-test: LDFLAGS  += $(TEST_LDFLAGS) $(ITK_LDFLAGS)
-test: LDLIBS   += $(TEST_LDLIBS) $(ITK_LDLIBS)
+test: CPPFLAGS += $(TEST_CPPFLAGS)
+test: LDFLAGS  += $(TEST_LDFLAGS)
+test: LDLIBS   += $(TEST_LDLIBS)
+
+$(BUILDTESTDIR)/integration/itk/itk: CPPFLAGS += $(TEST_CPPFLAGS) $(ITK_CPPFLAGS)
+$(BUILDTESTDIR)/integration/itk/itk: LDFLAGS  += $(TEST_LDFLAGS) $(ITK_LDFLAGS)
+$(BUILDTESTDIR)/integration/itk/itk: LDLIBS   += $(TEST_LDLIBS) $(ITK_LDLIBS)

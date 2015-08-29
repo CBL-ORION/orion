@@ -61,6 +61,7 @@ $(OUTPUT_DIRS): # multiple targets
 clean:
 	-find . -type f -name '*.o' -delete
 	-rm -Rf $(OUTPUT_DIRS)
+	-rm -Rf $(ITK_CONFIG_MK)
 	-rm $(VAA3D_ORION_MATLAB_LIB_OBJ)
 
 include make/00-implicit-rules.mk

@@ -8,12 +8,15 @@ CMakeFiles
 ITKIOFactoryRegistration
 cmake_install.cmake
 
+/make/itk/itk-config.mk.gen
+
 /ComputeFrangi/Makefile
 /ComputeFrangi/ComputeEigenValue_Sorted_Frangi
 
 ComputeFilter
 
 /data
+/test-data
 
 /.build
 /.deps

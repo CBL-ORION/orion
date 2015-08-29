@@ -13,6 +13,10 @@ typedef struct {
 	TYPE * data;
 } TYPED_NAME(array);
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /* ==== construct / destruct ==== */
 extern TYPED_NAME(array)* TYPED_NAME(array_new)( size_t size );
 extern void TYPED_NAME(array_free)( TYPED_NAME(array)* array );
@@ -29,3 +33,7 @@ extern void TYPED_NAME(array_add) ( TYPED_NAME(array)* array, TYPE data );
 
 /* ==== memory management ==== */
 extern void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t new_capacity );
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
