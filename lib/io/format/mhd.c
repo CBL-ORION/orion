@@ -1,6 +1,6 @@
 #include "ndarray/ndarray3.h"
 
-#include "io/format/mhd.h";
+#include "io/format/mhd.h"
 
 ndarray3* orion_read_mhd(char* mhd_filename) {
 	TODO( read the mhd file );
