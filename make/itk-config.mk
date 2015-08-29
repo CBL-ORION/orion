@@ -5,8 +5,7 @@ $(ITK_CONFIG_MK):  make/itk/CMakeLists.txt
 	@$(MKDIR_BUILD)
 	$(CMAKE.generate) -B$(BUILDDIR)/.make/itk -Hmake/itk
 
-#ITK_VERSION_SUFFIX := -4.8
-ITK_VERSION_SUFFIX :=
+ITK_VERSION_SUFFIX := -4.8
 ITK_LDFLAGS += -msse2 -rdynamic
 ITK_LDLIBS := \
 	-litkdouble-conversion$(ITK_VERSION_SUFFIX) \
