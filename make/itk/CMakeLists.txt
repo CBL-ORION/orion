@@ -7,6 +7,9 @@ if (ITKVtkGlue_LOADED)
   include(${VTK_USE_FILE})
 endif()
 
+add_executable(Pi Pi.cxx )
+target_link_libraries(Pi ${ITK_LIBRARIES})
+
 #message( ${ITK_LIBRARIES} ) 
 
 
@@ -19,7 +22,8 @@ foreach (libdir ${ITK_LIBRARY_DIRS})
 endforeach()
 
 foreach (lib ${ITK_LIBRARIES})
-	set(ITK_LDLIBS "${ITK_LDLIBS} -l${lib}-4.8")
+	# this variable does not give the actual linker flags
+	#set(ITK_LDLIBS "${ITK_LDLIBS} -l${lib}-4.8")
 endforeach()
 
 set(ITK_CONFIG_MK_GEN "itk-config.mk.gen" )
