@@ -6,7 +6,10 @@ $(BUILDTESTDIR)/orion3-config-parser/parse-file$(EXEEXT): $(BUILDDIR)/util/util.
 	$(BUILDDIR)/param/param.o $(BUILDDIR)/param/orion3.o \
 	$(BUILDDIR)/orion3-config-parser/parser.o $(BUILDDIR)/container/array.o
 
-$(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDFLAGS += -lstdc++ # needs to add C++ library to link to lib libIntegrationITK.a
+$(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): CPPFLAGS += $(ITK_CPPFLAGS)
+$(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDFLAGS  += $(ITK_LDFLAGS)
+$(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDLIBS   += $(ITK_LDLIBS)
+$(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDLIBS   += -lstdc++ # needs to add C++ library to link to lib libIntegrationITK.a
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/ndarray/ndarray3.o \
@@ -22,7 +25,3 @@ test: $(TEST_OBJ)
 test: CPPFLAGS += $(TEST_CPPFLAGS)
 test: LDFLAGS  += $(TEST_LDFLAGS)
 test: LDLIBS   += $(TEST_LDLIBS)
-
-$(BUILDTESTDIR)/integration/itk/itk: CPPFLAGS += $(ITK_CPPFLAGS)
-$(BUILDTESTDIR)/integration/itk/itk: LDFLAGS  += $(ITK_LDFLAGS)
-$(BUILDTESTDIR)/integration/itk/itk: LDLIBS   += $(ITK_LDLIBS)
