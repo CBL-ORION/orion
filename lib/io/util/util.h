@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-int orion_freadline(FILE* fh, char* buffer);
+extern int orion_freadline(FILE* fh, char* buffer);
 
 #endif /* IO_UTIL_UTIL_H */
