@@ -5,6 +5,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "util/float.h"
+#include "util/string.h"
+
 #define SQUARED(x) ( (x) * (x) )
 
 #define CAT(a, ...) PRIMITIVE_CAT(a, __VA_ARGS__)
