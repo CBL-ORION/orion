@@ -4,7 +4,8 @@ $(BUILDTESTDIR)/container/vector$(EXEEXT): $(BUILDDIR)/container/vector.o $(BUIL
 
 $(BUILDTESTDIR)/orion3-config-parser/parse-file$(EXEEXT): $(BUILDDIR)/util/util.o $(BUILDDIR)/simple-log/simplelog.o \
 	$(BUILDDIR)/param/param.o $(BUILDDIR)/param/orion3.o \
-	$(BUILDDIR)/orion3-config-parser/parser.o $(BUILDDIR)/container/array.o
+	$(BUILDDIR)/orion3-config-parser/parser.o $(BUILDDIR)/container/array.o \
+	$(BUILDDIR)/io/util/util.o
 
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): CPPFLAGS += $(ITK_CPPFLAGS)
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDFLAGS  += $(ITK_LDFLAGS)
@@ -19,6 +20,12 @@ $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): \
 		$(BUILDDIR)/filter/vesselness/libEigenFrangi.a \
 		$(BUILDDIR)/filter/vesselness/libEigenSato.a \
 		| $(TEST_DATA_NPF023)
+
+
+$(BUILDTESTDIR)/io/mhd$(EXEEXT): \
+		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/ndarray/ndarray3.o \
+		$(BUILDDIR)/io/format/mhd.o
 
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)

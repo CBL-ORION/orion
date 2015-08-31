@@ -3,7 +3,7 @@
 /* REFACTOR: readinformationOR3.m */
 orion3_param* orion3_param_read_input_file(char* filename) {
 	assert( filename != NULL ); /* the filename string is not a NULL pointer */
-	char buffer[256];
+	char buffer[ORION_ORION3_CONFIG_PARSER_BUFFER_SZ];
 
 	orion3_param* param = orion3_param_new();
 
@@ -24,7 +24,7 @@ orion3_param* orion3_param_read_input_file(char* filename) {
 	 */
 	{
 		/* read in the first line into the buffer */
-		fscanf(f, "%[^\n]\n", buffer);
+		orion_freadline(f, buffer);
 		/* read in each float out of the buffer */
 		char* sscanf_buffer = buffer;
 		int sscanf_count = -1;
@@ -43,7 +43,7 @@ orion3_param* orion3_param_read_input_file(char* filename) {
 	 * Read into: `param->path_to_volume_directory`
 	 */
 	{
-		fscanf(f, "%[^\n]\n", buffer);
+		orion_freadline(f, buffer);
 		safe_malloc_and_strcpy( &(param->path_to_volume_directory), buffer );
 	}
 
@@ -59,7 +59,7 @@ orion3_param* orion3_param_read_input_file(char* filename) {
 	{
 		char* single_volume_name = NULL;
 		do {
-			fscanf(f, "%[^\n]\n", buffer);
+			orion_freadline(f, buffer);
 			if( sscanf(buffer, "%d", &scan_for_boolean) ) {
 				/* found an integer */
 				break;
@@ -84,7 +84,7 @@ orion3_param* orion3_param_read_input_file(char* filename) {
 	 * Read into: `param->report_filename`.
 	 */
 	{
-		fscanf(f, "%[^\n]\n", buffer);
+		orion_freadline(f, buffer);
 		safe_malloc_and_strcpy( &(param->report_filename), buffer );
 	}
 
