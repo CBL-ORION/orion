@@ -5,10 +5,7 @@ include make/config.mk
 BIN_SRC.c   := $(SRCDIR)/segmentation/orion-segmentation.c
 BIN_SRC.cc  := $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
 LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/filter/hdaf/Makefilter.c
-TEST.c := $(TESTDIR)/canary.c $(TESTDIR)/ndarray/ndarray.c \
-	$(TESTDIR)/container/array.c $(TESTDIR)/container/vector.c \
-	$(TESTDIR)/orion3-config-parser/parse-file.c \
-	$(TESTDIR)/integration/itk/itk.c
+TEST.c := $(shell find $(TESTDIR) -path lib/t/liborion3mat -prune -o -type f -name "*.c" -print)
 ifdef FEAT_LIBORION3MAT
 TEST.c  += $(TESTDIR)/liborion3mat/test.c
 endif # FEAT_LIBORION3MAT
