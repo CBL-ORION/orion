@@ -6,7 +6,7 @@
 #include "ndarray/ndarray3.h"
 #include "container/array.h"
 
-#define ORION_IO_MHD_BUFFER_SZ 256
+#define ORION_IO_MHD_BUFFER_SZ ORION_BUFFER_SZ
 
 typedef enum {
 	MET_UCHAR = 1, /*  uint8   */
