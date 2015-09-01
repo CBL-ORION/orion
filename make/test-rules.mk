@@ -15,7 +15,9 @@ $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/ndarray/ndarray3.o \
 		$(BUILDDIR)/ndarray/array_ndarray3.o \
+		$(BUILDDIR)/container/array.o \
 		$(BUILDDIR)/io/format/mhd.o \
+		$(BUILDDIR)/io/util/util.o \
 		$(BUILDDIR)/integration/itk/libIntegrationITK.a \
 		$(BUILDDIR)/filter/vesselness/libEigenFrangi.a \
 		$(BUILDDIR)/filter/vesselness/libEigenSato.a \
@@ -25,7 +27,9 @@ $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): \
 $(BUILDTESTDIR)/io/mhd$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/ndarray/ndarray3.o \
-		$(BUILDDIR)/io/format/mhd.o
+		$(BUILDDIR)/container/array.o \
+		$(BUILDDIR)/io/format/mhd.o \
+		$(BUILDDIR)/io/util/util.o
 
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
