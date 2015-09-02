@@ -13,6 +13,7 @@ typedef struct {
 } orion_filepath;
 
 extern orion_filepath* orion_filepath_new_from_string(const char* fp_string);
+extern void orion_filepath_dump(orion_filepath* fp);
 extern char* orion_filepath_to_string(orion_filepath* fp);
 extern orion_filepath* orion_filepath_sibling( orion_filepath* base, orion_filepath* relative);
 

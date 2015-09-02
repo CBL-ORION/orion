@@ -48,6 +48,7 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 		fp_string_norm_cur_ptr++;
 	}
 
+	/* split into components */
 	while( fp_string_norm_cur_ptr < fp_string_norm_end_ptr ) {
 		/* the variable into which the current segment will be copied */
 		char* cur_comp_seg;
@@ -66,24 +67,23 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 		}
 
 		/* copy up to (but not including) the next slash */
-		safe_malloc_and_strncpy(cur_comp_seg,
+		safe_malloc_and_strncpy(&cur_comp_seg,
 				fp_string_norm_cur_ptr,
-				comp_up_to_slash - fp_string_norm_cur_ptr - 1 );
+				comp_up_to_slash - fp_string_norm_cur_ptr );
 		array_add_str( fp->components, cur_comp_seg);
 
 		/* start right after the next slash */
 		fp_string_norm_cur_ptr = comp_up_to_slash + 1;
 	}
 
-	TODO( split into components );
-	WARN_UNIMPLEMENTED;
+	return fp;
 }
 
-char* orion_filepath_base( orion_filepath* fp ) {
+orion_filepath* orion_filepath_base( orion_filepath* fp ) {
 	TODO( copy last component );
 }
 
-char* orion_filepath_dir( orion_filepath* fp ) {
+orion_filepath* orion_filepath_dir( orion_filepath* fp ) {
 	TODO( copy all but last component );
 }
 
@@ -95,9 +95,66 @@ void orion_filepath_free(orion_filepath* fp) {
 	free(fp);
 }
 
+void orion_filepath_dump(orion_filepath* fp) {
+	fprintf(stderr, "filepath [%p] : ", fp);
+	size_t number_of_components = array_length_str(fp->components);
+	if( fp->has_root_component ) {
+		fprintf(stderr, "%s", fp->root_component);
+		if( number_of_components > 0 ) {
+			/* print out separator if there are components after */
+			fprintf(stderr, "/");
+		}
+	}
+	for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
+		fprintf(stderr, "%s", array_get_str(fp->components, comp_idx));
+		if( comp_idx < number_of_components - 1 ) {
+			fprintf(stderr, "/");
+		}
+	}
+	fprintf(stderr, "\n");
+}
+
 char* orion_filepath_to_string(orion_filepath* fp) {
-	TODO( strcat );
-	return NULL;
+	char* fp_str;
+
+	size_t total_strlen = 0;
+	size_t total_buflen = 0;
+	size_t number_of_components = array_length_str(fp->components);
+	if( fp->has_root_component ) {
+		total_strlen += strlen( fp->root_component );
+		if( number_of_components > 0 ) {
+			total_strlen += 1; /* length of '/' */
+		}
+	}
+	for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
+		total_strlen += strlen( array_get_str(fp->components, comp_idx) );
+		if( comp_idx < number_of_components - 1 ) {
+			total_strlen += 1; /* length of '/' */
+		}
+	}
+
+	/* add 1 for null-terminator */
+	total_buflen = total_strlen + 1;
+
+	/* allocate space */
+	NEW_COUNT(fp_str, char, total_buflen);
+	fp_str[0] = '\0'; /* start off with empty string */
+
+	/* now concatenate */
+	if( fp->has_root_component ) {
+		strncat( fp_str, fp->root_component, total_strlen );
+		if( number_of_components > 0 ) {
+			strncat( fp_str, "/", total_strlen );
+		}
+	}
+	for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
+		strncat( fp_str, array_get_str(fp->components, comp_idx), total_strlen );
+		if( comp_idx < number_of_components - 1 ) {
+			strncat( fp_str, "/", total_strlen );
+		}
+	}
+
+	return fp_str;
 }
 
 orion_filepath* orion_filepath_cat( orion_filepath* fp1, orion_filepath* fp2 ) {
