@@ -1,4 +1,5 @@
 #include "orion3-config-parser/parser.h"
+#include "io/util/util.h"
 
 /* REFACTOR: readinformationOR3.m */
 orion3_param* orion3_param_read_input_file(char* filename) {
@@ -25,17 +26,7 @@ orion3_param* orion3_param_read_input_file(char* filename) {
 	{
 		/* read in the first line into the buffer */
 		orion_freadline(f, buffer);
-		/* read in each float out of the buffer */
-		char* sscanf_buffer = buffer;
-		int sscanf_count = -1;
-		int buffer_offset = 0; /* not size_t, used in %n */
-		float single_scale = 0.0;
-		while( 0 != ( sscanf_count = sscanf(sscanf_buffer, "%f%n", &single_scale, &buffer_offset) ) ) {
-			if( sscanf_count < 1 )
-				break;
-			sscanf_buffer += buffer_offset;
-			array_add_float( param->scales, single_scale );
-		}
+		orion_parse_sequence_float( buffer, &(param->scales) );
 	}
 
 	/* The second line is the path to the volume.

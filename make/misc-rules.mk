@@ -1,4 +1,4 @@
-$(BUILDDIR)/param/orion3.o: $(BUILDDIR)/container/array.o
+$(BUILDDIR)/param/orion3.o: $(BUILDDIR)/container/array.o $(BUILDDIR)/io/util/util.o
 $(BUILDDIR)/container/array.o: $(LIBDIR)/container/array_impl.h $(LIBDIR)/container/array_impl.c
 $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
 
