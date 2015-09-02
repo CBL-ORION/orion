@@ -38,7 +38,7 @@
 extern void _real_die(const char* msg_fmt, const char* origin, ...);
 #define die(_msg_fmt, ...) _real_die(_msg_fmt, SHOWORIGIN, __VA_ARGS__)
 
-extern char* safe_malloc_and_strcpy(char** dest, char* src);
+extern char* safe_malloc_and_strcpy(char** dest, const char* src);
 
 #define NEW_COUNT(_var, _type, _count) \
 	do { \
