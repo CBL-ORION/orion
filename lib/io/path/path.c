@@ -142,10 +142,6 @@ void orion_filepath_dump(orion_filepath* fp) {
 	size_t number_of_components = array_length_str(fp->components);
 	if( fp->has_root_component ) {
 		fprintf(stderr, "%s", fp->root_component);
-		if( number_of_components > 0 ) {
-			/* print out separator if there are components after */
-			fprintf(stderr, "/");
-		}
 	}
 	for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
 		fprintf(stderr, "%s", array_get_str(fp->components, comp_idx));
@@ -164,9 +160,6 @@ char* orion_filepath_to_string(orion_filepath* fp) {
 	size_t number_of_components = array_length_str(fp->components);
 	if( fp->has_root_component ) {
 		total_strlen += strlen( fp->root_component );
-		if( number_of_components > 0 ) {
-			total_strlen += 1; /* length of '/' */
-		}
 	}
 	for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
 		total_strlen += strlen( array_get_str(fp->components, comp_idx) );
@@ -185,9 +178,6 @@ char* orion_filepath_to_string(orion_filepath* fp) {
 	/* now concatenate */
 	if( fp->has_root_component ) {
 		strncat( fp_str, fp->root_component, total_strlen );
-		if( number_of_components > 0 ) {
-			strncat( fp_str, "/", total_strlen );
-		}
 	}
 	for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
 		strncat( fp_str, array_get_str(fp->components, comp_idx), total_strlen );
