@@ -30,7 +30,8 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 	}
 
 	NEW(meta, orion_mhd_metadata);
-	meta->DimSize = array_new_int(0);
+	meta->DimSize = array_new_int(3);
+	meta->ElementSpacing = array_new_float(3);
 
 	while( !feof( mhd_fh ) ) {
 		memset(buffer, 0, ORION_IO_MHD_BUFFER_SZ*sizeof(char));
@@ -68,9 +69,11 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 		} else if( 0 == strcmp("ElementSpacing", key_buffer)         ) {
 			/* TODO Value[ array_float[Ndim] ]
 			 */
+			orion_parse_sequence_float(value_buffer, &(meta->ElementSpacing));
 		} else if( 0 == strcmp("DimSize", key_buffer)                ) {
 			/* TODO Value [ array_int[Ndim] ]
 			 */
+			orion_parse_sequence_int(value_buffer, &(meta->DimSize));
 		} else if( 0 == strcmp("ElementType", key_buffer)            ) {
 			/* TODO Value [orion_mhd_datatype]
 			 * "MET_USHORT"
