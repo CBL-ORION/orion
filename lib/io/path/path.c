@@ -10,6 +10,7 @@ orion_filepath* _orion_filepath_init() {
 	NEW(fp, orion_filepath);
 	fp->components = array_new_str(3);
 	fp->has_root_component = false;
+	fp->root_component = NULL;
 	return fp;
 }
 
@@ -40,7 +41,7 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 		/* Unix specific: starts with '/',
 		 * then it is an absolute path.
 		 */
-		fp->has_root_component = 1;
+		fp->has_root_component = true;
 		safe_malloc_and_strcpy( &(fp->root_component), "/" );
 
 		/* we add to the cur_ptr because we want to start
@@ -80,11 +81,52 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 }
 
 orion_filepath* orion_filepath_base( orion_filepath* fp ) {
-	TODO( copy last component );
+	/* base_fp is the new filepath for the base component */
+	orion_filepath* base_fp = _orion_filepath_init();
+	base_fp->has_root_component = false;
+
+	/* copy the last component into a buffer */
+	size_t number_of_components = array_length_str(fp->components);
+	char* last_component;
+	safe_malloc_and_strcpy(&last_component,
+			array_get_str( fp->components, number_of_components - 1));
+
+	/* add that buffer to the base_fp */
+	array_add_str( base_fp->components, last_component );
+
+	/* there should only be one component in the base component */
+	assert( array_length_str(base_fp->components) == 1 );
+
+	return base_fp;
 }
 
 orion_filepath* orion_filepath_dir( orion_filepath* fp ) {
-	TODO( copy all but last component );
+	/* dir_fp is the new filepath for the base component */
+	orion_filepath* dir_fp = _orion_filepath_init();
+	dir_fp->has_root_component = fp->has_root_component;
+
+	if( fp->has_root_component ) {
+		safe_malloc_and_strcpy(
+			&( dir_fp->root_component ),
+			fp->root_component );
+	}
+
+	/* TODO what if there are no more components? should it start
+	 * using "."? See how Path::Tiny behaves. */
+	/* copy all but the last component into dir_fp */
+	size_t number_of_components = array_length_str(fp->components);
+	for( int comp_idx = 0; comp_idx < number_of_components - 1; comp_idx++ ) {
+		char* cur_component;
+		safe_malloc_and_strcpy(&cur_component,
+				array_get_str( fp->components, comp_idx));
+		/* add that to the dir_fp */
+		array_add_str( dir_fp->components, cur_component );
+	}
+
+	/* dir component should not be empty */
+	assert( array_length_str(dir_fp->components) > 0 );
+
+	return dir_fp;
 }
 
 void orion_filepath_free(orion_filepath* fp) {
