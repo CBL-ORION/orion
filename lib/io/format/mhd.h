@@ -22,6 +22,12 @@ typedef enum {
 } orion_mhd_datatype;
 
 typedef struct {
+	/* used to hold the filename from which this
+	 * MetaInfo metadata was read
+	 */
+	char* _filename;
+
+	/* start of MetaInfo keys */
 	size_t NDims;
 	orion_mhd_datatype ElementType;
 	array_int* DimSize;
@@ -29,6 +35,7 @@ typedef struct {
 	bool BinaryData;
 	bool BinaryDataByteOrderMSB;
 	array_float* ElementSpacing;
+	/* end of MetaInfo keys */
 } orion_mhd_metadata;
 
 extern ndarray3* orion_read_mhd(char* mhd_filename);

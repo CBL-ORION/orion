@@ -33,6 +33,8 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 	meta->DimSize = array_new_int(3);
 	meta->ElementSpacing = array_new_float(3);
 
+	safe_malloc_and_strcpy( &(meta->_filename), mhd_filename);
+
 	while( !feof( mhd_fh ) ) {
 		memset(buffer, 0, ORION_IO_MHD_BUFFER_SZ*sizeof(char));
 		memset(key_buffer, 0, ORION_IO_MHD_BUFFER_SZ*sizeof(char));
@@ -90,22 +92,20 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 }
 
 ndarray3* orion_read_mhd(char* mhd_filename) {
+	/* read the mhd file */
 	orion_mhd_metadata* meta = orion_read_mhd_metdata( mhd_filename );
 
-
-	TODO( read the mhd file );
 	TODO( read the raw file wite same name in the same folder );
 	size_t bytes_to_read = orion_mhd_raw_byte_length( meta );
 	void* raw_buffer;
 	NEW_COUNT(raw_buffer, int8_t, bytes_to_read);
 
+	return NULL;
 	char* raw_file = meta->ElementDataFile; /* TODO */
 	FILE* raw_file_fh = fopen(raw_file, "r");
 	if( !raw_file_fh ) {
-		printf("|%s|%d\n", meta->ElementDataFile, strlen(meta->ElementDataFile) );
 		die("Could not open ElementDataFile (%s) of the MetaInfo format file", meta->ElementDataFile, mhd_filename);
 	}
-	assert( raw_file_fh != NULL );
 	fread(raw_buffer, sizeof(int8_t), bytes_to_read, raw_file_fh);
 
 	WARN_UNIMPLEMENTED;
