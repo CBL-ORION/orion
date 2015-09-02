@@ -95,21 +95,48 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	/* read the mhd file */
 	orion_mhd_metadata* meta = orion_read_mhd_metdata( mhd_filename );
 
-	TODO( read the raw file wite same name in the same folder );
+	/* calculate the size of the buffer for holding the data and allocate
+	 * the space */
 	size_t bytes_to_read = orion_mhd_raw_byte_length( meta );
 	void* raw_buffer;
 	NEW_COUNT(raw_buffer, int8_t, bytes_to_read);
 
-	return NULL;
-	char* raw_file = meta->ElementDataFile; /* TODO */
-	FILE* raw_file_fh = fopen(raw_file, "r");
+	/* find the path to the raw file using the ElementDataFile key */
+	orion_filepath* mhd_file_fp = orion_filepath_new_from_string( meta->_filename );
+	orion_filepath* raw_file_fp = orion_filepath_new_from_string(meta->ElementDataFile);
+	orion_filepath* path_to_raw_fp = orion_filepath_sibling( mhd_file_fp, raw_file_fp );
+
+	char* path_to_raw = orion_filepath_to_string(path_to_raw_fp);
+
+	/* open the raw file */
+	FILE* raw_file_fh = fopen(path_to_raw, "r");
 	if( !raw_file_fh ) {
-		die("Could not open ElementDataFile (%s) of the MetaInfo format file", meta->ElementDataFile, mhd_filename);
+		die("Could not open ElementDataFile (%s) of the MetaInfo format file %s. Expected the file to be located at %s.",
+				meta->ElementDataFile,
+				mhd_filename,
+				path_to_raw);
 	}
 	fread(raw_buffer, sizeof(int8_t), bytes_to_read, raw_file_fh);
 
-	WARN_UNIMPLEMENTED;
-	return NULL;
+	if( meta->NDims != 3 ) {
+		die("the MetaInfo file %s is not a 3D volume. Expected NDims = 3, got NDims = " SIZE_T_FORMAT_SPEC ,
+				meta->_filename,
+				meta->NDims);
+	}
+
+	TODO(this needs to be cast to pixel_type);
+	/* wrap the buffer and use the dimensions from the MetaInfo metadata */
+	ndarray3* n = ndarray3_wrap( raw_buffer,
+			array_get_int(meta->DimSize, 0),
+			array_get_int(meta->DimSize, 1),
+			array_get_int(meta->DimSize, 2) );
+
+	free( mhd_file_fp );
+	free( raw_file_fp );
+	free( path_to_raw_fp );
+	free( path_to_raw );
+
+	return n;
 }
 
 size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta ) {
