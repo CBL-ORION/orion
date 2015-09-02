@@ -7,6 +7,8 @@ $(BUILDTESTDIR)/orion3-config-parser/parse-file$(EXEEXT): $(BUILDDIR)/util/util.
 	$(BUILDDIR)/orion3-config-parser/parser.o $(BUILDDIR)/container/array.o \
 	$(BUILDDIR)/io/util/util.o
 
+$(BUILDTESTDIR)/io/path/path$(EXEEXT): $(BUILDDIR)/io/path/path.o $(BUILDDIR)/util/util.o
+
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): CPPFLAGS += $(ITK_CPPFLAGS)
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDFLAGS  += $(ITK_LDFLAGS)
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): LDLIBS   += $(ITK_LDLIBS)
