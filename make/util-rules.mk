@@ -4,7 +4,8 @@ $(BINDIR)/subsample-volume/SubsampleVolume$(EXEEXT): $(SRCDIR)/subsample-volume/
 	$(MAKE) -C$(BINDIR)/subsample-volume
 
 $(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion-segmentation.c \
-		$(BUILDDIR)/simple-log/simplelog.o $(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/simple-log/simplelog.o \
+		$(BUILDDIR)/util/util.o $(BUILDDIR)/util/string.o \
 		$(BUILDDIR)/param/segmentation.o $(BUILDDIR)/param/io.o \
 		$(BUILDDIR)/param/param.o \
 		$(BUILDDIR)/container/array.o

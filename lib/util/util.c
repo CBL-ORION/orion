@@ -17,18 +17,3 @@ void _real_die(const char* msg_fmt, const char* origin, ...) {
 	va_end(args);
 	exit(EXIT_FAILURE);
 }
-
-char* safe_malloc_and_strcpy(char** dest, const char* src) {
-	size_t len = strlen(src);
-	NEW_COUNT(*dest, char, len);
-	return strncpy(*dest, src, len);
-}
-
-char* safe_malloc_and_strncpy(char** dest, const char* src, size_t len) {
-	size_t src_len = strlen(src);
-	if( len > src_len ) {
-		die("Length requested for destination string is longer than the source string: %s > %s", len, src_len);
-	}
-	NEW_COUNT(*dest, char, len);
-	return strncpy(*dest, src, len);
-}

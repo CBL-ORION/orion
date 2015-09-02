@@ -1,7 +1,7 @@
 $(BUILDDIR)/param/orion3.o: $(BUILDDIR)/container/array.o $(BUILDDIR)/io/util/util.o
 $(BUILDDIR)/container/array.o: $(LIBDIR)/container/array_impl.h $(LIBDIR)/container/array_impl.c
 $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
-$(BUILDDIR)/io/format/mhd.o: $(BUILDDIR)/io/path/path.o
+$(BUILDDIR)/io/format/mhd.o: $(BUILDDIR)/io/path/path.o $(BUILDDIR)/util/string.o
 
 $(BUILDDIR)/integration/itk/libIntegrationITK.a: \
 		$(LIBDIR)/integration/itk/itk.cxx \
