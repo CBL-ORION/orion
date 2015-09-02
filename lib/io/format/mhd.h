@@ -42,6 +42,6 @@ extern ndarray3* orion_read_mhd(char* mhd_filename);
 extern orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename );
 
 extern size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta );
-extern size_t orion_mhd_element_size( orion_mhd_datatype dtype );
+extern size_t orion_mhd_element_sizeof( orion_mhd_datatype dtype );
 
 #endif /* IO_FORMAT_MHD_H */

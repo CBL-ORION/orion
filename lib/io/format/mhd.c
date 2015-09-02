@@ -113,14 +113,14 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 }
 
 size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta ) {
-	size_t bytes = orion_mhd_element_size( meta->ElementType );
+	size_t bytes = orion_mhd_element_sizeof( meta->ElementType );
 	for( int i = 0; i < meta->NDims; i++ ) {
 		bytes *= array_get_int( meta->DimSize, i );
 	}
 	return bytes;
 }
 
-size_t orion_mhd_element_size( orion_mhd_datatype dtype ) {
+size_t orion_mhd_element_sizeof( orion_mhd_datatype dtype ) {
 	switch( dtype ) {
 		case MET_UCHAR:  return sizeof( uint8_t);
 		case MET_SHORT:  return sizeof(  int16_t);
