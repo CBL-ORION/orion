@@ -21,7 +21,7 @@ int main(void) {
 
 /* 2 tests */
 	is_int(1, array_length_str(p->volume_names), "There is 1 volume to process");
-	ok( 0 == strcmp( "NPF023", array_get_str(p->volume_names, 0) ), "and has the expected volume name" );
+	is_string( "NPF023", array_get_str(p->volume_names, 0), "and has the expected volume name" );
 
 	return EXIT_SUCCESS;
 }
