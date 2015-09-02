@@ -1,12 +1,19 @@
 #ifndef IO_PATH_PATH_H
 #define IO_PATH_PATH_H 1
 
+#include <stdbool.h>
+
+#include "container/array.h"
+
 typedef struct {
-	char** components;
-	size_t number_of_components;
+	array_str* components;
+
+	bool has_root_component;
+	char* root_component;
 } orion_filepath;
 
 extern orion_filepath* orion_filepath_new_from_string(const char* fp_string);
 extern char* orion_filepath_to_string(orion_filepath* fp);
+extern orion_filepath* orion_filepath_sibling( orion_filepath* base, orion_filepath* relative);
 
 #endif /* IO_PATH_PATH_H */
