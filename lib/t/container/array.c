@@ -2,6 +2,7 @@
 #include <tap/basic.h>
 
 #include "container/array.h"
+#include "util/string.h"
 
 int main() {
 	plan( 1 + 2 + 1 + 3 + 2 );
@@ -33,7 +34,7 @@ int main() {
 
 /* 2 tests */
 	is_int( 4, array_length_int(arr), "4th element added and length is now 4");
-	diag( "capacity of the array is %d", array_capacity_int( arr ) );
+	diag( "capacity of the array is " SIZE_T_FORMAT_SPEC, array_capacity_int( arr ) );
 	ok( array_capacity_int( arr ) >= 4, "the capacity of the array is >= 4");
 
 
