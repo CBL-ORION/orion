@@ -122,6 +122,12 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	/* read the mhd file */
 	orion_mhd_metadata* meta = orion_read_mhd_metdata( mhd_filename );
 
+	if( meta->NDims != 3 ) {
+		die("the MetaInfo file %s is not a 3D volume. Expected NDims = 3, got NDims = " SIZE_T_FORMAT_SPEC ,
+				meta->_filename,
+				meta->NDims);
+	}
+
 	/* calculate the size of the buffer for holding the data and allocate
 	 * the space */
 	size_t bytes_to_read = orion_mhd_raw_byte_length( meta );
@@ -147,12 +153,6 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 				path_to_raw);
 	}
 	fread(raw_buffer, sizeof(int8_t), bytes_to_read, raw_file_fh);
-
-	if( meta->NDims != 3 ) {
-		die("the MetaInfo file %s is not a 3D volume. Expected NDims = 3, got NDims = " SIZE_T_FORMAT_SPEC ,
-				meta->_filename,
-				meta->NDims);
-	}
 
 	TODO(this needs to be cast to pixel_type);
 	/* wrap the buffer and use the dimensions from the MetaInfo metadata */
