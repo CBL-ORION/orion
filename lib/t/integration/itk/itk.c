@@ -7,12 +7,13 @@
 int main(void) {
 	plan( 1 + 1 );
 
-	skip("rest of tests can not run without MetaInfo file reading");
-	return EXIT_SUCCESS;
+	/*skip("rest of tests can not run without MetaInfo file reading");
+	return EXIT_SUCCESS;*/
 
 /* 1 test */
 	ndarray3* n = orion_read_mhd("test-data/DIADEM/NPF/NPF023/NPF023.mhd");
-	ok( NULL != n, "# todo reading MetaInfo file is not yet finished");
+	/*DEBUG*/ndarray3_dump( n );
+	ok( NULL != n, "read the metainfo data");
 
 /* 1 test */
 	array_ndarray3* frangi = orion_filter_method_frangi(n, 3.0);

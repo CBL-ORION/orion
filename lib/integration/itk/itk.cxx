@@ -98,6 +98,7 @@ array_ndarray3* orion_filter_method_sato( ndarray3* vol, float sigma ) {
 
 array_ndarray3* orion_filter_method_frangi( ndarray3* vol, float sigma ) {
 	InternalImageType::Pointer vol_itk = _orion_convert_ndarray3_to_itkImage( vol );
+	/*[>DEBUG<]std::cout << vol_itk << std::endl;*/
 
 	OutputImageArrayType arr_eig_itk  = ComputeFrangi( vol_itk, sigma );
 
