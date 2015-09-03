@@ -41,50 +41,41 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 		memset(value_buffer, 0, ORION_IO_MHD_BUFFER_SZ*sizeof(char));
 
 		orion_freadline(mhd_fh, buffer);
-		printf("%s\n", buffer);
+		/*[>DEBUG<]printf("%s\n", buffer);*/
 
+		/* extract out key and value from line */
 		sscanf(buffer, "%[^ ] = %[^\n]\n", key_buffer, value_buffer);
-		printf("-> %s <=> %s\n", key_buffer, value_buffer);
+
+		/*[>DEBUG<]printf("-> %s <=> %s\n", key_buffer, value_buffer);*/
 		       if( 0 == strcmp("ObjectType", key_buffer)             ) {
-			/* TODO Value [Str]
-			 * "Image"
-			 */
+			/* Value [Str] (e.g., "Image") */
+			safe_malloc_and_strcpy( &(meta->ObjectType), value_buffer);
 		} else if( 0 == strcmp("NDims", key_buffer)                  ) {
-			/* TODO Value [size_t]
-			 * e.g., 3
-			 */
+			/* Value [size_t] (e.g., 3) */
 			size_t ndims;
 			sscanf(value_buffer, SIZE_T_FORMAT_SPEC, &ndims);
 			meta->NDims = ndims;
 		} else if( 0 == strcmp("BinaryData", key_buffer)             ) {
-			/* TODO Value [Boolean]
-			 * "True", "False"
-			 */
+			/* Value [Boolean string] */
 			meta->BinaryData =
 				orion_string_True_False_to_bool(value_buffer);
 		} else if( 0 == strcmp("BinaryDataByteOrderMSB", key_buffer) ) {
-			/* TODO Value [Boolean]
-			 * "True", "False"
-			 */
+			/* Value [Boolean] */
 			meta->BinaryDataByteOrderMSB =
 				orion_string_True_False_to_bool(value_buffer);
 		} else if( 0 == strcmp("ElementSpacing", key_buffer)         ) {
-			/* TODO Value[ array_float[Ndim] ]
-			 */
+			/* Value[ array_float[Ndim] ] */
 			orion_parse_sequence_float(value_buffer, &(meta->ElementSpacing));
 		} else if( 0 == strcmp("DimSize", key_buffer)                ) {
-			/* TODO Value [ array_int[Ndim] ]
-			 */
+			/* Value [ array_int[Ndim] ] */
 			orion_parse_sequence_int(value_buffer, &(meta->DimSize));
 		} else if( 0 == strcmp("ElementType", key_buffer)            ) {
 			/* TODO Value [orion_mhd_datatype]
 			 * "MET_USHORT"
 			 */
 		} else if( 0 == strcmp("ElementDataFile", key_buffer)        ) {
+			/* Value [Str] (e.g. "NPF023.raw") */
 			safe_malloc_and_strcpy( &(meta->ElementDataFile), value_buffer );
-			/* TODO Value [Str]
-			 * "NPF023.raw"
-			 */
 		}
 	}
 

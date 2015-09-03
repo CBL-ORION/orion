@@ -28,6 +28,10 @@ typedef struct {
 	char* _filename;
 
 	/* start of MetaInfo keys */
+	/* NOTE: The ObjectType could be turned into an enum in the future
+	 * since there are only a limited number of supported ObjectTypes.
+	 */
+	char* ObjectType;
 	size_t NDims;
 	orion_mhd_datatype ElementType;
 	array_int* DimSize;
