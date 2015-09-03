@@ -36,6 +36,11 @@ extern ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t s
 extern void ndarray3_free( ndarray3* n );
 
 /** TODO document
+ * Outputs information about the ndarray3 `n`.
+ */
+extern void ndarray3_dump( ndarray3* n );
+
+/** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
  */
 #define _INDEX3D(_i, _j, _k, _sz_x, _sz_y, _sz_z)   ((_k*_sz_y+_j) * _sz_x + _i)

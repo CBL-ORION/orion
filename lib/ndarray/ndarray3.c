@@ -34,3 +34,21 @@ void ndarray3_free( ndarray3* n ) {
 	if( ! n->wrap ) free( n->p );
 	free( n );
 }
+
+void ndarray3_dump( ndarray3* n ) {
+	fprintf(stderr, "ndarray3: %p\n"
+			"\tsize: [ "
+				SIZE_T_FORMAT_SPEC " "
+				SIZE_T_FORMAT_SPEC " "
+				SIZE_T_FORMAT_SPEC " "
+				"]\n"
+			"\tdata: %p\n"
+			"\twrap: %s\n"
+				,
+				n,
+				n->sz[0],
+				n->sz[1],
+				n->sz[2],
+				n->p,
+				btoa(n->wrap) );
+}
