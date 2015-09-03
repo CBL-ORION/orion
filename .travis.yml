@@ -1,7 +1,7 @@
 language: c
 sudo: true
 env:
-  - PROD=1
+  - PROD=1 TEST_VERBOSE=1
 compiler:
   - gcc
   - clang
