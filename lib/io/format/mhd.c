@@ -106,6 +106,9 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	orion_filepath* raw_file_fp = orion_filepath_new_from_string(meta->ElementDataFile);
 	orion_filepath* path_to_raw_fp = orion_filepath_sibling( mhd_file_fp, raw_file_fp );
 
+	/*[>DEBUG<]orion_filepath_dump( mhd_file_fp );*/
+	/*[>DEBUG<]orion_filepath_dump( raw_file_fp );*/
+	/*[>DEBUG<]orion_filepath_dump( path_to_raw_fp );*/
 	char* path_to_raw = orion_filepath_to_string(path_to_raw_fp);
 
 	/* open the raw file */
