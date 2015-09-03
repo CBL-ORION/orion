@@ -16,7 +16,6 @@ int main(void) {
 		char* fp_base;
 	} path_test_spec;
 
-	const size_t TEST_CASES = 4;
 	path_test_spec fp_data[] = {
 		/* fp_path_input     ,   fp_path        ,   fp_dir  ,  fp_base  */
 		{ "path/to/file.c"   ,  "path/to/file.c",  "path/to", "file.c" },
@@ -24,6 +23,7 @@ int main(void) {
 		{ "path\\to\\file.c" ,  "path/to/file.c",  "path/to", "file.c" },
 		{ "\\path/to\\file.c", "/path/to/file.c", "/path/to", "file.c" },
 	};
+	const size_t TEST_CASES = sizeof( fp_data ) / sizeof( path_test_spec );
 
 
 
