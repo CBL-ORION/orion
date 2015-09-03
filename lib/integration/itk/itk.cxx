@@ -68,7 +68,13 @@ InternalImageType::Pointer _orion_convert_ndarray3_to_itkImage(ndarray3* vol) {
 }
 
 ndarray3* _orion_convert_itkImage_to_ndarray3( InternalImageType::Pointer vol_itk ) {
-	WARN_UNIMPLEMENTED;
+	InternalImageType::PixelType* pixel_data = vol_itk->GetBufferPointer();
+	InternalImageType::RegionType region = vol_itk->GetLargestPossibleRegion();
+	InternalImageType::SizeType sz = region.GetSize();
+
+	ndarray3* n = ndarray3_wrap( pixel_data, sz[0], sz[1], sz[3] );
+
+	return n;
 }
 
 array_ndarray3* _orion_convert_itkFixedArray_to_array_ndarray( OutputImageArrayType arr_itk ) {
