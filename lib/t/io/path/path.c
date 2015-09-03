@@ -7,15 +7,18 @@
 int main(void) {
 	/* data */
 	typedef struct {
+		char* fp_path_input;
 		char* fp_path;
 		char* fp_dir;
 		char* fp_base;
 	} path_test_spec;
 
-	const size_t TEST_CASES = 2;
+	const size_t TEST_CASES = 4;
 	path_test_spec fp_data[] = {
-		{ "path/to/file.c", "path/to", "file.c" },
-		{ "/path/to/file.c", "/path/to", "file.c" },
+		{ "path/to/file.c"   ,  "path/to/file.c",  "path/to", "file.c" },
+		{ "/path/to/file.c"  , "/path/to/file.c", "/path/to", "file.c" },
+		{ "path\\to\\file.c" ,  "path/to/file.c",  "path/to", "file.c" },
+		{ "\\path/to\\file.c", "/path/to/file.c", "/path/to", "file.c" },
 	};
 
 
@@ -26,7 +29,7 @@ int main(void) {
 		/* 3 tests */
 		path_test_spec cur_spec = fp_data[test_case];
 
-		orion_filepath* fp_fwd_slash = orion_filepath_new_from_string(cur_spec.fp_path);
+		orion_filepath* fp_fwd_slash = orion_filepath_new_from_string(cur_spec.fp_path_input);
 		is_string( cur_spec.fp_path,
 			orion_filepath_to_string(fp_fwd_slash),
 			"the path created from a path with forward slashes remains the same" );

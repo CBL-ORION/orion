@@ -19,25 +19,27 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 
 	/* normalise the backslashes to forward slashes on Windows */
 	char* fp_string_norm;
-	size_t fp_len;
+	size_t fp_string_norm_len;
 	safe_malloc_and_strcpy(&fp_string_norm, fp_string);
 	size_t fp_string_len = strlen( fp_string );
 
 	orion_filepath* fp = _orion_filepath_init();
 
+	fp_string_norm_len = strlen( fp_string_norm );
 	size_t norm_current_idx = 0;
-	while( norm_current_idx < fp_len ) {
+	while( norm_current_idx < fp_string_norm_len ) {
 		if( '\\' == fp_string_norm[norm_current_idx] ) {
-			fp_string_norm[norm_current_idx] == '/';
+			fp_string_norm[norm_current_idx] = '/';
 		}
 		norm_current_idx++;
 	}
+	/*[>DEBUG<]printf("==> %s\n", fp_string_norm);*/
 
 	char*  fp_string_norm_cur_ptr = fp_string_norm;
 	char*  fp_string_norm_end_ptr = strchr(fp_string_norm, '\0');
 
 	/* check if the string is an absolute path */
-	if( '/' == fp_string[0] ) {
+	if( '/' == fp_string_norm[0] ) {
 		/* Unix specific: starts with '/',
 		 * then it is an absolute path.
 		 */
