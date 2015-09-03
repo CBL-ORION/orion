@@ -13,6 +13,9 @@ typedef struct {
 	bool wrap;
 } ndarray3;
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 
 /***** CONSTRUCTORS *****/
 
@@ -61,4 +64,8 @@ extern void ndarray3_dump( ndarray3* n );
  */
 #define ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
 
-#endif
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
+
+#endif /* NDARRAY3_H */
