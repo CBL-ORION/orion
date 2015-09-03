@@ -20,12 +20,12 @@ typedef struct {
     ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z)
  */
 
-ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
+extern ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
 /** TODO document
     ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
  */
-ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
+extern ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
 
 /***** DESTRUCTORS *****/
 
@@ -33,7 +33,7 @@ ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, co
     ndarray3_free( ndarray3* n )
  */
 
-void ndarray3_free( ndarray3* n );
+extern void ndarray3_free( ndarray3* n );
 
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
