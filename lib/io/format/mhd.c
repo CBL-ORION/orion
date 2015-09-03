@@ -54,6 +54,10 @@ orion_mhd_datatype orion_mhd_datatype_parse_string( const char* dt_string_rep ) 
 	return -1; /* invalid */
 }
 
+/* Cast the input_buffer data to the type specified by meta->ElementType then
+ * cast each of the values to pixel_type and returns a new buffer of type
+ * pixel_type*.
+ */
 pixel_type* orion_mhd_cast_buffer( void* input_buffer, orion_mhd_metadata* meta ) {
 	pixel_type* output_buffer;
 	size_t elements = orion_mhd_meta_number_of_elements(meta);
