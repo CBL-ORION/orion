@@ -11,7 +11,7 @@ int main(void) {
 	return EXIT_SUCCESS;*/
 
 /* 1 test */
-	ndarray3* n = orion_read_mhd("test-data/DIADEM/NPF/NPF023/NPF023.mhd");
+	ndarray3* n = orion_read_mhd("test-data/ITK/HeadMRVolume/HeadMRVolume.mhd");
 	/*DEBUG*/ndarray3_dump( n );
 	ok( NULL != n, "read the metainfo data");
 
