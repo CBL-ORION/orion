@@ -2,6 +2,7 @@
 #define NDARRAY3_H 1
 
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "config/datatype.h"
 #include "util/util.h"
@@ -9,7 +10,7 @@
 typedef struct {
 	pixel_type* p;
 	size_t sz[3];
-	int wrap;
+	bool wrap;
 } ndarray3;
 
 

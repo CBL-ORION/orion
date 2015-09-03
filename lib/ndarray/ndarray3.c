@@ -1,10 +1,11 @@
 #include "ndarray/ndarray3.h"
+#include "util/string.h"
 
 ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
 	ndarray3* n;
 	NEW(n, ndarray3);
 
-	n->wrap = 1;
+	n->wrap = true;
 
 	n->p = p;
 
@@ -20,7 +21,7 @@ ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) 
 	NEW(n, ndarray3);
 
 	NEW_COUNT( n->p, pixel_type, sz_x * sz_y * sz_y );
-	n->wrap = 0;
+	n->wrap = false;
 
 	n->sz[0] = sz_x;
 	n->sz[1] = sz_y;
