@@ -10,7 +10,7 @@
 /* See also: orion_mhd_datatype */
 #undef ENUM
 /* NOTE _ENUM_OPT_VAL is not used in this macro */
-#define ENUM(_ENUM_NAME, _ENUM_OPT_VAL) \
+#define ENUM(_ENUM_NAME, _ENUM_OPT_VAL, _ENUM_TYPE) \
 	[_ENUM_NAME] = STRINGIZE(_ENUM_NAME),
 const char* orion_mhd_datatype_string[] = {
 #include "io/format/mhd_datatype_table.h"
@@ -53,6 +53,36 @@ orion_mhd_datatype orion_mhd_datatype_parse_string( const char* dt_string_rep ) 
 	}
 	return -1; /* invalid */
 }
+
+pixel_type* orion_mhd_cast_buffer( void* input_buffer, orion_mhd_metadata* meta ) {
+	pixel_type* output_buffer;
+	size_t elements = orion_mhd_meta_number_of_elements(meta);
+	NEW_COUNT(output_buffer, pixel_type, elements);
+
+#undef ENUM
+/* create a case for each entry */
+#define ENUM(_ENUM_NAME, _ENUM_OPT_VAL, _ENUM_TYPE) \
+		case _ENUM_NAME: \
+			{ \
+				_ENUM_TYPE* cast_buffer = (_ENUM_TYPE*)input_buffer; \
+				for( size_t idx = 0; idx < elements; idx++ ) { \
+					output_buffer[idx] = (pixel_type)cast_buffer[idx]; \
+				} \
+				return output_buffer; \
+			}
+
+	switch( meta->ElementType ) {
+#include "io/format/mhd_datatype_table.h"
+	}
+#undef ENUM
+
+	die("Casting from orion_mhd_datatype ElementType = %d not implemented",
+			meta->ElementType);
+
+	return NULL;
+}
+
+
 
 /* Refactor: RAWfromMHD, WriteRAWandMHD */
 orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
@@ -154,9 +184,13 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	}
 	fread(raw_buffer, sizeof(int8_t), bytes_to_read, raw_file_fh);
 
-	TODO(this needs to be cast to pixel_type);
+	/* cast to pixel_type */
+	pixel_type* buffer = orion_mhd_cast_buffer( raw_buffer, meta );
+
+	free(raw_buffer);
+
 	/* wrap the buffer and use the dimensions from the MetaInfo metadata */
-	ndarray3* n = ndarray3_wrap( raw_buffer,
+	ndarray3* n = ndarray3_wrap( buffer,
 			array_get_int(meta->DimSize, 0),
 			array_get_int(meta->DimSize, 1),
 			array_get_int(meta->DimSize, 2) );
@@ -169,12 +203,17 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	return n;
 }
 
-size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta ) {
-	size_t bytes = orion_mhd_element_sizeof( meta->ElementType );
+size_t orion_mhd_meta_number_of_elements( orion_mhd_metadata* meta ) {
+	size_t elements = 1;
 	for( int i = 0; i < meta->NDims; i++ ) {
-		bytes *= array_get_int( meta->DimSize, i );
+		elements *= array_get_int( meta->DimSize, i );
 	}
-	return bytes;
+	return elements;
+}
+
+size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta ) {
+	return orion_mhd_element_sizeof( meta->ElementType )
+		* orion_mhd_meta_number_of_elements( meta );
 }
 
 size_t orion_mhd_element_sizeof( orion_mhd_datatype dtype ) {
