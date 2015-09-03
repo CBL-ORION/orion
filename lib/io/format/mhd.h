@@ -8,18 +8,23 @@
 
 #define ORION_IO_MHD_BUFFER_SZ ORION_BUFFER_SZ
 
+/* See also: orion_mhd_datatype_string */
+#undef ENUM
+/* NOTE This has a trailing comma at the end of each value */
+#define ENUM(_ENUM_NAME, _ENUM_OPT_VAL) \
+	_ENUM_NAME _ENUM_OPT_VAL,
 typedef enum {
-	MET_UCHAR = 1, /*  uint8_t   */
-	MET_SHORT,     /*   int16_t  */
-	MET_USHORT,    /*  uint16_t  */
-	MET_ULONG,     /*  uint32_t  */
-	MET_UINT,      /*  uint32_t  */
-	MET_FLOAT,     /* float32 */
-	MET_DOUBLE,    /* float64 */
 
+#include "io/format/mhd_datatype_table.h"
+
+	/* last elements */
 	MET_DATATYPE_ENUM_FIRST = MET_UCHAR,
 	MET_DATATYPE_ENUM_LAST = MET_DOUBLE
 } orion_mhd_datatype;
+#undef ENUM
+
+extern const char* orion_mhd_datatype_string[];
+
 
 typedef struct {
 	/* used to hold the filename from which this

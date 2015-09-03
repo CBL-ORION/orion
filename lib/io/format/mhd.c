@@ -7,6 +7,23 @@
 #include "io/path/path.h"
 #include "io/util/util.h"
 
+#undef ENUM
+/* NOTE _ENUM_OPT_VAL is not used in this macro */
+#define ENUM(_ENUM_NAME, _ENUM_OPT_VAL) \
+	[_ENUM_NAME] = STRINGIZE(_ENUM_NAME),
+const char* orion_mhd_datatype_string[] = {
+#include "io/format/mhd_datatype_table.h"
+
+	"" /* last element */
+};
+#undef ENUM
+
+
+/* Parses a string expression and returns a boolean:
+ *
+ * - If the string is "True", returns true.
+ * - If the string is "False", returns false.
+ */
 bool orion_string_True_False_to_bool(const char* bool_string_rep) {
 	if( 0 == strcmp("True", bool_string_rep) ) {
 		return true;
