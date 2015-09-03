@@ -190,7 +190,28 @@ char* orion_filepath_to_string(orion_filepath* fp) {
 }
 
 orion_filepath* orion_filepath_cat( orion_filepath* fp1, orion_filepath* fp2 ) {
-	TODO( join the two paths and check if the second one is absolute or not );
+	orion_filepath* cat_fp = _orion_filepath_init();
+	TODO( check if the second one is absolute or not );
+	if( fp1->has_root_component ) {
+		cat_fp->has_root_component = true;
+		safe_malloc_and_strcpy(
+			&(cat_fp->root_component),
+			fp1->root_component );
+	}
+
+	orion_filepath* fp[] = { fp1, fp2 };
+
+	for( size_t fp_idx = 0; fp_idx < 2; fp_idx++ ) {
+		size_t number_of_components = array_length_str(fp[fp_idx]->components);
+		for( int comp_idx = 0; comp_idx < number_of_components; comp_idx++ ) {
+			char* cur_component;
+			safe_malloc_and_strcpy(&cur_component,
+					array_get_str( fp[fp_idx]->components, comp_idx));
+			array_add_str( cat_fp->components, cur_component );
+		}
+	}
+
+	return cat_fp;
 }
 
 orion_filepath* orion_filepath_sibling( orion_filepath* base, orion_filepath* relative) {
