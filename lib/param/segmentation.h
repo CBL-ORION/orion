@@ -12,9 +12,17 @@ typedef struct {
 	int min_conn_comp_to_remove; /* Used in the multiscale only. */
 } orion_segmentation_param;
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 extern orion_segmentation_param* orion_segmentation_param_new();
 extern void orion_segmentation_param_free(orion_segmentation_param* param);
 extern void orion_segmentation_param_set_default_scales( orion_segmentation_param* param );
 extern void orion_segmentation_param_dump( orion_segmentation_param* param );
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #endif /* PARAM_SEGMENTATION_H */

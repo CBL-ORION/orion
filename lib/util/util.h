@@ -34,9 +34,17 @@
 	} while(0)
 #endif /* COMPILE_WARN_UNIMPLEMENTED */
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 
 extern void _real_die(const char* msg_fmt, const char* origin, ...);
 #define die(_msg_fmt, ...) _real_die(_msg_fmt, SHOWORIGIN, __VA_ARGS__)
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #define NEW_COUNT(_var, _type, _count) \
 	do { \

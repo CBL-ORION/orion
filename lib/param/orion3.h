@@ -29,8 +29,16 @@ typedef struct {
 	float starting_coordinate[3]; /* TODO should this be a size_t? */
 } orion3_param;
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 extern orion3_param* orion3_param_new();
 extern void orion3_param_free( orion3_param* param );
 extern void orion3_param_dump( orion3_param* param );
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #endif /* PARAM_ORION3_H */

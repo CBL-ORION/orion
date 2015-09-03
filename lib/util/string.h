@@ -9,7 +9,15 @@
 
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 extern char* safe_malloc_and_strcpy(char** dest, const char* src);
 extern char* safe_malloc_and_strncpy(char** dest, const char* src, size_t len);
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #endif /* UTIL_STRING_H */

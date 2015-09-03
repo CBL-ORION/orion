@@ -47,11 +47,19 @@ typedef struct {
 	/* end of MetaInfo keys */
 } orion_mhd_metadata;
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 extern ndarray3* orion_read_mhd(char* mhd_filename);
 extern orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename );
 
 extern size_t orion_mhd_meta_number_of_elements( orion_mhd_metadata* meta );
 extern size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta );
 extern size_t orion_mhd_element_sizeof( orion_mhd_datatype dtype );
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #endif /* IO_FORMAT_MHD_H */

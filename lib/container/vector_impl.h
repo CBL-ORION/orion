@@ -16,6 +16,10 @@ typedef struct {
 	TYPE * data;
 } TYPED_NAME(vector);
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /* ==== construct / destruct ==== */
 extern TYPED_NAME(vector)* TYPED_NAME(vector_new)( size_t size );
 extern void TYPED_NAME(vector_free)( TYPED_NAME(vector)* vector );
@@ -27,3 +31,7 @@ extern size_t TYPED_NAME(vector_length) ( TYPED_NAME(vector)* vector );
 /* ==== element access ==== */
 extern TYPE TYPED_NAME(vector_get) ( TYPED_NAME(vector)* vector, size_t index );
 extern void TYPED_NAME(vector_set) ( TYPED_NAME(vector)* vector, size_t index, TYPE data );
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */

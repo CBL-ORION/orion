@@ -19,8 +19,16 @@
 #undef TYPE
 #undef TYPED_NAME
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 /* TODO make more generic */
 extern void array_dump_float(array_float* array);
 extern void array_dump_str(array_str* array);
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #endif /* CONTAINER_ARRAY_H */

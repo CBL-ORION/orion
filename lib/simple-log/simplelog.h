@@ -11,8 +11,16 @@
 
 #define SIMPLE_LOG_FILE stderr
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 extern void LOG_ERROR(const char* message, ...);
 extern void LOG_INFO (const char* message, ...);
 extern void LOG_DEBUG(const char* message, ...);
+
+#ifdef __cplusplus
+};
+#endif /* __cplusplus */
 
 #endif /* SIMPLE_LOG_H */
