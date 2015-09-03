@@ -6,17 +6,18 @@
 #include "io/format/mhd.h"
 
 int main(void) {
-	plan(3 + 4);
+	plan(4 + 4);
 
 	char* mhd_file = "test-data/DIADEM/NPF/NPF023/NPF023.mhd";
 
 	{
-		/* 3 tests */
+		/* 4 tests */
 		orion_mhd_metadata* meta = orion_read_mhd_metdata( mhd_file );
 
 		is_string( "NPF023.raw", meta->ElementDataFile, "the data file is right" );
 		is_int(3, meta->NDims, "is a 3D volume" );
 		is_int(3, array_length_int(meta->DimSize), "DimSize is of length 3" );
+		is_int( MET_USHORT, meta->ElementType, "ElementType is correctly parsed");
 	}
 
 	{

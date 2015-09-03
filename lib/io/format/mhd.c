@@ -7,6 +7,7 @@
 #include "io/path/path.h"
 #include "io/util/util.h"
 
+/* See also: orion_mhd_datatype */
 #undef ENUM
 /* NOTE _ENUM_OPT_VAL is not used in this macro */
 #define ENUM(_ENUM_NAME, _ENUM_OPT_VAL) \
@@ -35,6 +36,24 @@ bool orion_string_True_False_to_bool(const char* bool_string_rep) {
 	return false;
 }
 
+/* Parses a string with the name of a datatype value (e.g., "MET_USHORT") and
+ * returns the corresponding `orion_mhd_datatype` enum value.
+ *
+ * Returns -1 if a corresponding `orion_mhd_datatype` is not found.
+ */
+orion_mhd_datatype orion_mhd_datatype_parse_string( const char* dt_string_rep ) {
+	for( int met_datatype_idx = MET_DATATYPE_ENUM_FIRST;
+			met_datatype_idx <= MET_DATATYPE_ENUM_LAST;
+			met_datatype_idx++ ) {
+		/*[>DEBUG<]printf("[%d] = %s\n", met_datatype_idx,
+				orion_mhd_datatype_string[met_datatype_idx]);*/
+		if( 0 == strcmp( dt_string_rep, orion_mhd_datatype_string[met_datatype_idx]) ) {
+			 return met_datatype_idx;
+		}
+	}
+	return -1; /* invalid */
+}
+
 /* Refactor: RAWfromMHD, WriteRAWandMHD */
 orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 	FILE* mhd_fh;
@@ -49,6 +68,7 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 	NEW(meta, orion_mhd_metadata);
 	meta->DimSize = array_new_int(3);
 	meta->ElementSpacing = array_new_float(3);
+	meta->ElementType = -1;
 
 	safe_malloc_and_strcpy( &(meta->_filename), mhd_filename);
 
@@ -87,9 +107,8 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 			/* Value [ array_int[Ndim] ] */
 			orion_parse_sequence_int(value_buffer, &(meta->DimSize));
 		} else if( 0 == strcmp("ElementType", key_buffer)            ) {
-			/* TODO Value [orion_mhd_datatype]
-			 * "MET_USHORT"
-			 */
+			/* Value [orion_mhd_datatype] (e.g., "MET_USHORT") */
+			meta->ElementType = orion_mhd_datatype_parse_string(value_buffer);
 		} else if( 0 == strcmp("ElementDataFile", key_buffer)        ) {
 			/* Value [Str] (e.g. "NPF023.raw") */
 			safe_malloc_and_strcpy( &(meta->ElementDataFile), value_buffer );
