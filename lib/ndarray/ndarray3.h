@@ -22,9 +22,9 @@ typedef struct {
 ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
 /** TODO document
-    ndarray3* ndarray3_wrap( const pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
+    ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
  */
-ndarray3* ndarray3_wrap( const pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
+ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
 
 /***** DESTRUCTORS *****/
 

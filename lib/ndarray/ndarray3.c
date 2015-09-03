@@ -1,10 +1,12 @@
 #include "ndarray/ndarray3.h"
 
-ndarray3* ndarray3_wrap( const float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
+ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
 	ndarray3* n;
 	NEW(n, ndarray3);
 
 	n->wrap = 1;
+
+	n->p = p;
 
 	n->sz[0] = sz_x;
 	n->sz[1] = sz_y;
