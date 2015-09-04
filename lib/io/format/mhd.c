@@ -77,11 +77,14 @@ pixel_type* orion_mhd_cast_buffer( void* input_buffer, orion_mhd_metadata* meta 
 
 	switch( meta->ElementType ) {
 #include "io/format/mhd_datatype_table.h"
+		default:
+			{
+				die("Casting from orion_mhd_datatype ElementType = %d not implemented",
+						meta->ElementType);
+			}
 	}
 #undef ENUM
 
-	die("Casting from orion_mhd_datatype ElementType = %d not implemented",
-			meta->ElementType);
 
 	return NULL;
 }
