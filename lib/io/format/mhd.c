@@ -224,14 +224,19 @@ size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta ) {
 }
 
 size_t orion_mhd_element_sizeof( orion_mhd_datatype dtype ) {
+
+#undef ENUM
+/* create a case for each entry */
+#define ENUM(_ENUM_NAME, _ENUM_OPT_VAL, _ENUM_TYPE) \
+		case _ENUM_NAME: return sizeof(_ENUM_TYPE);
 	switch( dtype ) {
-		case MET_UCHAR:  return sizeof( uint8_t);
-		case MET_SHORT:  return sizeof(  int16_t);
-		case MET_USHORT: return sizeof( uint16_t);
-		case MET_ULONG:  return sizeof( uint32_t);
-		case MET_UINT:   return sizeof( uint32_t);
-		case MET_FLOAT:  return sizeof(float32 );
-		case MET_DOUBLE: return sizeof(float64 );
+#include "io/format/mhd_datatype_table.h"
+		default:
+			{
+				die("Unknown orion_mhd_datatype dtype = %d not implemented",
+						dtype);
+			}
 	}
+#undef ENUM
 	return 0;
 }
