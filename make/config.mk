@@ -1,26 +1,54 @@
 include make/platform.mk
 
+# need to point to the headers under the lib/ directory
 CPPFLAGS += -Ilib
-CFLAGS   += -std=c99 -O2
-#CFLAGS   += -fsanitize=address
+
+# all the C code needs to support C99
+CFLAGS   += -std=c99
+
+# enable AddressSantizer (ASAN)
+CFLAGS   += -fsanitize=address
+
+# enable all warnings
 #CFLAGS   += -Wall
+
 #CFLAGS   := -std=c11
+
+# link to the the mathematical functions
 LDFLAGS  += -lm $(CPPFLAGS)
+
+# CMAKEFLAGS: flags added to cmake calls
 CMAKEFLAGS +=
 
+# optimisation flags
+CFLAGS.OPT := -O2
+
+# DEBUGFLAGS, CMAKEDEBUGFLAGS: used when DEBUG variable exists
 DEBUGFLAGS := -g
-RELEASEFLAGS :=
 CMAKEDEBUGFLAGS := -DCMAKE_BUILD_TYPE=debug
+
+# GCOVFLAGS: used when GCOV variable exists
+GCOVFLAGS :=  -g -O0 -fprofile-arcs -ftest-coverage
+CMAKEGCOVFLAGS :=
+
+# RELEASEFLAGS, CMAKERELEASEFLAGS: used when neither DEBUG nor GCOV exist
+RELEASEFLAGS :=
 CMAKERELEASEFLAGS :=
 
 ifdef DEBUG
-CFLAGS   := $(CFLAGS) $(DEBUGFLAGS)
-LDFLAGS   := $(LDFLAGS) $(DEBUGFLAGS)
-CMAKEFLAGS := $(CMAKEFLAGS) $(CMAKEDEBUGFLAGS)
-else
-CFLAGS   := $(CFLAGS) $(RELEASEFLAGS)
-LDFLAGS   := $(LDFLAGS) $(RELEASEFLAGS)
-CMAKEFLAGS := $(CMAKEFLAGS) $(CMAKERELEASEFLAGS)
+CFLAGS     += $(DEBUGFLAGS)
+LDFLAGS    += $(DEBUGFLAGS)
+CMAKEFLAGS += $(CMAKEDEBUGFLAGS)
+else ifdef GCOV
+CFLAGS     += $(GCOVFLAGS)
+LDFLAGS    += $(GCOVFLAGS)
+CMAKEFLAGS += $(CMAKEGCOVFLAGS)
+else # RELEASE
+CFLAGS     += $(RELEASEFLAGS)
+# add optimisation flags
+CFLAGS     += $(CFLAGS.OPT)
+LDFLAGS    += $(RELEASEFLAGS)
+CMAKEFLAGS += $(CMAKERELEASEFLAGS)
 endif
 
 CMAKE := cmake
