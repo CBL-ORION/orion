@@ -11,6 +11,6 @@ struct {
  *
  * Refactor: readNegativeSamples
  */
-void orion_readNegativeSamples( ndarray3* input_volume,  ) {
+void orion_readNegativeSamples( ndarray3* input_volume ) {
 	WARN_UNIMPLEMENTED;
 }

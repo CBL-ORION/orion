@@ -9,10 +9,7 @@
 #include "ndarray/array_ndarray3.h"
 #include "container/array.h"
 
-#include "filter/vesselness/FilterCommon.hxx"
-#include "filter/vesselness/FilterCommon.hxx"
-#include "filter/vesselness/frangi/EigenFrangi.hxx"
-#include "filter/vesselness/sato/EigenSato.hxx"
+#include "integration/itk/itk.hxx"
 
 typedef enum {
 	EIG_FEAT_METHOD_SORT_SATO = 1,
