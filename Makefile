@@ -61,11 +61,9 @@ clean:
 	-find . -type f \( -name '*.gcda' -o -name '*.gcno' -o -name '*.gcov' \) -delete
 	-rm -Rf $(OUTPUT_DIRS)
 	-rm -Rf $(ITK_CONFIG_MK)
+	-rm -Rf $(GCOVDIR) $(LCOVDIR)
 	-rm $(VAA3D_ORION_MATLAB_LIB_OBJ)
 
-test.build_gcov:
-	$(MAKE) test BUILD_GCOV=1
-	gcov --preserve-paths
 
 include make/00-implicit-rules.mk
 
@@ -83,3 +81,4 @@ include make/test-rules.mk
 include make/ndarray-rules.mk
 include make/util-rules.mk
 include make/misc-rules.mk
+include make/devops-rules.mk
