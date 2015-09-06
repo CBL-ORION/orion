@@ -14,3 +14,7 @@ VAA3D_USE_OWN_QT=1 ./tool/external/vaa3d/build-vaa3d
 ## Tests
 
 ./tool/external/c-tap-harness/download && ./tool/external/c-tap-harness/build
+
+## Developer
+
+lcov, gcov
