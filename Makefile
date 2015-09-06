@@ -4,7 +4,8 @@ include make/config.mk
 ## Source files
 BIN_SRC.c   := $(SRCDIR)/segmentation/orion-segmentation.c
 BIN_SRC.cc  := $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
-LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/filter/hdaf/Makefilter.c
+#LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/filter/hdaf/Makefilter.c
+LIB_SRC.c  := $(shell find $(LIBDIR) -path lib/t -prune -o  -type f -name '*.c' \! -name '*_impl.c'  \! -name 'Makefilter.c'  -print)
 TEST.c := $(shell find $(TESTDIR) -path lib/t/liborion3mat -prune -o -type f -name "*.c" -print)
 ifdef FEAT_LIBORION3MAT
 TEST.c  += $(TESTDIR)/liborion3mat/test.c
@@ -68,7 +69,7 @@ test.build_gcov:
 
 include make/00-implicit-rules.mk
 
--include $(SRC:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
+-include $(LIB_SRC.c:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
 
 tags:
 	ctags --exclude=external -R .
