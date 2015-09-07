@@ -86,7 +86,7 @@ array_ndarray3* _orion_convert_itkFixedArray_to_array_ndarray( OutputImageArrayT
 
 	/* fill `arr_eig` with the ndarray3* volumes converted from `arr_eig_itk`'s
 	 * elements */
-	for( int i = 0; i < sz; sz++ ) {
+	for( int i = 0; i < sz; i++ ) {
 		ndarray3* nd = _orion_convert_itkImage_to_ndarray3( arr_itk[i] );
 		array_add_ndarray3( arr_eig, nd );
 	}
