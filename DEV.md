@@ -39,5 +39,5 @@ Need to make sure that ASAN is disabled.
 ```shell
 PROGRAM="./.build/t/canary"
 make BUILD_ENABLE_ASAN=0 all test
-valgrind $PROGRAM
+valgrind --leak-check=full $PROGRAM
 ```
