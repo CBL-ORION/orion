@@ -24,3 +24,6 @@ ComputeFilter
 
 *~
 *.a
+
+/report-gcov
+/report-lcov
