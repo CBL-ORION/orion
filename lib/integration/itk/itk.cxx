@@ -6,6 +6,7 @@
 #include "itkImportImageFilter.h"
 
 #include "config/itkdatatype.hxx"
+#include "simple-log/simplelog.h"
 
 #include "FilterCommon.hxx"
 #include "EigenSato.hxx"
@@ -106,8 +107,10 @@ array_ndarray3* orion_filter_method_frangi( ndarray3* vol, float sigma ) {
 	InternalImageType::Pointer vol_itk = _orion_convert_ndarray3_to_itkImage( vol );
 	/*[>DEBUG<]std::cout << vol_itk << std::endl;*/
 
+	LOG_INFO("Computing the Frangi vessellness feature filter");
 	OutputImageArrayType arr_eig_itk  = ComputeFrangi( vol_itk, sigma );
 
+	LOG_INFO("Converting the results of the Frangi filter array");
 	array_ndarray3* arr_eig = _orion_convert_itkFixedArray_to_array_ndarray( arr_eig_itk );
 	return arr_eig;
 }

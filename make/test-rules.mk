@@ -22,6 +22,7 @@ $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT): \
 		$(BUILDDIR)/container/array.o \
 		$(BUILDDIR)/io/format/mhd.o \
 		$(BUILDDIR)/io/util/util.o \
+		$(BUILDDIR)/simple-log/simplelog.o \
 		$(BUILDDIR)/integration/itk/libIntegrationITK.a \
 		$(BUILDDIR)/filter/vesselness/libEigenFrangi.a \
 		$(BUILDDIR)/filter/vesselness/libEigenSato.a \
