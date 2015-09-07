@@ -1,3 +1,10 @@
+## Compile with debug flags
+
+```shell
+make clean
+make BUILD_DEBUG=1 all test
+```
+
 ## Compile with coverage and profiling options
 
 ```shell
