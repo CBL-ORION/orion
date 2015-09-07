@@ -3,6 +3,9 @@
 .gcov-note:
 	@echo "If this does not give output, make sure you run the test suite first in order to intialise the counters"
 
+.valgrind-note:
+	@echo "If this does not give output, make sure that AddressSantizer is not enabled: make BUILD_ENABLE_ASAN=0 all test"
+
 # Build tests using code coverage using gcov
 test.build-gcov:
 	mkdir -p $(COVERAGEDIR)
@@ -26,3 +29,7 @@ check-lcov:
 	lcov --capture --directory . --output-file $(LCOVDIR)/lcov.info
 	genhtml $(LCOVDIR)/lcov.info --output-directory $(LCOVDIR)
 	@echo "See lcov report in $(LCOVDIR)/index.html"
+check-valgrind:
+	$(MAKE) .valgrind-note
+	find $(BUILDTESTDIR) -type f -executable \
+		| xargs -n1 valgrind --leak-check=full --show-leak-kinds=all
