@@ -1,6 +1,9 @@
 include make/platform.mk
 include make/config-dir.mk
 
+# initialise CXXFLAGS
+CXXFLAGS :=
+
 # need to point to the headers under the lib/ directory
 CPPFLAGS += -Ilib
 
@@ -70,6 +73,7 @@ LDFLAGS    += $(RELEASEFLAGS)
 CMAKEFLAGS += $(CMAKERELEASEFLAGS)
 endif
 
+
 ifeq ($(BUILD_OPT_FLAGS),1)
 # add optimisation flags
 CFLAGS     += $(CFLAGS.OPT)
@@ -78,9 +82,11 @@ endif
 
 CMAKE := cmake
 ### Set variables to pass into CMakeLists.txt
-CMAKEFLAGS := -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
+CMAKEFLAGS = -D CMAKE_CXX_FLAGS:STRING="$(CXXFLAGS)" -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
+## Set the output of the the CMake-generated Makefiles to show all commands
+CMAKEFLAGS += -DCMAKE_VERBOSE_MAKEFILE=ON
 
-CMAKE.generate := $(CMAKE) $(CMAKEFLAGS)
+CMAKE.generate = $(CMAKE) $(CMAKEFLAGS)
 
 GCOV := gcov
 GPROF := gprof
