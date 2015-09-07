@@ -53,6 +53,7 @@ extern "C" {
 
 extern ndarray3* orion_read_mhd(char* mhd_filename);
 extern orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename );
+extern void orion_mhd_metadata_free(orion_mhd_metadata* meta);
 
 extern size_t orion_mhd_meta_number_of_elements( orion_mhd_metadata* meta );
 extern size_t orion_mhd_raw_byte_length( orion_mhd_metadata* meta );

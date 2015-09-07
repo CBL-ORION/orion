@@ -79,6 +79,8 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 		fp_string_norm_cur_ptr = comp_up_to_slash + 1;
 	}
 
+	free(fp_string_norm);
+
 	return fp;
 }
 
@@ -132,6 +134,9 @@ orion_filepath* orion_filepath_dir( orion_filepath* fp ) {
 }
 
 void orion_filepath_free(orion_filepath* fp) {
+	for( int idx = 0; idx < array_length_str(fp->components); idx++) {
+		free( array_get_str(fp->components, idx  ) );
+	}
 	array_free_str( fp->components );
 	if( fp->has_root_component ) {
 		free( fp->root_component );

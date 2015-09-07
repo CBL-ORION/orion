@@ -34,21 +34,29 @@ int main(void) {
 		path_test_spec cur_spec = fp_data[test_case];
 
 		orion_filepath* fp = orion_filepath_new_from_string(cur_spec.fp_path_input);
-		is_string( cur_spec.fp_path,
-			orion_filepath_to_string(fp),
+		char* fp_str = orion_filepath_to_string(fp);
+		is_string( cur_spec.fp_path, fp_str,
 			"expected normalised path is correct" );
 
 		orion_filepath* fp_dir = orion_filepath_dir( fp );
+		char* fp_dir_str = orion_filepath_to_string( fp_dir );
 		/*[>DEBUG<]orion_filepath_dump( fp_dir );*/
-		is_string( cur_spec.fp_dir,
-			orion_filepath_to_string( fp_dir ),
+		is_string( cur_spec.fp_dir, fp_dir_str,
 			"(dir) removing the last component is correct");
 
 		orion_filepath* fp_base = orion_filepath_base( fp );
+		char* fp_base_str = orion_filepath_to_string( fp_base );
 		/*[>DEBUG<]orion_filepath_dump( fp_base );*/
-		is_string( cur_spec.fp_base,
-			orion_filepath_to_string( fp_base ),
+		is_string( cur_spec.fp_base, fp_base_str,
 			"(base) the last component is correct");
+
+		orion_filepath_free(fp);
+		orion_filepath_free(fp_dir);
+		orion_filepath_free(fp_base);
+
+		free(fp_str);
+		free(fp_dir_str);
+		free(fp_base_str);
 	}
 
 

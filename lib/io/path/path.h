@@ -31,6 +31,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 extern orion_filepath* orion_filepath_new_from_string(const char* fp_string);
+extern void orion_filepath_free(orion_filepath* fp);
+
 extern void orion_filepath_dump(orion_filepath* fp);
 extern char* orion_filepath_to_string(orion_filepath* fp);
 

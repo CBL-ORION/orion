@@ -155,6 +155,19 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 	return meta;
 }
 
+void orion_mhd_metadata_free(orion_mhd_metadata* meta) {
+	if( meta->ObjectType )
+		free(meta->ObjectType);
+	if( meta->ElementDataFile )
+		free(meta->ElementDataFile);
+	array_free_int(meta->DimSize);
+	array_free_float(meta->ElementSpacing);
+
+	free( meta->_filename );
+
+	free(meta);
+}
+
 ndarray3* orion_read_mhd(char* mhd_filename) {
 	/* read the mhd file */
 	orion_mhd_metadata* meta = orion_read_mhd_metdata( mhd_filename );
@@ -202,10 +215,12 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 			array_get_int(meta->DimSize, 1),
 			array_get_int(meta->DimSize, 2) );
 
-	free( mhd_file_fp );
-	free( raw_file_fp );
-	free( path_to_raw_fp );
+	orion_filepath_free( mhd_file_fp );
+	orion_filepath_free( raw_file_fp );
+	orion_filepath_free( path_to_raw_fp );
 	free( path_to_raw );
+
+	orion_mhd_metadata_free(meta);
 
 	return n;
 }
