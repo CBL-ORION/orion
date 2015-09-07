@@ -22,10 +22,22 @@ make check-gcov-full
 make check-lcov
 ```
 
-## Profiling
+### Profiling
+
+#### Runtime profiling with gprof
 
 ```shell
 PROGRAM="./.build/t/canary"
 $PROGRAM
 gprof $PROGRAM
+```
+
+#### Memory profiling with Valgrind
+
+Need to make sure that ASAN is disabled.
+
+```shell
+PROGRAM="./.build/t/canary"
+make BUILD_ENABLE_ASAN=0 all test
+valgrind $PROGRAM
 ```
