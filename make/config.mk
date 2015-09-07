@@ -10,9 +10,6 @@ CPPFLAGS += -Ilib
 # all the C code needs to support C99
 CFLAGS   += -std=c99
 
-# enable AddressSantizer (ASAN)
-CFLAGS   += -fsanitize=address
-
 # enable all warnings
 #CFLAGS   += -Wall
 
@@ -23,6 +20,9 @@ LDFLAGS  += -lm $(CPPFLAGS)
 
 # CMAKEFLAGS: flags added to cmake calls
 CMAKEFLAGS +=
+
+# AddressSanitizer (ASAN) flags
+CFLAGS.ASAN   += -fsanitize=address
 
 # optimisation flags
 CFLAGS.OPT := -O2
@@ -41,19 +41,21 @@ CMAKEGCOVFLAGS :=
 GPROFFLAGS := -pg
 CMAKEGPROFLAGS :=
 
-# RELEASEFLAGS, CMAKERELEASEFLAGS: used when neither BUILD_DEBUG nor BUILD_GCOV exist
+# RELEASEFLAGS, CMAKERELEASEFLAGS: used when BUILD_DEBUG does not exist
 RELEASEFLAGS :=
 CMAKERELEASEFLAGS :=
 
+# gcov builds
 ifdef BUILD_GCOV
 # using OPT flags when using gcov is not recommended
-BUILD_OPT_FLAGS := 0
+BUILD_ENABLE_OPT := 0
 CFLAGS     += $(GCOVFLAGS)
 CXXFLAGS   += $(GCOVFLAGS)
 LDFLAGS    += $(GCOVFLAGS) $(GCOVFLAGS.PROFILEDIR)
 CMAKEFLAGS += $(CMAKEGCOVFLAGS)
 endif
 
+# gprof builds
 ifdef BUILD_GPROF
 CFLAGS     += $(GPROFFLAGS)
 CXXFLAGS   += $(GPROFFLAGS)
@@ -61,22 +63,33 @@ LDFLAGS    += $(GPROFFLAGS)
 CMAKEFLAGS += $(CMAKEGPROFLAGS)
 endif
 
+
+# DEBUG or RELEASE builds
 ifdef BUILD_DEBUG
+BUILD_ENABLE_ASAN ?= 1
+
 CFLAGS     += $(DEBUGFLAGS)
 LDFLAGS    += $(DEBUGFLAGS)
 CMAKEFLAGS += $(CMAKEDEBUGFLAGS)
 else # BUILD_RELEASE
-# set BUILD_OPT_FLAGS only if it has not been unset before
-BUILD_OPT_FLAGS ?= 1
+# set BUILD_ENABLE_OPT only if it has not been unset before
+BUILD_ENABLE_OPT ?= 1
+BUILD_ENABLE_ASAN ?= 1
+
 CFLAGS     += $(RELEASEFLAGS)
 LDFLAGS    += $(RELEASEFLAGS)
 CMAKEFLAGS += $(CMAKERELEASEFLAGS)
 endif
 
 
-ifeq ($(BUILD_OPT_FLAGS),1)
+ifeq ($(BUILD_ENABLE_OPT),1)
 # add optimisation flags
 CFLAGS     += $(CFLAGS.OPT)
+endif
+
+# enable AddressSantizer (ASAN)
+ifeq ($(BUILD_ENABLE_ASAN),1)
+CFLAGS     += $(CFLAGS.ASAN)
 endif
 
 
