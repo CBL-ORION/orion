@@ -36,6 +36,14 @@ gprof $PROGRAM
 
 Need to make sure that ASAN is disabled.
 
+Run Valgrind on all the test programs:
+
+```shell
+make check-valgrind
+```
+
+or on an individual program
+
 ```shell
 PROGRAM="./.build/t/canary"
 make BUILD_ENABLE_ASAN=0 all test
