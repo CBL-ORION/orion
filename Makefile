@@ -3,6 +3,7 @@ include make/config.mk
 
 ## Source files
 BIN_SRC.c   := $(SRCDIR)/segmentation/orion-segmentation.c
+BIN_SRC_CONFIG.c   := $(SRCDIR)/config/configurator.c
 BIN_SRC.cc  := $(SRCDIR)/compute-filter/ComputeFilter.cxx $(SRCDIR)/subsample-volume/SubsampleVolume.cxx
 #LIB_SRC.c  := $(LIBDIR)/ndarray/ndarray3.c  # $(LIBDIR)/filter/hdaf/Makefilter.c
 LIB_SRC.c  := $(shell find $(LIBDIR) -path lib/t -prune -o  -type f -name '*.c' \! -name '*_impl.c'  \! -name 'Makefilter.c'  -print)
@@ -34,7 +35,12 @@ LIB_OBJ:= $(call OBJ_PATHSUBST.c,$(LIB_SRC.c))
 TEST_OBJ:= $(call TEST_PATHSUBST.c,$(TEST.c))
 
 BIN_BIN.c := $(call BIN_PATHSUBST.c,$(BIN_SRC.c))
+BIN_BIN_CONFIG.c := $(call BIN_PATHSUBST.c,$(BIN_SRC_CONFIG.c))
 BIN_BIN.cc := $(call BIN_PATHSUBST.cc,$(BIN_SRC.cc))
+
+CONFIG_HEADER_FILE := $(LIBDIR)/config/config.h
+$(CONFIG_HEADER_FILE): $(BIN_BIN_CONFIG.c)
+	$(BIN_BIN_CONFIG.c) > $@
 
 .PHONY: tags
 
@@ -62,6 +68,7 @@ clean:
 	-rm -Rf $(OUTPUT_DIRS)
 	-rm -Rf $(ITK_CONFIG_MK)
 	-rm -Rf $(GCOVDIR) $(LCOVDIR)
+	-rm -Rf $(CONFIG_HEADER_FILE)
 	-rm $(VAA3D_ORION_MATLAB_LIB_OBJ)
 
 
