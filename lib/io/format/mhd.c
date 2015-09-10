@@ -152,6 +152,8 @@ orion_mhd_metadata* orion_read_mhd_metdata( char* mhd_filename ) {
 		}
 	}
 
+	fclose(mhd_fh);
+
 	return meta;
 }
 
@@ -221,6 +223,8 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	free( path_to_raw );
 
 	orion_mhd_metadata_free(meta);
+
+	fclose(raw_file_fh);
 
 	return n;
 }
