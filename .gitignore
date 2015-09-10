@@ -28,5 +28,7 @@ ComputeFilter
 # gprof output
 gmon.out
 
+/lib/config/config.h
+
 /report-gcov
 /report-lcov
