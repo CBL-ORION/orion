@@ -4,8 +4,8 @@ include make/config-dir.mk
 # initialise CXXFLAGS
 CXXFLAGS :=
 
-# need to point to the headers under the lib/ directory
-CPPFLAGS += -Ilib
+# need to point to the headers under the $(LIBDIR)/ directory
+CPPFLAGS += -I$(LIBDIR)
 
 # all the C code needs to support C99
 CFLAGS   += -std=c99
