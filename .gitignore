@@ -25,5 +25,8 @@ ComputeFilter
 *~
 *.a
 
+# gprof output
+gmon.out
+
 /report-gcov
 /report-lcov
