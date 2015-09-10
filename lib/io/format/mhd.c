@@ -7,6 +7,8 @@
 #include "io/path/path.h"
 #include "io/util/util.h"
 
+#include "util/likely.h"
+
 /* See also: orion_mhd_datatype */
 #undef ENUM
 /* NOTE _ENUM_OPT_VAL is not used in this macro */
@@ -174,7 +176,7 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	/* read the mhd file */
 	orion_mhd_metadata* meta = orion_read_mhd_metdata( mhd_filename );
 
-	if( meta->NDims != 3 ) {
+	if( unlikely(meta->NDims != 3) ) {
 		die("the MetaInfo file %s is not a 3D volume. Expected NDims = 3, got NDims = " SIZE_T_FORMAT_SPEC ,
 				meta->_filename,
 				meta->NDims);
