@@ -95,7 +95,7 @@ endif
 
 CMAKE := cmake
 ### Set variables to pass into CMakeLists.txt
-CMAKEFLAGS = -D CMAKE_CXX_FLAGS:STRING="$(CXXFLAGS)" -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
+CMAKEFLAGS += -D CMAKE_CXX_FLAGS:STRING+="$(CXXFLAGS)" -D LIBDIR=${FULL_LIBDIR} -D BUILDDIR=${FULL_BUILDDIR}
 ## Set the output of the the CMake-generated Makefiles to show all commands
 CMAKEFLAGS += -DCMAKE_VERBOSE_MAKEFILE=ON
 
