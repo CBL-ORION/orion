@@ -4,6 +4,7 @@ $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
 $(BUILDDIR)/io/format/mhd.o: $(BUILDDIR)/io/path/path.o $(BUILDDIR)/util/string.o \
 	$(CONFIG_HEADER_FILE)
 
+.NOTPARALLEL: $(BUILDDIR)/integration/itk/libIntegrationITK.a
 $(BUILDDIR)/integration/itk/libIntegrationITK.a: \
 		$(LIBDIR)/integration/itk/itk.cxx \
 		$(FILTER_OBJ) \
