@@ -1,16 +1,20 @@
-#include <stdbool.h>
-#include "container/vector.h"
-#include "ndarray/ndarray3.h"
-
-struct {
-	bool multiscale;
-	vector_float spacing;
-} orion_readNegativeSamples_param;
+#include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/readNegativeSamples.h"
 
 /* TODO
  *
  * Refactor: readNegativeSamples
  */
-void orion_readNegativeSamples( ndarray3* input_volume ) {
+void orion_readNegativeSamples(
+		orion_segmentation_param* param,
+		ndarray3* input_volume ) {
 	WARN_UNIMPLEMENTED;
+
+	LOG_INFO("%s", "Detecting training set of background samples...");
+
+	/*
+	 * computing the scales of the filter in the Fourier domain. This is
+	 * the main parameter to detect the boundary of the tubular structure.
+	 */
+	/*Lap = 0.5913./p.sigma;*/
+	/*Lap = 0.66./p.sigma;*/
 }
