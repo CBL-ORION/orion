@@ -16,7 +16,8 @@ CFLAGS   += -std=c99
 #CFLAGS   := -std=c11
 
 # link to the the mathematical functions
-LDFLAGS  += -lm $(CPPFLAGS)
+LDLIBS   += -lm $(CPPFLAGS)
+#LDFLAGS  += $(CPPFLAGS)
 
 # CMAKEFLAGS: flags added to cmake calls
 CMAKEFLAGS +=
