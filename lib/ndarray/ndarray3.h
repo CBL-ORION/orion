@@ -70,6 +70,33 @@ extern void ndarray3_dump( ndarray3* n );
  */
 #define ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
 
+
+/** TODO document
+ *  NDARRAY3_LOOP_OVER_START( ndarray3* n, size_t i, size_t j, size_t k ) {
+ *      / * code body * /
+ *  } NDARRAY3_LOOP_OVER_END;
+ *
+ *      NDARRAY3_LOOP_OVER_START( n, i, j, k) {
+ *          ndarray3_set(n, i, j, k, 0);
+ *      } NDARRAY3_LOOP_OVER_END;
+ */
+#define NDARRAY3_LOOP_OVER_START( _ndarray3_var, _i0, _i1, _i2 ) \
+	do { \
+	/* start of NDARRAY3_LOOP_OVER_* */ \
+		for( size_t _i0 = 0; _i0 < _ndarray3_var->sz[0]; _i0++ ) { \
+		for( size_t _i1 = 0; _i1 < _ndarray3_var->sz[1]; _i1++ ) { \
+		for( size_t _i2 = 0; _i2 < _ndarray3_var->sz[2]; _i2++ ) { \
+			/* NDARRAY3_LOOP_OVER_* body goes here */
+
+#define NDARRAY3_LOOP_OVER_END \
+			/* NDARRAY3_LOOP_OVER_* body ends here */ \
+		} \
+		} \
+		} \
+	/* end of NDARRAY3_LOOP_OVER_* */ \
+	} while(0)
+
+
 #ifdef __cplusplus
 };
 #endif /* __cplusplus */
