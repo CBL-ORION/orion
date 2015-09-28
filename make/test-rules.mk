@@ -37,6 +37,10 @@ $(BUILDTESTDIR)/io/mhd$(EXEEXT): \
 		$(BUILDDIR)/io/util/util.o \
 		$(BUILDDIR)/io/path/path.o
 
+$(BUILDTESTDIR)/numeric/func_factorial$(EXEEXT): \
+		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/numeric/func.o
+
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
 test: CPPFLAGS += $(TEST_CPPFLAGS)
