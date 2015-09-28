@@ -25,6 +25,12 @@ extern "C" {
 
 extern ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
 
+/* TODO document
+ *
+ * ndarray3* ndarray3_new_with_size_from_ndarray3(ndarray3* that)
+ */
+extern ndarray3* ndarray3_new_with_size_from_ndarray3(ndarray3* that);
+
 /** TODO document
     ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
  */
