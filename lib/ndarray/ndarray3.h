@@ -61,12 +61,12 @@ extern void ndarray3_dump( ndarray3* n );
 
 
 /** TODO document
-    ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type value )
+ *  ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type value )
  */
 #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = (val); } while(0)
 
 /** TODO document
-    ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
+ *  ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
  */
 #define ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
 
