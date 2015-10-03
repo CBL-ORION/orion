@@ -1,12 +1,16 @@
 #ifndef NUMERIC_FUNC_H
 #define NUMERIC_FUNC_H 1
 
+#include <stdint.h>
+
+#include "util/util.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-double factorial_float(int n);
+float64 factorial_int64_t(uint8_t n);
 
 #ifdef __cplusplus
 };
