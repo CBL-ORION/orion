@@ -49,6 +49,12 @@ extern void ndarray3_free( ndarray3* n );
  */
 extern void ndarray3_dump( ndarray3* n );
 
+
+/** TODO document
+ * Outputs the contents of the ndarray3 `n`.
+ */
+extern void ndarray3_print( ndarray3* n );
+
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
  */
