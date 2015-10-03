@@ -11,6 +11,7 @@ extern "C" {
 
 /* Function prototypes */
 float64 factorial_int64_t(uint8_t n);
+float64 polyeval_horners_float64(const float64* coefficients, size_t polynomial_degree, float64 x );
 
 #ifdef __cplusplus
 };

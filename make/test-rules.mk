@@ -40,6 +40,9 @@ $(BUILDTESTDIR)/io/mhd$(EXEEXT): \
 $(BUILDTESTDIR)/numeric/func_factorial$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/numeric/func.o
+$(BUILDTESTDIR)/numeric/func_polyeval_horners$(EXEEXT): \
+		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/numeric/func.o
 
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)

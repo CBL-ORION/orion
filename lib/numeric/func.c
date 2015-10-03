@@ -191,3 +191,47 @@ float64 factorial_int64_t(uint8_t n) {
 
 	return factorial_lut[n];
 }
+
+/* Horner's method for polynomial evaluation.
+ *
+ * This function evaluates a polynomial of degree n
+ *
+ *   f(x) =    c_{0}
+ *          +  c_{1}   * x^{1}
+ *          +  c_{2}   * x^{2}
+ *          + ...
+ *          +  c_{n-1} * x^{n-1},
+ *          +  c_{n}   * x^{n},
+ *
+ * at given the value x.
+ *
+ * Input:
+ *
+ *    - coefficients:
+ *          The cofficients of the polynomial f(x). These cofficients are
+ *          passed in an array of length (polynomial_degree + 1) and are in the
+ *          following order:
+ *
+ *              { c_0, c_1, c_2, ..., c_{n} }
+ *
+ *          which has (n+1) elements.
+ *
+ *          Thus, for any f(x), f(0) = c_0.
+ *
+ *    - polynomial_degree:
+ *          The degree of the polynomial (i.e., n in the above definition of
+ *          f(x))
+ *
+ *    - x:
+ *          The point at which to evaluate the polynomial f(x).
+ *
+ * See <https://en.wikipedia.org/wiki/Horner's_method>.
+ */
+#include<stdio.h>
+float64 polyeval_horners_float64(const float64* coefficients, size_t polynomial_degree, float64 x ) {
+	float64 poly_accum = 0.0;
+	for(int i = polynomial_degree; i >= 0; i--) {
+		poly_accum = poly_accum * x + coefficients[i];
+	}
+	return poly_accum;
+}
