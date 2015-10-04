@@ -58,13 +58,14 @@ void ndarray3_dump( ndarray3* n ) {
 				btoa(n->wrap) );
 }
 
-void ndarray3_print( ndarray3* n ) {
+void ndarray3_printf( ndarray3* n, const char* format ) {
 	for( int i = 0; i < n->sz[0]; i++ ) {
 		printf("x[%d][:][:] = {\n", i);
 		for( int j = 0; j < n->sz[1]; j++ ) {
 			printf("\t");
 			for( int k = 0; k < n->sz[2]; k++ ) {
-				printf("%-9.3e ", ndarray3_get(n, i,j,k));
+				printf(format, ndarray3_get(n, i,j,k));
+				printf(" ");
 			}
 			printf("\n");
 		}
