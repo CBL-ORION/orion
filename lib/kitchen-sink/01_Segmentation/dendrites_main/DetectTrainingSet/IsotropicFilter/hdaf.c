@@ -1,5 +1,4 @@
-/* TODO
- *
+/*
  * Refactor: hdaf
  */
 #include "hdaf.h"
@@ -42,9 +41,7 @@ ndarray3* orion_hdaf(
 		int n = hdaf_approx_degree - coeff_idx;
 		coeff[ coeff_idx ] = 1 / factorial_int64_t( n );
 	}
-	for( int i = 0 ; i < coeff_sz; i++ ) {
-		printf("coeff[%d] = %f\n", i, coeff[i]);
-	}
+	/*[>DEBUG<]for( int i = 0 ; i < coeff_sz; i++ ) { printf("coeff[%d] = %f\n", i, coeff[i]); }*/
 
 	NDARRAY3_LOOP_OVER_START(out, i, j, k) {
 		pixel_type x_scale_ijk = ndarray3_get( x_scale, i,j,k);
@@ -52,10 +49,10 @@ ndarray3* orion_hdaf(
 
 		/* evaluate the Taylor expansion of
 		 * exponential to degree `hdaf_approx_degree` */
-		out_ijk = polyeval_horners_float64(coeff, hdaf_approx_degree, x_scale_ijk );
+		out_ijk = matlab_polyeval_horners_float64(coeff, hdaf_approx_degree, x_scale_ijk );
 
 		/* evaluate the filter */
-		out_ijk *= exp( x_scale_ijk );
+		out_ijk *= exp( -x_scale_ijk );
 
 		/* save it in the ndarray3 `out` */
 		ndarray3_set(out, i,j,k, out_ijk);
