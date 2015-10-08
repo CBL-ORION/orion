@@ -242,3 +242,38 @@ float64 polyeval_horners_float64(const float64* coefficients, size_t polynomial_
 	}
 	return poly_accum;
 }
+
+/* Compute polynomial using MATLAB's convention for coefficient order.
+ *
+ * This is essentially a shim to reverse the order of the coefficients in the
+ * `coefficients` array and pass the values to polyeval_horners_float64().
+ *
+ * Thus, the array `coefficients` is defined as
+ *
+ *     coefficients = { c_{n}, c_{n-1}, c_{n-2}, ... c_{1}, c_{0} }
+ *
+ * where `n` is the degree of the polynomial f(x)
+ *
+ *     f(x) =    c_{0}
+ *            +  c_{1}   * x^{1}
+ *            +  c_{2}   * x^{2}
+ *            + ...
+ *            +  c_{n-1} * x^{n-1},
+ *            +  c_{n}   * x^{n},
+ *
+ */
+float64 matlab_polyeval_horners_float64(const float64* coefficients, size_t polynomial_degree, float64 x ) {
+	/* create a array with the reverse of the coefficients in the
+	 * `coefficients` array */
+	float64* coefficients_reverse;
+	NEW_COUNT( coefficients_reverse, float64, polynomial_degree + 1 );
+	for( int i = polynomial_degree; i >= 0; i-- ) {
+		coefficients_reverse[ polynomial_degree - i ] = coefficients[i];
+	}
+
+	/* pass this reversed array on to polyeval_horners_float64 with the
+	 * rest of the arguments kept the same */
+	float64 result = polyeval_horners_float64( coefficients_reverse, polynomial_degree, x );
+
+	return result;
+}
