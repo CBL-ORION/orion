@@ -3,6 +3,14 @@
 #include "numeric/func.h"
 #include "util/util.h"
 
+/* Compute
+ *
+ *     n!
+ *
+ * that is, the factorial of the input argument `n`.
+ *
+ * The bounds of this function on a 64-bit machine are n ∈ [ 0, 170 ].
+ */
 float64 factorial_int64_t(uint8_t n) {
 	/* maximum for a float64 such that
 	 *     fact(MAX_FACTORIAL_N_FLOAT64) <= FLT_MAX
@@ -227,7 +235,6 @@ float64 factorial_int64_t(uint8_t n) {
  *
  * See <https://en.wikipedia.org/wiki/Horner's_method>.
  */
-#include<stdio.h>
 float64 polyeval_horners_float64(const float64* coefficients, size_t polynomial_degree, float64 x ) {
 	float64 poly_accum = 0.0;
 	for(int i = polynomial_degree; i >= 0; i--) {
