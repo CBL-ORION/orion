@@ -43,6 +43,12 @@ $(BUILDTESTDIR)/numeric/func_factorial$(EXEEXT): \
 $(BUILDTESTDIR)/numeric/func_polyeval_horners$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/numeric/func.o
+$(BUILDTESTDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf$(EXEEXT): \
+		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/numeric/func.o \
+		$(BUILDDIR)/ndarray/ndarray3.o \
+		$(BUILDDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf.o
+
 
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)

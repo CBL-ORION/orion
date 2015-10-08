@@ -58,28 +58,48 @@ ndarray3* orion_Makefilter(
 		}
 	}
 
+	ndarray3* K[3];
 	ndarray3* Kxyz = ndarray3_new(
 			k_axis_sz[0],
 			k_axis_sz[1],
 			k_axis_sz[2] );
-	for( size_t ka_idx_0 = 0; ka_idx_0 < k_axis_sz[0]; ka_idx_0++ ) {
-	for( size_t ka_idx_1 = 0; ka_idx_1 < k_axis_sz[1]; ka_idx_1++ ) {
-	for( size_t ka_idx_2 = 0; ka_idx_2 < k_axis_sz[2]; ka_idx_2++ ) {
+	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
+		K[dim_idx] = ndarray3_new_with_size_from_ndarray3( Kxyz );
+	}
+
+	NDARRAY3_LOOP_OVER_START( Kxyz, i0, i1, i2) {
+		ndarray3_set( K[0], i0, i1, i2, k_axis_sz[i0] );
+		ndarray3_set( K[1], i0, i1, i2, k_axis_sz[i1] );
+		ndarray3_set( K[1], i0, i1, i2, k_axis_sz[i2] );
+
 		/* kx .^ 2 + ky .^ 2 + kz .^ 2 */
-		ndarray3_set(Kxyz, ka_idx_0, ka_idx_1, ka_idx_2,
-				  SQUARED(k_axis[0][ka_idx_0])
-				+ SQUARED(k_axis[1][ka_idx_1])
-				+ SQUARED(k_axis[2][ka_idx_2]) );
-	}}}
+		ndarray3_set(Kxyz, i0, i1, i2,
+				  SQUARED(k_axis[0][i0])
+				+ SQUARED(k_axis[1][i1])
+				+ SQUARED(k_axis[2][i2]) );
+	} NDARRAY3_LOOP_OVER_END;
 
 	float kd = scale_factor * kmax[0];
 	float sigma = sqrt( 2.0 * hdaf_approx_degree + 1 ) / kd;
-
 
 	float nh[ndims];
 	bool flip[ndims];
 	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
 		nh[dim_idx] = floor( n[dim_idx] / 2.0 ) + 1;
 		flip[dim_idx] = !!( n[dim_idx] % 2  );
+	}
+
+	ndarray3* filt = ndarray3_new( n[0], n[1], n[2] );
+	NDARRAY3_LOOP_OVER_START( filt, i0, i1, i2) {
+		/* set all values to 0 */
+		ndarray3_set( filt, i0, i1, i2, 0 );
+	} NDARRAY3_LOOP_OVER_END;
+
+	if( flag == orion_Makefilter_FLAG_A ) {
+		/* TODO */
+	} else if( flag == orion_Makefilter_FLAG_B ) {
+		/* TODO */
+	} else if( flag == orion_Makefilter_FLAG_C ) {
+		/* TODO */
 	}
 }
