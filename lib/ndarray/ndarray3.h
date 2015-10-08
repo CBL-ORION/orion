@@ -55,7 +55,7 @@ extern void ndarray3_dump( ndarray3* n );
  * Outputs the contents of the ndarray3 `n` with each element formatted using
  * the format specifier in `format`.
  */
-extern void ndarray3_printf( ndarray3* n, const char* format );
+extern void ndarray3_printf( ndarray3* n, const char* variable_name, const char* format );
 
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )

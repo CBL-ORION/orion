@@ -58,9 +58,9 @@ void ndarray3_dump( ndarray3* n ) {
 				btoa(n->wrap) );
 }
 
-void ndarray3_printf( ndarray3* n, const char* format ) {
+void ndarray3_printf( ndarray3* n, const char* variable_name, const char* format ) {
 	for( int i = 0; i < n->sz[0]; i++ ) {
-		printf("x[%d][:][:] = {\n", i);
+		printf("%s[%d][:][:] = {\n", variable_name, i);
 		for( int j = 0; j < n->sz[1]; j++ ) {
 			printf("\t");
 			for( int k = 0; k < n->sz[2]; k++ ) {
