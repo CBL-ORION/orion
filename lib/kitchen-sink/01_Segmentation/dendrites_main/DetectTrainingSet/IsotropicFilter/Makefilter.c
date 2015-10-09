@@ -3,16 +3,13 @@
  * Refactor: Makefilter
  */
 
-typedef enum {
-	orion_Makefilter_FLAG_A,
-	orion_Makefilter_FLAG_B,
-	orion_Makefilter_FLAG_C
-} orion_Makefilter_flag;
+#include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/Makefilter.h"
 
-#include "ndarray/ndarray3.h"
 #include "segmentation/def.h"
 #include "numeric/def.h"
 #include "util/util.h"
+
+#include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf.h"
 
 ndarray3* orion_Makefilter(
 		size_t nx, size_t ny, size_t nz,
@@ -26,7 +23,7 @@ ndarray3* orion_Makefilter(
 	float kmax[ndims];
 	float dk[ndims];
 	size_t k_axis_sz[ndims];
-	float* k_axis[ndims];
+	float64* k_axis[ndims];
 
 	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
 		kmin[dim_idx] = 0;
@@ -34,28 +31,9 @@ ndarray3* orion_Makefilter(
 
 		dk[dim_idx] = 2*M_PI / n[dim_idx];
 
-		/* MATLAB's colonop:
-		 *
-		 * see <https://www.mathworks.com/matlabcentral/answers/143255-how-does-the-colon-operator-work>
-		 */
-		k_axis_sz[dim_idx] = (size_t) floor(
-				  (kmax[dim_idx] - kmin[dim_idx])
-				/ dk[dim_idx] );
-		NEW_COUNT(k_axis[dim_idx], float, k_axis_sz[dim_idx]);
-
-		for(size_t k_axis_idx = 0; k_axis_idx < k_axis_sz[dim_idx]; k_axis_idx++) {
-			/* Do not use direct summation to avoid numerical
-			 * errors (i.e., do not use
-			 *     `running_value += * dk[dim_idx]`
-			 * )
-			 *
-			 * NOTE: it might be better to use Kahan summation
-			 * algorithm
-			 */
-			k_axis[dim_idx][k_axis_idx] =
-				kmin[dim_idx]
-				+ k_axis_idx * dk[dim_idx];
-		}
+		/* kmin(:) : dk(:) : kmax(:) */
+		k_axis[dim_idx] =
+			matlab_colonop_float64(kmin[dim_idx], dk[dim_idx], kmax[dim_idx], &k_axis_sz[dim_idx]);
 	}
 
 	ndarray3* K[3];
@@ -70,7 +48,7 @@ ndarray3* orion_Makefilter(
 	NDARRAY3_LOOP_OVER_START( Kxyz, i0, i1, i2) {
 		ndarray3_set( K[0], i0, i1, i2, k_axis_sz[i0] );
 		ndarray3_set( K[1], i0, i1, i2, k_axis_sz[i1] );
-		ndarray3_set( K[1], i0, i1, i2, k_axis_sz[i2] );
+		ndarray3_set( K[2], i0, i1, i2, k_axis_sz[i2] );
 
 		/* kx .^ 2 + ky .^ 2 + kz .^ 2 */
 		ndarray3_set(Kxyz, i0, i1, i2,
@@ -97,9 +75,25 @@ ndarray3* orion_Makefilter(
 
 	if( flag == orion_Makefilter_FLAG_A ) {
 		/* TODO */
+		ndarray3* half_filt = orion_hdaf(hdaf_approx_degree, scale_factor, Kxyz);
+
+
+		for( int i = 0; i < nh[0]; i++ ) {
+			for( int j = 0; j < nh[1]; j++ ) {
+				for( int k = 0; k < nh[2]; k++ ) {
+					/* - Kxyz * half_filt */
+					pixel_type v = - ndarray3_get( Kxyz, i,j,k )
+						* ndarray3_get(half_filt, i,j,k);
+					ndarray3_set(filt, i,j,k,   v);
+				}
+			}
+		}
+		return filt;
 	} else if( flag == orion_Makefilter_FLAG_B ) {
 		/* TODO */
+		die("Unimplemented flag: %s\n", STRINGIZE(orion_Makefilter_FLAG_B));
 	} else if( flag == orion_Makefilter_FLAG_C ) {
 		/* TODO */
+		die("Unimplemented flag: %s\n", STRINGIZE(orion_Makefilter_FLAG_C));
 	}
 }

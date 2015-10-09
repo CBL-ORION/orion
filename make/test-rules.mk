@@ -51,6 +51,13 @@ $(BUILDTESTDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/Is
 		$(BUILDDIR)/numeric/func.o \
 		$(BUILDDIR)/ndarray/ndarray3.o \
 		$(BUILDDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf.o
+$(BUILDTESTDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/Makefilter$(EXEEXT): \
+		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/numeric/func.o \
+		$(BUILDDIR)/ndarray/ndarray3.o \
+		$(BUILDDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf.o \
+		$(BUILDDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/Makefilter.o
+
 
 
 test: $(TEST_OBJ)
