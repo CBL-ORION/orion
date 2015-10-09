@@ -11,7 +11,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-ndarray3* orion_hdaf(
+extern ndarray3* orion_hdaf(
 		const int hdaf_approx_degree,
 		const float scaling_constant,
 		ndarray3* x);
