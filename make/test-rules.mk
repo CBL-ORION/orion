@@ -43,6 +43,9 @@ $(BUILDTESTDIR)/numeric/func_factorial$(EXEEXT): \
 $(BUILDTESTDIR)/numeric/func_polyeval_horners$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/numeric/func.o
+$(BUILDTESTDIR)/numeric/func_matlab_colonop$(EXEEXT): \
+		$(BUILDDIR)/util/util.o \
+		$(BUILDDIR)/numeric/func.o
 $(BUILDTESTDIR)/kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf$(EXEEXT): \
 		$(BUILDDIR)/util/util.o \
 		$(BUILDDIR)/numeric/func.o \

@@ -14,6 +14,8 @@ float64 factorial_int64_t(uint8_t n);
 float64 polyeval_horners_float64(const float64* coefficients, size_t polynomial_degree, float64 x );
 float64 matlab_polyeval_horners_float64(const float64* coefficients, size_t polynomial_degree, float64 x );
 
+float64* matlab_colonop_float64(float64 min, float64 delta, float64 max, size_t* length);
+
 #ifdef __cplusplus
 };
 #endif /* __cplusplus */

@@ -277,3 +277,27 @@ float64 matlab_polyeval_horners_float64(const float64* coefficients, size_t poly
 
 	return result;
 }
+
+/* MATLAB's colonop:
+ *
+ * see <https://www.mathworks.com/matlabcentral/answers/143255-how-does-the-colon-operator-work>
+ */
+float64* matlab_colonop_float64(float64 min, float64 delta, float64 max, size_t* length) {
+	float64* vec;
+
+	*length = (size_t)floor( (max-min) / delta ) + 1;
+	NEW_COUNT( vec, float64, *length );
+
+	for( size_t i = 0 ; i < *length ; i++ ) {
+		/* Do not use direct summation to avoid numerical
+		 * errors (i.e., do not use
+		 *     `running_value += delta`
+		 * )
+		 *
+		 * NOTE: it might be better to use Kahan summation
+		 * algorithm
+		 */
+		vec[i] = min + i * delta;
+	}
+	return vec;
+}
