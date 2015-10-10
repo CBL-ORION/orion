@@ -74,7 +74,8 @@ clean:
 
 include make/00-implicit-rules.mk
 
--include $(LIB_SRC.c:$(LIBDIR)/%.c=$(DEPDIR)/%.P)
+-include $(LIB_SRC.c:$(LIBDIR)/%.c=$(DEPDIR)/$(LIBDIR)/%.P)
+-include $(TEST.c:$(TESTDIR)/%.c=$(DEPDIR)/$(TESTDIR)/%.P)
 
 tags:
 	ctags --exclude=external -R .
