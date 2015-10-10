@@ -20,7 +20,7 @@ ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) 
 	ndarray3* n;
 	NEW(n, ndarray3);
 
-	NEW_COUNT( n->p, pixel_type, sz_x * sz_y * sz_y );
+	NEW_COUNT( n->p, pixel_type, sz_x * sz_y * sz_z );
 	n->wrap = false;
 
 	n->sz[0] = sz_x;
