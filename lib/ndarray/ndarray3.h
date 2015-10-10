@@ -75,6 +75,13 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = (val); } while(0)
 
 /** TODO document
+ *  ndarray3_elems( ndarray3* n )
+ *
+ *  Number of elements in `n`. This is the product of the dimensions of `n`.
+ */
+#define ndarray3_elems(_n) ( (_n)->sz[0] * (_n)->sz[1] * (_n)->sz[2] )
+
+/** TODO document
  *  ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
  */
 #define ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
