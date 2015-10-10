@@ -42,6 +42,10 @@ CONFIG_HEADER_FILE := $(LIBDIR)/config/config.h
 $(CONFIG_HEADER_FILE): $(BIN_BIN_CONFIG.c)
 	$(BIN_BIN_CONFIG.c) > $@
 
+$(LIBORION.A): $(LIB_OBJ)
+	mkdir -p `dirname $@`
+	$(AR) $(ARFLAGS) $@ $^
+
 .PHONY: tags
 
 ifdef PROD
@@ -54,8 +58,7 @@ endif
 all: $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
-	$(DEV_TARGETS) \
-	$(BUILDDIR)/integration/itk/libIntegrationITK.a
+	$(DEV_TARGETS)
 
 ### Output directories
 $(OUTPUT_DIRS): # multiple targets
@@ -69,6 +72,7 @@ clean:
 	-rm -Rf $(ITK_CONFIG_MK)
 	-rm -Rf $(GCOVDIR) $(LCOVDIR)
 	-rm -Rf $(CONFIG_HEADER_FILE)
+	-rm -Rf $(LIBORION.A)
 	-rm $(VAA3D_ORION_MATLAB_LIB_OBJ)
 
 
@@ -86,7 +90,6 @@ include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk
 include make/vaa3d-plugin-rules.mk
 include make/test-rules.mk
-include make/ndarray-rules.mk
 include make/util-rules.mk
 include make/misc-rules.mk
 include make/devops-rules.mk

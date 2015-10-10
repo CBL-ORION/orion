@@ -1,6 +1,8 @@
 include make/platform.mk
 include make/config-dir.mk
 
+LIBORION.A := $(BUILDDIR)/.lib/liborion.a
+
 # initialise CXXFLAGS
 CXXFLAGS :=
 
