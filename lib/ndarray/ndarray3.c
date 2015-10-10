@@ -72,3 +72,18 @@ void ndarray3_printf( ndarray3* n, const char* variable_name, const char* format
 		printf("}\n");
 	}
 }
+
+void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, const char* format ) {
+	for( int k = 0; k < n->sz[2]; k++ ) {
+		printf("%s[:][:][%d] = {\n", variable_name, k);
+		for( int i = 0; i < n->sz[0]; i++ ) {
+			for( int j = 0; j < n->sz[1]; j++ ) {
+			printf("\t");
+				printf(format, ndarray3_get(n, i,j,k));
+				printf(" ");
+			}
+			printf("\n");
+		}
+		printf("}\n");
+	}
+}

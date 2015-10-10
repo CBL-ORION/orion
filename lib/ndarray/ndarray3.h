@@ -56,6 +56,7 @@ extern void ndarray3_dump( ndarray3* n );
  * the format specifier in `format`.
  */
 extern void ndarray3_printf( ndarray3* n, const char* variable_name, const char* format );
+extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, const char* format );
 
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
