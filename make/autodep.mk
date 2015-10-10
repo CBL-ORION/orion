@@ -1,5 +1,5 @@
 ## Dependency generation
-MAKEDEPEND.c = gcc -M $(CPPFLAGS) -o $(df).d $<
+MAKEDEPEND.c = gcc -MM $(CPPFLAGS) -o $(df).d $<
 df = $(<:%.c=$(DEPDIR)/%)
 MKDIR_DEPEND.c = mkdir -p `dirname $(df).d`; $(MAKEDEPEND.c); \
 	    $(CP) $(df).d $(df).P; \
