@@ -67,8 +67,9 @@ ndarray3* orion_Makefilter(
 	float nh[ndims];
 	bool flip[ndims];
 	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
-		nh[dim_idx] = floor( n[dim_idx] / 2.0 ) + 1;
-		flip[dim_idx] = !!( n[dim_idx] % 2  );
+		flip[dim_idx] = ( n[dim_idx] % 2  );
+		nh[dim_idx] = floor( n[dim_idx] / 2.0 ) + flip[dim_idx];
+		/*[>DEBUG<]printf("nh[%d] = %f ; flip[%d] = %d\n", dim_idx, nh[dim_idx], dim_idx, flip[dim_idx]);*/
 	}
 
 	ndarray3* filt = ndarray3_new( n[0], n[1], n[2] );
@@ -79,19 +80,34 @@ ndarray3* orion_Makefilter(
 
 	if( flag == orion_Makefilter_FLAG_A ) {
 		/* TODO */
-		ndarray3* half_filt = orion_hdaf(hdaf_approx_degree, scale_factor, Kxyz);
+		ndarray3* half_filt = orion_hdaf(hdaf_approx_degree, sigma, Kxyz);
+		/* Generating Laplacian filter */
+		/*[>DEBUG<]ndarray3_printf_matlab(half_filt, STRINGIZE(half_filt), "%10.8g");*/
+		/*[>DEBUG<]ndarray3_printf_matlab(Kxyz, STRINGIZE(Kxyz), "%10.8f");*/
 
 
+		/* make the rest of the filter symmetric across the centre */
 		for( int i = 0; i < nh[0]; i++ ) {
 			for( int j = 0; j < nh[1]; j++ ) {
 				for( int k = 0; k < nh[2]; k++ ) {
 					/* - Kxyz * half_filt */
 					pixel_type v = - ndarray3_get( Kxyz, i,j,k )
 						* ndarray3_get(half_filt, i,j,k);
-					ndarray3_set(filt, i,j,k,   v);
+					ndarray3_set(filt,             i           ,            j           ,            k           ,   v);
+					ndarray3_set(filt,             i           ,filt->sz[1]-j-1+!flip[1],            k           ,   v);
+					ndarray3_set(filt,             i           ,            j           ,filt->sz[2]-k-1+!flip[2],   v);
+					ndarray3_set(filt,             i           ,filt->sz[1]-j-1+!flip[1],filt->sz[2]-k-1+!flip[2],   v);
+					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],filt->sz[1]-j-1+!flip[1],            k           ,   v);
+					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,filt->sz[2]-k-1+!flip[2],   v);
+					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,            k           ,   v);
+					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],filt->sz[1]-j-1+!flip[1],filt->sz[2]-k-1+!flip[2],   v);
 				}
 			}
 		}
+
+		ndarray3_free(half_filt);
+		ndarray3_free(Kxyz);
+
 		return filt;
 	} else if( flag == orion_Makefilter_FLAG_B ) {
 		/* TODO */
