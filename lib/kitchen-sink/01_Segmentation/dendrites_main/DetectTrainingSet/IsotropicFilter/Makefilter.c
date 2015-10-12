@@ -62,7 +62,7 @@ ndarray3* orion_Makefilter(
 	}
 
 	float kd = scale_factor * kmax[0];
-	float sigma = sqrt( 2.0 * hdaf_approx_degree + 1 ) / kd;
+	float sigma = sqrt( 2.0 * hdaf_approx_degree + 1 ) / (sqrt(2) * kd);
 
 	float nh[ndims];
 	bool flip[ndims];
