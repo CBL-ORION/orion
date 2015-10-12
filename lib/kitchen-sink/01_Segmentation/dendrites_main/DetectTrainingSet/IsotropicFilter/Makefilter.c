@@ -57,6 +57,10 @@ ndarray3* orion_Makefilter(
 				+ SQUARED(k_axis[2][i2]) );
 	} NDARRAY3_LOOP_OVER_END;
 
+	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
+		ndarray3_free(K[dim_idx]);
+	}
+
 	float kd = scale_factor * kmax[0];
 	float sigma = sqrt( 2.0 * hdaf_approx_degree + 1 ) / kd;
 
