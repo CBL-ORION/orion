@@ -6,6 +6,7 @@
 #include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/Makefilter.h"
 
 #include "segmentation/def.h"
+#include "numeric/func.h"
 #include "numeric/def.h"
 #include "util/util.h"
 
@@ -67,7 +68,7 @@ ndarray3* orion_Makefilter(
 	float nh[ndims];
 	bool flip[ndims];
 	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
-		flip[dim_idx] = ( n[dim_idx] % 2  );
+		flip[dim_idx] =    ( n[dim_idx] % 2   );
 		nh[dim_idx] = floor( n[dim_idx] / 2.0 ) + flip[dim_idx];
 		/*[>DEBUG<]printf("nh[%d] = %f ; flip[%d] = %d\n", dim_idx, nh[dim_idx], dim_idx, flip[dim_idx]);*/
 	}
@@ -93,13 +94,20 @@ ndarray3* orion_Makefilter(
 					/* - Kxyz * half_filt */
 					pixel_type v = - ndarray3_get( Kxyz, i,j,k )
 						* ndarray3_get(half_filt, i,j,k);
+
 					ndarray3_set(filt,             i           ,            j           ,            k           ,   v);
+
+					/* flip once */
+					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,            k           ,   v);
 					ndarray3_set(filt,             i           ,filt->sz[1]-j-1+!flip[1],            k           ,   v);
 					ndarray3_set(filt,             i           ,            j           ,filt->sz[2]-k-1+!flip[2],   v);
+
+					/* flip twice */
 					ndarray3_set(filt,             i           ,filt->sz[1]-j-1+!flip[1],filt->sz[2]-k-1+!flip[2],   v);
 					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],filt->sz[1]-j-1+!flip[1],            k           ,   v);
 					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,filt->sz[2]-k-1+!flip[2],   v);
-					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,            k           ,   v);
+
+					/* flip thrice */
 					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],filt->sz[1]-j-1+!flip[1],filt->sz[2]-k-1+!flip[2],   v);
 				}
 			}
