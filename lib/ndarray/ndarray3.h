@@ -6,6 +6,7 @@
 
 #include "config/datatype.h"
 #include "util/util.h"
+#include "util/likely.h"
 
 typedef struct {
 	pixel_type* p;
@@ -72,11 +73,35 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 	(_n)->p + _INDEX3D( (_n_i), (_n_j), (_n_k), (_n)->sz[0], (_n)->sz[1], (_n)->sz[2] ) \
 )
 
+#define _ndarray3_assert_bounds(_n, _n_i, _n_j, _n_k) ( \
+		   _n_i >=0 && _n_i < _n->sz[0] \
+		&& _n_j >=0 && _n_j < _n->sz[1] \
+		&& _n_k >=0 && _n_k < _n->sz[2] \
+		)
+
+
 
 /** TODO document
  *  ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type value )
  */
-#define ndarray3_set(_n, _n_i, _n_j, _n_k, val) do { *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = (val); } while(0)
+#ifdef NDARRAY3_ASSERT_BOUNDS_ACCESS
+  #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) \
+	do { \
+		if( likely(_ndarray3_assert_bounds(_n, _n_i, _n_j, _n_k)) ) { \
+			_real_ndarray3_set(_n, _n_i, _n_j, _n_k, val); \
+		} else { \
+			die("ndarray3 (%p) access [%d,%d,%d]", _n, _n_i,_n_j,_n_k); \
+		} \
+	} while(0)
+#else
+  #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) \
+	_real_ndarray3_set(_n, _n_i, _n_j, _n_k, val)
+#endif /* NDARRAY3_ASSERT_BOUNDS_ACCESS */
+
+#define _real_ndarray3_set(_n, _n_i, _n_j, _n_k, val) \
+	do { \
+		*_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = (val); \
+	} while(0)
 
 /** TODO document
  *  ndarray3_elems( ndarray3* n )
@@ -88,7 +113,18 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 /** TODO document
  *  ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
  */
-#define ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
+#ifdef NDARRAY3_ASSERT_BOUNDS_ACCESS
+  #define ndarray3_get(_n, _n_i, _n_j, _n_k           )    \
+	( \
+	  ( likely(_ndarray3_assert_bounds(_n, _n_i, _n_j, _n_k)) ) \
+	? ( _real_ndarray3_get(_n, _n_i, _n_j, _n_k     ) ) \
+	: (  die("ndarray3 (%p) access [%d,%d,%d]", _n, _n_i,_n_j,_n_k),0 ) \
+	)
+#else
+  #define ndarray3_get(_n, _n_i, _n_j, _n_k           )    ( _real_ndarray3_get(_n, _n_i, _n_j, _n_k     ) )
+#endif /* NDARRAY3_ASSERT_BOUNDS_ACCESS */
+
+#define _real_ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
 
 
 /** TODO document
