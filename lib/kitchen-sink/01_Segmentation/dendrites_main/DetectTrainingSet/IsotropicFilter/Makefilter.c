@@ -96,20 +96,25 @@ ndarray3* orion_Makefilter(
 					pixel_type v = - ndarray3_get( Kxyz, i,j,k )
 						* ndarray3_get(half_filt, i,j,k);
 
-					ndarray3_set(filt,             i           ,            j           ,            k           ,   v);
+					ndarray3_set(filt, i, j, k,   v);
+
+					/* indices reflected across the axes */
+					ptrdiff_t fi = filt->sz[0]-i-1+!flip[0];
+					ptrdiff_t fj = filt->sz[1]-j-1+!flip[1];
+					ptrdiff_t fk = filt->sz[2]-k-1+!flip[2];
 
 					/* flip once */
-					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,            k           ,   v);
-					ndarray3_set(filt,             i           ,filt->sz[1]-j-1+!flip[1],            k           ,   v);
-					ndarray3_set(filt,             i           ,            j           ,filt->sz[2]-k-1+!flip[2],   v);
+					ndarray3_set(filt, fi, j, k,   v);
+					ndarray3_set(filt,  i,fj, k,   v);
+					ndarray3_set(filt,  i, j,fk,   v);
 
 					/* flip twice */
-					ndarray3_set(filt,             i           ,filt->sz[1]-j-1+!flip[1],filt->sz[2]-k-1+!flip[2],   v);
-					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],filt->sz[1]-j-1+!flip[1],            k           ,   v);
-					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],            j           ,filt->sz[2]-k-1+!flip[2],   v);
+					ndarray3_set(filt,  i,fj,fk,   v);
+					ndarray3_set(filt, fi,fj, k,   v);
+					ndarray3_set(filt, fi, j,fk,   v);
 
 					/* flip thrice */
-					ndarray3_set(filt, filt->sz[0]-i-1+!flip[0],filt->sz[1]-j-1+!flip[1],filt->sz[2]-k-1+!flip[2],   v);
+					ndarray3_set(filt, fi,fj,fk,   v);
 				}
 			}
 		}
