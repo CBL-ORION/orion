@@ -60,6 +60,7 @@ ndarray3* orion_Makefilter(
 
 	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
 		ndarray3_free(K[dim_idx]);
+		free(k_axis[dim_idx]);
 	}
 
 	float kd = scale_factor * kmax[0];
