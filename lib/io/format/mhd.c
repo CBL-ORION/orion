@@ -214,7 +214,7 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 	free(raw_buffer);
 
 	/* wrap the buffer and use the dimensions from the MetaInfo metadata */
-	ndarray3* n = ndarray3_wrap( buffer,
+	ndarray3* n = ndarray3_buffer( buffer,
 			array_get_int(meta->DimSize, 0),
 			array_get_int(meta->DimSize, 1),
 			array_get_int(meta->DimSize, 2) );
