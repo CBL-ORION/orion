@@ -13,5 +13,7 @@ int main(void) {
 	is_int(4, nd_test->sz[1], "size of second dim is correct");
 	is_int(5, nd_test->sz[2], "size of second dim is correct");
 
+	ndarray3_free( nd_test );
+
 	return EXIT_SUCCESS;
 }
