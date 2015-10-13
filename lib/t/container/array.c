@@ -37,6 +37,7 @@ int main() {
 	diag( "capacity of the array is " SIZE_T_FORMAT_SPEC, array_capacity_int( arr ) );
 	ok( array_capacity_int( arr ) >= 4, "the capacity of the array is >= 4");
 
+	array_free_int(arr);
 
 	return EXIT_SUCCESS;
 }
