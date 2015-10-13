@@ -99,9 +99,9 @@ ndarray3* orion_Makefilter(
 					ndarray3_set(filt, i, j, k,   v);
 
 					/* indices reflected across the axes */
-					ptrdiff_t fi = filt->sz[0]-i-1+!flip[0];
-					ptrdiff_t fj = filt->sz[1]-j-1+!flip[1];
-					ptrdiff_t fk = filt->sz[2]-k-1+!flip[2];
+					ptrdiff_t fi = filt->sz[0]-i-1;
+					ptrdiff_t fj = filt->sz[1]-j-1;
+					ptrdiff_t fk = filt->sz[2]-k-1;
 
 					/* flip once */
 					ndarray3_set(filt, fi, j, k,   v);
@@ -109,9 +109,9 @@ ndarray3* orion_Makefilter(
 					ndarray3_set(filt,  i, j,fk,   v);
 
 					/* flip twice */
-					ndarray3_set(filt,  i,fj,fk,   v);
 					ndarray3_set(filt, fi,fj, k,   v);
 					ndarray3_set(filt, fi, j,fk,   v);
+					ndarray3_set(filt,  i,fj,fk,   v);
 
 					/* flip thrice */
 					ndarray3_set(filt, fi,fj,fk,   v);

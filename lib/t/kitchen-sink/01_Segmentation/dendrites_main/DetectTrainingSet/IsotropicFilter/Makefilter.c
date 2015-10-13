@@ -21,9 +21,9 @@ bool ndarray3_is_isotropic( const ndarray3* n, pixel_type eps ) {
 				/*[>DEBUG<]printf("%d|%p at [%d,%d,%d] -> %f\n", is_isotropic, n, i, j, k, ndarray3_get(n, i, j, k ));*/
 
 				/* indices reflected across the axes */
-				ptrdiff_t fi = n->sz[0]-i-1+!sz_even[0];
-				ptrdiff_t fj = n->sz[1]-j-1+!sz_even[1];
-				ptrdiff_t fk = n->sz[2]-k-1+!sz_even[2];
+				ptrdiff_t fi = n->sz[0]-i-1;
+				ptrdiff_t fj = n->sz[1]-j-1;
+				ptrdiff_t fk = n->sz[2]-k-1;
 
 				/* flip once */
 				is_isotropic &= fabs( ndarray3_get(n, fi, j, k) - v ) < eps;
@@ -63,33 +63,32 @@ int main(void) {
 	int hdaf_approx_degree = 3;
 	float scale_factor = 5.0;
 
-	/*{
-		[> even-sized filter <]
+	{
+		/* even-sized filter */
 		const size_t SZ = 6;
 		ndarray3* mk = orion_Makefilter( SZ, SZ, SZ, hdaf_approx_degree, scale_factor, orion_Makefilter_FLAG_A );
-		ndarray3_printf_matlab( mk , "mk-even", "%8.4e");
-		ndarray3_dump(mk);
+		/*[>DEBUG<]ndarray3_printf_matlab( mk , "mk-even", "%8.4e");*/
 		ok( ndarray3_is_isotropic( mk, eps ), "Makefilter() output is isotropic for an even-sized filter" );
-		[>ndarray3_free(mk);<]
-	}*/
+		ndarray3_free(mk);
+	}
 
 	{
 		/* odd-sized filter */
 		const size_t SZ = 5;
 		ndarray3* mk = orion_Makefilter( SZ, SZ, SZ, hdaf_approx_degree, scale_factor, orion_Makefilter_FLAG_A );
-		ndarray3_printf_matlab( mk , "mk-odd", "%8.4e");
+		/*[>DEBUG<]ndarray3_printf_matlab( mk , "mk-odd", "%8.4e");*/
 		ok( ndarray3_is_isotropic( mk, eps ), "Makefilter() output is isotropic for an odd-sized filter" );
 		ndarray3_free(mk);
 	}
 
-	/*{
-		[> asymmetric-sized filter <]
+	{
+		/* asymmetric-sized filter */
 		const size_t SZ = 5;
 		ndarray3* mk = orion_Makefilter( SZ-1, SZ, SZ+1, hdaf_approx_degree, scale_factor, orion_Makefilter_FLAG_A );
-		ndarray3_printf_matlab( mk , "mk-asym", "%8.4e");
+		/*[>DEBUG<]ndarray3_printf_matlab( mk , "mk-asym", "%8.4e");*/
 		ok( ndarray3_is_isotropic( mk, eps ), "Makefilter() output is isotropic for an asymmetric-sized filter" );
-		[>ndarray3_free(mk);<]
-	}*/
+		ndarray3_free(mk);
+	}
 
 	return EXIT_SUCCESS;
 }
