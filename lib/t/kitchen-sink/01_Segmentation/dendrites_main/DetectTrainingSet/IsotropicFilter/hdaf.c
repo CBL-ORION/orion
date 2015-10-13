@@ -59,6 +59,8 @@ int main(void) {
 		}
 	}
 
+	ndarray3_free( x_hdaf );
+	ndarray3_free( x );
 
 	return EXIT_SUCCESS;
 }

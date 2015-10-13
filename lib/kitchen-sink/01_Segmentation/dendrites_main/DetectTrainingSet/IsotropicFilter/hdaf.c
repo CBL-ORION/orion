@@ -58,5 +58,8 @@ ndarray3* orion_hdaf(
 		ndarray3_set(out, i,j,k, out_ijk);
 	} NDARRAY3_LOOP_OVER_END;
 
+	free(coeff);
+	ndarray3_free(x_scale);
+
 	return out;
 }
