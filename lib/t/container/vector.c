@@ -23,5 +23,7 @@ int main() {
 	is_int( 8, vector_get_int( vec, 1 ), "2nd element");
 	is_int( 9, vector_get_int( vec, 2 ), "3rd element");
 
+	vector_free_int( vec );
+
 	return EXIT_SUCCESS;
 }
