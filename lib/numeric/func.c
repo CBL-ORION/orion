@@ -275,6 +275,8 @@ float64 matlab_polyeval_horners_float64(const float64* coefficients, size_t poly
 	 * rest of the arguments kept the same */
 	float64 result = polyeval_horners_float64( coefficients_reverse, polynomial_degree, x );
 
+	free(coefficients_reverse);
+
 	return result;
 }
 
