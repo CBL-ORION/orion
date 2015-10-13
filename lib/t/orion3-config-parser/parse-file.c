@@ -23,5 +23,7 @@ int main(void) {
 	is_int(1, array_length_str(p->volume_names), "There is 1 volume to process");
 	is_string( "NPF023", array_get_str(p->volume_names, 0), "and has the expected volume name" );
 
+	orion3_param_free(p);
+
 	return EXIT_SUCCESS;
 }

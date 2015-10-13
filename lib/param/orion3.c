@@ -17,8 +17,16 @@ orion3_param* orion3_param_new() {
 }
 
 void orion3_param_free( orion3_param* param ) {
-	array_free_str(param->volume_names);
+	free(param->path_to_volume_directory);
+	free(param->report_filename);
+
 	array_free_float(param->scales);
+
+	for( int idx = 0; idx < array_length_str(param->volume_names); idx++) {
+		free( array_get_str(param->volume_names, idx  ) );
+	}
+	array_free_str(param->volume_names);
+
 	free(param);
 }
 
