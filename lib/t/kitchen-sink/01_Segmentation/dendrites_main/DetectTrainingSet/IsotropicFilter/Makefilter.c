@@ -5,7 +5,7 @@
 #include <math.h>
 #include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/Makefilter.h"
 
-bool ndarray3_is_isotropic( const ndarray3* n, pixel_type eps ) {
+bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps ) {
 	bool is_isotropic = true;
 	const size_t ndim = 3;
 	size_t sz_half[ndim];
@@ -60,8 +60,8 @@ int main(void) {
 
 	plan(3);
 
-	int hdaf_approx_degree = 3;
-	float scale_factor = 5.0;
+	const int hdaf_approx_degree = 3;
+	const float scale_factor = 5.0;
 
 	{
 		/* even-sized filter */
