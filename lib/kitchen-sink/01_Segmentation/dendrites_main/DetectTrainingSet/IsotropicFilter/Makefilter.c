@@ -37,20 +37,12 @@ ndarray3* orion_Makefilter(
 			matlab_colonop_float64(kmin[dim_idx], dk[dim_idx], kmax[dim_idx], &k_axis_sz[dim_idx]);
 	}
 
-	ndarray3* K[3];
 	ndarray3* Kxyz = ndarray3_new(
 			k_axis_sz[0],
 			k_axis_sz[1],
 			k_axis_sz[2] );
-	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
-		K[dim_idx] = ndarray3_new_with_size_from_ndarray3( Kxyz );
-	}
 
 	NDARRAY3_LOOP_OVER_START( Kxyz, i0, i1, i2) {
-		ndarray3_set( K[0], i0, i1, i2, k_axis_sz[i0] );
-		ndarray3_set( K[1], i0, i1, i2, k_axis_sz[i1] );
-		ndarray3_set( K[2], i0, i1, i2, k_axis_sz[i2] );
-
 		/* kx .^ 2 + ky .^ 2 + kz .^ 2 */
 		ndarray3_set(Kxyz, i0, i1, i2,
 				  SQUARED(k_axis[0][i0])
@@ -59,7 +51,6 @@ ndarray3* orion_Makefilter(
 	} NDARRAY3_LOOP_OVER_END;
 
 	for( int dim_idx = 0; dim_idx < ndims; dim_idx++ ) {
-		ndarray3_free(K[dim_idx]);
 		free(k_axis[dim_idx]);
 	}
 
