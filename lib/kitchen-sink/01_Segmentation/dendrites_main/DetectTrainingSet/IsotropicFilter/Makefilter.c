@@ -115,10 +115,12 @@ ndarray3* orion_Makefilter(
 
 		return filt;
 	} else if( flag == orion_Makefilter_FLAG_B ) {
-		/* TODO */
+		TODO(Implement high-pass filter --- dead code)
+		/* NOTE: zaki: this is dead code in the original MATLAB implementation */
 		die("Unimplemented flag: %s\n", STRINGIZE(orion_Makefilter_FLAG_B));
 	} else if( flag == orion_Makefilter_FLAG_C ) {
-		/* TODO */
+		TODO(Implement low-pass filter --- dead code)
+		/* NOTE: zaki: this is dead code in the original MATLAB implementation */
 		die("Unimplemented flag: %s\n", STRINGIZE(orion_Makefilter_FLAG_C));
 	}
 }
