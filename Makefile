@@ -55,7 +55,7 @@ else
 endif
 
 ## Rules
-all: $(OUTPUT_DIRS) $(LIB_OBJ) \
+all: $(CONFIG_HEADER_FILE) $(OUTPUT_DIRS) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
 	$(DEV_TARGETS)
