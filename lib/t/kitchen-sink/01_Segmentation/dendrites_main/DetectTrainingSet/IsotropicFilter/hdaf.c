@@ -35,7 +35,7 @@ int main(void) {
 	} NDARRAY3_LOOP_OVER_END;
 	/*[>DEBUG<]ndarray3_printf_matlab( x, "x", "%-3.4f" );*/
 	ndarray3* x_hdaf = orion_hdaf(3.0, 5.0, x);
-	/*DEBUG*/ndarray3_printf_matlab( x_hdaf, "x_hdaf", "%-8.2e" );
+	/*[>DEBUG<]ndarray3_printf_matlab( x_hdaf, "x_hdaf", "%-8.2e" );*/
 
 /* 1 test */
 	ok( NULL != x_hdaf, "hdaf() is calculated");
