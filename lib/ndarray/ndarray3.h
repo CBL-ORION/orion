@@ -84,6 +84,10 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 /** TODO document
  *  ndarray3_set( ndarray3* n, size_t i, size_t j, size_t k, pixel_type value )
  */
+#define _real_ndarray3_set(_n, _n_i, _n_j, _n_k, val) \
+	do { \
+		*_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = (val); \
+	} while(0)
 #ifdef NDARRAY3_ASSERT_BOUNDS_ACCESS
   #define ndarray3_set(_n, _n_i, _n_j, _n_k, val) \
 	do { \
@@ -98,11 +102,6 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 	_real_ndarray3_set(_n, _n_i, _n_j, _n_k, val)
 #endif /* NDARRAY3_ASSERT_BOUNDS_ACCESS */
 
-#define _real_ndarray3_set(_n, _n_i, _n_j, _n_k, val) \
-	do { \
-		*_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) ) = (val); \
-	} while(0)
-
 /** TODO document
  *  ndarray3_elems( ndarray3* n )
  *
@@ -113,18 +112,19 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 /** TODO document
  *  ndarray3_get( ndarray3* n, size_t i, size_t j, size_t k              )
  */
+#define _real_ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
+
 #ifdef NDARRAY3_ASSERT_BOUNDS_ACCESS
   #define ndarray3_get(_n, _n_i, _n_j, _n_k           )    \
-	( \
-	  ( likely(_ndarray3_assert_bounds(_n, _n_i, _n_j, _n_k)) ) \
-	? ( _real_ndarray3_get(_n, _n_i, _n_j, _n_k     ) ) \
-	: (  die("ndarray3 (%p) access [%d,%d,%d]", _n, _n_i,_n_j,_n_k),0 ) \
-	)
+        ( \
+          ( likely(_ndarray3_assert_bounds(_n, _n_i, _n_j, _n_k )) ) \
+        ? ( _real_ndarray3_get(_n, _n_i, _n_j, _n_k     ) ) \
+        : (  die("ndarray3 (%p) access [%d,%d,%d]", _n, _n_i, _n_j, _n_k ),0 ) \
+        )
 #else
-  #define ndarray3_get(_n, _n_i, _n_j, _n_k           )    ( _real_ndarray3_get(_n, _n_i, _n_j, _n_k     ) )
+  #define ndarray3_get(_n, _n_i, _n_j, _n_k           )   \
+        ( _real_ndarray3_get(_n, _n_i, _n_j, _n_k     ) )
 #endif /* NDARRAY3_ASSERT_BOUNDS_ACCESS */
-
-#define _real_ndarray3_get(_n, _n_i, _n_j, _n_k     )    ( *_ndarray3_index( (_n), (_n_i), (_n_j), (_n_k) )       )
 
 
 /** TODO document
