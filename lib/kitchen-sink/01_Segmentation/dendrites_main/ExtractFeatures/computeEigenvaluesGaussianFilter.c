@@ -33,8 +33,7 @@ array_orion_eig_feat_result* orion_computeEigenvaluesGaussianFilter(
 	size_t n_scales = array_length_float(scales);
 	array_orion_eig_feat_result* all_results = array_new_orion_eig_feat_result(n_scales);
 	for( size_t scale_idx = 0; scale_idx < n_scales; scale_idx++ ) {
-		orion_eig_feat_result* res;
-		NEW(res, orion_eig_feat_result);
+		orion_eig_feat_result* res = orion_eig_feat_result_new();
 		res->scale = array_get_float(scales, scale_idx);
 
 		/* calculate each filter */
@@ -51,7 +50,7 @@ array_orion_eig_feat_result* orion_computeEigenvaluesGaussianFilter(
 			die("Unknown sort method: %d", method);
 		}
 
-		array_set_orion_eig_feat_result( all_results, scale_idx, res );
+		array_add_orion_eig_feat_result( all_results, res );
 	}
 	return all_results;
 }
