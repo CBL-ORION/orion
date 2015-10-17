@@ -12,6 +12,7 @@ $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT) : $(LIBORION.A) \
 
 $(TEST_OBJ): $(LIBORION.A)
 
+test: export ASAN_OPTIONS = ${ENV_ASAN_OPTIONS}
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
 test: CPPFLAGS += $(TEST_CPPFLAGS)

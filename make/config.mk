@@ -94,6 +94,7 @@ endif
 
 # enable AddressSantizer (ASAN)
 ifeq ($(BUILD_ENABLE_ASAN),1)
+ENV_ASAN_OPTIONS += "alloc_dealloc_mismatch=0"
 CFLAGS     += $(CFLAGS.ASAN)
 endif
 
