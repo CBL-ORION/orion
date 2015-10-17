@@ -68,6 +68,8 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 extern bool ndarray3_is_same_size( ndarray3* a, ndarray3* b );
 extern bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps );
 
+extern pixel_type ndarray3_sum_over_all( const ndarray3* n );
+
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
  */
