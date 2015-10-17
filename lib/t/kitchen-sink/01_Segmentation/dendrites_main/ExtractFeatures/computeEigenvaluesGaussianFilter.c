@@ -8,6 +8,12 @@
 #include "param/segmentation.h"
 #include "ndarray/ndarray3.h"
 
+bool ndarray3_is_same_size( ndarray3* a, ndarray3* b ) {
+	return    a->sz[0] == b->sz[0]
+	       && a->sz[1] == b->sz[1]
+	       && a->sz[2] == b->sz[2];
+}
+
 /*
 % MATLAB
 
@@ -38,6 +44,18 @@ int main(void) {
 		printf("i = %d; scale = %f; nd = %d\n", r_idx, array_get_orion_eig_feat_result(r, r_idx)->scale, array_length_ndarray3(e->eig_feat) );
 		ndarray3_dump(n);
 	}
+
+
+	is_int( array_length_float(scales)  ,  array_length_orion_eig_feat_result(r), "there are as many results as there are scales");
+
+	orion_eig_feat_result* first_result = array_get_orion_eig_feat_result(r,0);
+	is_double( array_get_float(scales,0), first_result->scale, 0, "the first scale is recorded in the result as expected");
+
+	ndarray3* first_result_first_n = array_get_ndarray3(first_result->eig_feat,0);
+	ok( ndarray3_is_same_size(n, first_result_first_n), "the size of the returned ndarray3 is the same");
+
+
+
 
 	for( size_t r_idx = 0; r_idx < array_length_orion_eig_feat_result(r); r_idx++ ) {
 		orion_eig_feat_result* e = array_get_orion_eig_feat_result(r, r_idx);
