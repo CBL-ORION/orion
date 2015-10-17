@@ -4,6 +4,8 @@ $(BUILDDIR)/param/param.o: $(BUILDDIR)/container/array.o
 $(BUILDDIR)/io/format/mhd.o: $(BUILDDIR)/io/path/path.o $(BUILDDIR)/util/string.o \
 	$(CONFIG_HEADER_FILE)
 
+ITK_INTEGRATION_LIB_OBJ := $(BUILDDIR)/integration/itk/CMakeFiles/IntegrationITK.dir/itk.cxx.o
+$(ITK_INTEGRATION_LIB_OBJ): $(BUILDDIR)/integration/itk/libIntegrationITK.a
 .NOTPARALLEL: $(BUILDDIR)/integration/itk/libIntegrationITK.a
 $(BUILDDIR)/integration/itk/libIntegrationITK.a: \
 		$(LIBDIR)/integration/itk/itk.cxx \

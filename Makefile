@@ -42,10 +42,6 @@ CONFIG_HEADER_FILE := $(LIBDIR)/config/config.h
 $(CONFIG_HEADER_FILE): $(BIN_BIN_CONFIG.c)
 	$(BIN_BIN_CONFIG.c) > $@
 
-$(LIBORION.A): $(LIB_OBJ)
-	mkdir -p `dirname $@`
-	$(AR) $(ARFLAGS) $@ $^
-
 .PHONY: tags
 
 ifdef PROD
@@ -93,3 +89,4 @@ include make/test-rules.mk
 include make/util-rules.mk
 include make/misc-rules.mk
 include make/devops-rules.mk
+include make/liborion.mk
