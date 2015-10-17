@@ -8,6 +8,17 @@
 #include "param/segmentation.h"
 #include "ndarray/ndarray3.h"
 
+pixel_type ndarray3_sum_over_all( ndarray3* n ) {
+	pixel_type sum = 0;
+	size_t elems = ndarray3_elems( n );
+	/*[>DEBUG<]ndarray3_printf(n, "n", "%8.3e");*/
+	for( size_t n_idx = 0; n_idx < elems; n_idx++ ) {
+		sum += n->p[n_idx];
+	}
+	return sum;
+}
+
+
 /*
 % MATLAB
 
@@ -32,13 +43,19 @@ int main(void) {
 
 	array_orion_eig_feat_result* r = orion_computeEigenvaluesGaussianFilter(n, EIG_FEAT_METHOD_SORT_SATO, false, scales);
 
-	for( size_t r_idx = 0; r_idx < array_length_orion_eig_feat_result(r); r_idx++ ) {
+	size_t r_len = array_length_orion_eig_feat_result(r);
+
+	/*DEBUG*/for( size_t r_idx = 0; r_idx < r_len; r_idx++ ) {
 		orion_eig_feat_result* e = array_get_orion_eig_feat_result(r, r_idx);
 		ndarray3* n = array_get_ndarray3(e->eig_feat,0);
-		printf("i = %d; scale = %f; nd = %d\n", r_idx, array_get_orion_eig_feat_result(r, r_idx)->scale, array_length_ndarray3(e->eig_feat) );
+		printf("i = %d; scale = %f; nd = %d; with sum for first = %f\n",
+				r_idx,
+				array_get_orion_eig_feat_result(r, r_idx)->scale,
+				array_length_ndarray3(e->eig_feat),
+				ndarray3_sum_over_all(n)
+				);
 		ndarray3_dump(n);
 	}
-
 
 	is_int( array_length_float(scales)  ,  array_length_orion_eig_feat_result(r), "there are as many results as there are scales");
 
@@ -51,7 +68,7 @@ int main(void) {
 
 
 
-	for( size_t r_idx = 0; r_idx < array_length_orion_eig_feat_result(r); r_idx++ ) {
+	for( size_t r_idx = 0; r_idx < r_len; r_idx++ ) {
 		orion_eig_feat_result* e = array_get_orion_eig_feat_result(r, r_idx);
 		orion_eig_feat_result_free(e);
 	}
