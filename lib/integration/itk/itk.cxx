@@ -96,9 +96,13 @@ array_ndarray3* _orion_convert_itkFixedArray_to_array_ndarray( OutputImageArrayT
 
 array_ndarray3* orion_filter_method_sato( ndarray3* vol, float sigma ) {
 	InternalImageType::Pointer vol_itk = _orion_convert_ndarray3_to_itkImage( vol );
+	/*[>DEBUG<]std::cout << vol_itk << std::endl;*/
 
+	LOG_INFO("Computing the Sato vessellness feature filter");
 	OutputImageArrayType arr_eig_itk  = ComputeSato( vol_itk, sigma );
+	/*[>DEBUG<]std::cout << arr_eig_itk[0] << std::endl;*/
 
+	LOG_INFO("Converting the results of the Sato filter array");
 	array_ndarray3* arr_eig = _orion_convert_itkFixedArray_to_array_ndarray( arr_eig_itk );
 	return arr_eig;
 }
