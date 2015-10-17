@@ -73,7 +73,7 @@ ndarray3* _orion_convert_itkImage_to_ndarray3( InternalImageType::Pointer vol_it
 	InternalImageType::RegionType region = vol_itk->GetLargestPossibleRegion();
 	InternalImageType::SizeType sz = region.GetSize();
 
-	ndarray3* n = ndarray3_wrap( pixel_data, sz[0], sz[1], sz[3] );
+	ndarray3* n = ndarray3_wrap( pixel_data, sz[0], sz[1], sz[2] );
 
 	return n;
 }
