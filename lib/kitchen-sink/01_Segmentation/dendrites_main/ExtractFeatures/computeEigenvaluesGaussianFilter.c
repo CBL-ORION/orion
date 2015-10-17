@@ -8,29 +8,15 @@
  * - Applying the log() function should be factored out to another function.
  */
 
-#include <stdbool.h>
-
-#include "ndarray/ndarray3.h"
-#include "ndarray/array_ndarray3.h"
-#include "container/array.h"
-
+#include "kitchen-sink/01_Segmentation/dendrites_main/ExtractFeatures/computeEigenvaluesGaussianFilter.h"
 #include "integration/itk/itk.hxx"
-
-typedef enum {
-	EIG_FEAT_METHOD_SORT_SATO = 1,
-	EIG_FEAT_METHOD_SORT_FRANGI,
-	EIG_FEAT_METHOD_SINGLE_VALUE,
-
-	EIG_FEAT_METHOD_ENUM_FIRST = EIG_FEAT_METHOD_SORT_SATO,
-	EIG_FEAT_METHOD_ENUM_LAST = EIG_FEAT_METHOD_SINGLE_VALUE
-} orion_eigenvalue_feature_method;
 
 /**
  * This function computes eigenvalues after applying various filtering methods
  * for feature extraction. These eigenvalue features are used to measure the
  * vessellness of the data.
  */
-array_ndarray3* orion_computeEigenvaluesGaussianFilter(
+array_orion_eig_feat_result* orion_computeEigenvaluesGaussianFilter(
 		ndarray3* input_volume,
 		orion_eigenvalue_feature_method method,
 		bool apply_log,
@@ -42,19 +28,30 @@ array_ndarray3* orion_computeEigenvaluesGaussianFilter(
 		die("Please refactor and remove use of apply_log as it is orthogonal to the eigenvalue filtering ( apply_log == %c )", apply_log);
 	}
 
-	/* TODO calculate each filter */
 	/* TODO loop over all scales */
-	size_t scale_idx = 0;
-	if( method == EIG_FEAT_METHOD_SORT_SATO ) {
-		/* TODO call Sato filter */
-		orion_filter_method_sato(input_volume, array_get_float(scales, scale_idx));
-	} else if( method == EIG_FEAT_METHOD_SORT_FRANGI ) {
-		/* TODO call Frangi filter */
-		orion_filter_method_frangi(input_volume, array_get_float(scales, scale_idx));
-	} else if( method == EIG_FEAT_METHOD_SINGLE_VALUE ) {
-		/* TODO calculate eigenvalues */
-		orion_filter_method_single_eigenvalue(input_volume, array_get_float(scales, scale_idx));
-	} else {
-		die("Unknown sort method: %d", method);
+
+	size_t n_scales = array_length_float(scales);
+	array_orion_eig_feat_result* all_results = array_new_orion_eig_feat_result(n_scales);
+	for( size_t scale_idx = 0; scale_idx < n_scales; scale_idx++ ) {
+		orion_eig_feat_result* res;
+		NEW(res, orion_eig_feat_result);
+		res->scale = array_get_float(scales, scale_idx);
+
+		/* calculate each filter */
+		if( method == EIG_FEAT_METHOD_SORT_SATO ) {
+			/* call Sato filter */
+			res->eig_feat = orion_filter_method_sato(input_volume, res->scale);
+		} else if( method == EIG_FEAT_METHOD_SORT_FRANGI ) {
+			/* call Frangi filter */
+			res->eig_feat = orion_filter_method_frangi(input_volume, res->scale);
+		} else if( method == EIG_FEAT_METHOD_SINGLE_VALUE ) {
+			/* calculate eigenvalues */
+			res->eig_feat = orion_filter_method_single_eigenvalue(input_volume, res->scale);
+		} else {
+			die("Unknown sort method: %d", method);
+		}
+
+		array_set_orion_eig_feat_result( all_results, scale_idx, res );
 	}
+	return all_results;
 }
