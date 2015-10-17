@@ -8,12 +8,6 @@
 #include "param/segmentation.h"
 #include "ndarray/ndarray3.h"
 
-bool ndarray3_is_same_size( ndarray3* a, ndarray3* b ) {
-	return    a->sz[0] == b->sz[0]
-	       && a->sz[1] == b->sz[1]
-	       && a->sz[2] == b->sz[2];
-}
-
 /*
 % MATLAB
 

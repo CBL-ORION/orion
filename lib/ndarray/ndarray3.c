@@ -1,4 +1,7 @@
 #include "ndarray/ndarray3.h"
+
+#include <math.h>
+
 #include "util/string.h"
 
 ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
@@ -101,4 +104,54 @@ void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, const char*
 		}
 		printf("}\n");
 	}
+}
+
+/* testing functions */
+bool ndarray3_is_same_size( ndarray3* a, ndarray3* b ) {
+	return    a->sz[0] == b->sz[0]
+	       && a->sz[1] == b->sz[1]
+	       && a->sz[2] == b->sz[2];
+}
+
+bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps ) {
+	bool is_isotropic = true;
+	const size_t ndim = 3;
+	size_t sz_half[ndim];
+	size_t sz_even[ndim];
+	for( int dim_idx = 0; dim_idx < ndim; dim_idx++ ) {
+		sz_even[dim_idx] =      (n->sz[dim_idx] % 2  );
+		sz_half[dim_idx] = floor(n->sz[dim_idx] / 2.0) + sz_even[dim_idx];
+	}
+	for( int i = 0; i < sz_half[0]; i++ ) {
+		for( int j = 0; j < sz_half[1]; j++ ) {
+			for( int k = 0; k < sz_half[2]; k++ ) {
+				const pixel_type v = ndarray3_get(n, i, j, k );
+				/*[>DEBUG<]printf("%d|%p at [%d,%d,%d] -> %f\n", is_isotropic, n, i, j, k, ndarray3_get(n, i, j, k ));*/
+
+				/* indices reflected across the axes */
+				ptrdiff_t fi = n->sz[0]-i-1;
+				ptrdiff_t fj = n->sz[1]-j-1;
+				ptrdiff_t fk = n->sz[2]-k-1;
+
+				/* flip once */
+				is_isotropic &= fabs( ndarray3_get(n, fi, j, k) - v ) < eps;
+				is_isotropic &= fabs( ndarray3_get(n,  i,fj, k) - v ) < eps;
+				is_isotropic &= fabs( ndarray3_get(n,  i, j,fk) - v ) < eps;
+
+				/* flip twice */
+				is_isotropic &= fabs( ndarray3_get(n, fi,fj, k) - v ) < eps;
+				is_isotropic &= fabs( ndarray3_get(n, fi, j,fk) - v ) < eps;
+				is_isotropic &= fabs( ndarray3_get(n,  i,fj,fk) - v ) < eps;
+
+				/* flip thrice */
+				is_isotropic &= fabs( ndarray3_get(n, fi,fj,fk) - v ) < eps;
+
+				if( !is_isotropic ) {
+					return is_isotropic;
+				}
+			}
+		}
+	}
+
+	return is_isotropic;
 }

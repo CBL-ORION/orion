@@ -63,6 +63,11 @@ extern void ndarray3_dump( ndarray3* n );
 extern void ndarray3_printf( ndarray3* n, const char* variable_name, const char* format );
 extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, const char* format );
 
+
+/* testing functions */
+extern bool ndarray3_is_same_size( ndarray3* a, ndarray3* b );
+extern bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps );
+
 /** TODO document
     _INDEX3D( int i, int j, int k, int size_x, int size_y,  int size_z )
  */
