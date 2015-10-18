@@ -10,9 +10,15 @@ $(ITK_INTEGRATION_TESTS): LDLIBS   += -lstdc++ # needs to add C++ library to lin
 $(BUILDTESTDIR)/integration/itk/itk$(EXEEXT) : $(LIBORION.A) \
 		| $(TEST_DATA_NPF023)
 
+$(ITK_MHD_TEST): CPPFLAGS += $(TEST_CPPFLAGS)
+$(ITK_MHD_TEST): LDFLAGS  += $(TEST_LDFLAGS)
+$(ITK_MHD_TEST): LDLIBS   += $(TEST_LDLIBS)
+$(ITK_MHD_TEST): lib/t/integration/itk/mhd.cxx $(LIBORION.A)
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
 $(TEST_OBJ): $(LIBORION.A)
 
-test: export ASAN_OPTIONS = ${ENV_ASAN_OPTIONS}
+#test: export ASAN_OPTIONS = ${ENV_ASAN_OPTIONS}
 test: $(TEST_OBJ)
 	$(RUNTESTS) $(TEST_OBJ)
 test: CPPFLAGS += $(TEST_CPPFLAGS)
