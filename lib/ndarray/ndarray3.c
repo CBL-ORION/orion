@@ -159,8 +159,8 @@ bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps ) {
 /**
  * Sum over all the elements in the `ndarray3` `n`.
  */
-pixel_type ndarray3_sum_over_all( const ndarray3* n ) {
-	pixel_type sum = 0;
+float64 ndarray3_sum_over_all_float64( const ndarray3* n ) {
+	float64 sum = 0; /* use larger type for precision */
 	size_t elems = ndarray3_elems( n );
 	/*[>DEBUG<]ndarray3_printf(n, "n", "%8.3e");*/
 	for( size_t n_idx = 0; n_idx < elems; n_idx++ ) {
