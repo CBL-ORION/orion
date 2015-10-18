@@ -10,7 +10,12 @@
 
 /*
 % MATLAB
+file_name = 'HeadMRVolume';
+file_path = 'test-data/ITK/HeadMRVolume';
+[n spacing] = RAWfromMHD(file_name,[],file_path);
 
+scales = [ 1.50:0.25:2.50, 3, 4 ];
+computeEigenvaluesGaussianFilter(file_path, file_name, 'SATO', 0, scales )
 */
 
 int main(void) {
@@ -19,6 +24,7 @@ int main(void) {
 	plan(3);
 
 	ndarray3* n = orion_read_mhd("test-data/ITK/HeadMRVolume/HeadMRVolume.mhd");
+	printf("orion_read_mhd: sum(n) = %f\n", ndarray3_sum_over_all_float64(n));
 	/*[>DEBUG<]ndarray3_dump(n);*/
 
 	array_float* scales = array_new_float( 10 );
@@ -31,19 +37,26 @@ int main(void) {
 	array_add_float( scales, 4.00 );
 
 	array_orion_eig_feat_result* r = orion_computeEigenvaluesGaussianFilter(n, EIG_FEAT_METHOD_SORT_SATO, false, scales);
+	array_ndarray3* r1 = orion_filter_method_sato(n, 3.0);
+	ndarray3* n1 = orion_read_mhd("test-data/ITK/HeadMRVolume/HeadMRVolume.EigVal1.Sigma.3.0.mhd");
+	printf("sum-orion_filter_method_sato(n) = %f\n", ndarray3_sum_over_all_float64(array_get_ndarray3(r1,0)));
+	printf("sum-compute-filter-then-read-back-in(n) = %f\n", ndarray3_sum_over_all_float64(n1));
 
 	size_t r_len = array_length_orion_eig_feat_result(r);
 
 	/*DEBUG*/for( size_t r_idx = 0; r_idx < r_len; r_idx++ ) {
 		orion_eig_feat_result* e = array_get_orion_eig_feat_result(r, r_idx);
-		ndarray3* n = array_get_ndarray3(e->eig_feat,0);
+		ndarray3* n_e = array_get_ndarray3(e->eig_feat,0);
 		printf("i = %d; scale = %f; nd = %d; with sum for first = %f\n",
 				r_idx,
 				array_get_orion_eig_feat_result(r, r_idx)->scale,
 				array_length_ndarray3(e->eig_feat),
-				ndarray3_sum_over_all(n)
+				ndarray3_sum_over_all_float64(n_e)
 				);
-		ndarray3_dump(n);
+		printf("n[0,0,0] = %f\n",
+				ndarray3_get(n_e, 0,0,0)
+				);
+		ndarray3_dump(n_e);
 	}
 
 	is_int( array_length_float(scales)  ,  array_length_orion_eig_feat_result(r), "there are as many results as there are scales");
