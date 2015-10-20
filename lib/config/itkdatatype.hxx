@@ -19,8 +19,5 @@ typedef itk::Image< InputPixelType,    Dimension >   InputImageType;
 typedef itk::Image< InternalPixelType, Dimension >   InternalImageType;
 typedef itk::Image< OutputPixelType,   Dimension >   OutputImageType;
 
-typedef itk::ImageFileReader< InputImageType  >  ReaderType;
-typedef itk::ImageFileWriter< OutputImageType >  WriterType;
-
 #endif /* ITK_DATATYPE_H */
 

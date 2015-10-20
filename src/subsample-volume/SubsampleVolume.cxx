@@ -48,6 +48,8 @@
 
 #include "config/itkdatatype.hxx"
 
+typedef   itk::ImageFileReader< InputImageType >	ReaderType;
+typedef   itk::ImageFileWriter<  InternalImageType  > WriterType;
 
 int main( int argc, char * argv[] )
 {
@@ -204,7 +206,7 @@ int main( int argc, char * argv[] )
 
 // Software Guide : BeginCodeSnippet
   typedef itk::ResampleImageFilter<
-                  InternalImageType, OutputImageType >  ResampleFilterType;
+                  InternalImageType, InternalImageType >  ResampleFilterType;
 
   ResampleFilterType::Pointer resampler = ResampleFilterType::New();
 // Software Guide : EndCodeSnippet
