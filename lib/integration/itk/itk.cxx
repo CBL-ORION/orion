@@ -4,8 +4,8 @@
 #include "itkImage.h"
 #include "itkFixedArray.h"
 #include "itkImportImageFilter.h"
+#include "itkStatisticsImageFilter.h"
 
-#include "config/itkdatatype.hxx"
 #include "simple-log/simplelog.h"
 
 #include "FilterCommon.hxx"
@@ -95,6 +95,16 @@ array_ndarray3* _orion_convert_itkFixedArray_to_array_ndarray( OutputImageArrayT
 	}
 
 	return arr_eig;
+}
+
+float64 _orion_itkImage_sum_over_all_float64( InternalImageType::Pointer vol_itk ) {
+	typedef itk::StatisticsImageFilter<InternalImageType> StatisticsImageFilterType;
+
+	StatisticsImageFilterType::Pointer statisticsImageFilter = StatisticsImageFilterType::New();
+	statisticsImageFilter->SetInput(vol_itk);
+	statisticsImageFilter->Update();
+
+	return statisticsImageFilter->GetSum();
 }
 
 array_ndarray3* orion_filter_method_sato( ndarray3* vol, float sigma ) {

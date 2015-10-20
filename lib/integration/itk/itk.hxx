@@ -6,6 +6,15 @@
 #include "ndarray/ndarray3.h"
 
 #ifdef __cplusplus
+
+#include "config/itkdatatype.hxx"
+
+/* prototypes only in C++ */
+extern float64 _orion_itkImage_sum_over_all_float64( InternalImageType::Pointer vol_itk );
+
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
