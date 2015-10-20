@@ -1,9 +1,3 @@
-
-// Software Guide : BeginCodeSnippet
-#include "itkConnectedThresholdImageFilter.h"
-// Software Guide : EndCodeSnippet
-
-
 #include "itkImage.h"
 #include "itkCastImageFilter.h"
 #include "itkCurvatureFlowImageFilter.h"
@@ -15,13 +9,9 @@
 #include "itkSymmetricEigenAnalysisImageFilter.h"
 #include "itkCastImageFilter.h"
 
-#include "itkImageFileReader.h"
-#include "itkImageFileWriter.h"
-//Here goes the function for Sato
-
 #include "EigenSato.hxx"
 
-OutputImageArrayType ComputeSato( InternalImageType::Pointer inputVolume, float sigma)
+OutputImageArrayType ComputeSato( const InternalImageType::Pointer inputVolume, float sigma)
 {
      typedef   itk::HessianRecursiveGaussianImageFilter< InternalImageType >       HessianFilterType;
      typedef   HessianFilterType::OutputImageType                                  HessianImageType;

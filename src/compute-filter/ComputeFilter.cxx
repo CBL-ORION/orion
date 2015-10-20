@@ -22,11 +22,6 @@
 #include "EigenSato.hxx"
 #include "EigenFrangi.hxx"
 
-const int nSigmas = 1;
-
-OutputImageArrayType ComputeSato( InternalImageType::Pointer inputVolume, float sigma );
-
-OutputImageArrayType ComputeFrangi( InternalImageType::Pointer inputVolume, float sigma );
 
 
 int main( int argc, char *argv[])
@@ -34,7 +29,7 @@ int main( int argc, char *argv[])
 	if( argc < 3 ) {
 		std::cerr << "Missing Parameters " << std::endl;
 		std::cerr << "Usage: " << argv[0];
-		std::cerr << " inputImage sigma1" << std::endl;
+		std::cerr << "[sato|frangi] inputImage sigma1" << std::endl;
 		std::cerr << "with no mhd extension"<<std::endl;
 		return 1;
 	}
