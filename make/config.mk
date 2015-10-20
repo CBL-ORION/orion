@@ -26,6 +26,7 @@ CMAKEFLAGS +=
 
 # AddressSanitizer (ASAN) flags
 CFLAGS.ASAN   += -fsanitize=address
+CXXFLAGS.ASAN += $(CFLAGS.ASAN)
 
 # optimisation flags
 CFLAGS.OPT := -O2
