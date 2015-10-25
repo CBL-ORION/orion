@@ -50,9 +50,9 @@ InternalImageType::Pointer _orion_convert_ndarray3_to_itkImage(ndarray3* vol) {
 	importFilter->SetOrigin( origin );
 
 	double spacing[ Dimension ];
-	spacing[0] = 1.0;    // along X direction
-	spacing[1] = 1.0;    // along Y direction
-	spacing[2] = 1.0;    // along Z direction
+	spacing[0] = vol->spacing[0];    // along X direction
+	spacing[1] = vol->spacing[1];    // along Y direction
+	spacing[2] = vol->spacing[2];    // along Z direction
 
 	importFilter->SetSpacing( spacing );
 
