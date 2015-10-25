@@ -15,7 +15,7 @@
 #include "util/util.h"
 
 int main(void) {
-	plan( 1 + 1 );
+	plan( 1 + 1 + 2 );
 
 	char mhd_filename[] = "test-data/ITK/HeadMRVolume/HeadMRVolume.mhd";
 
@@ -34,7 +34,7 @@ int main(void) {
 
 
 
-	{
+	{/* 1 test */
 		/* This code tests that the volumes index to the same values
 		 * when looping over all (i,j,k) coordinates in each respective
 		 * volume. */
@@ -55,7 +55,7 @@ int main(void) {
 	}
 
 
-	{
+	{/* 1 test */
 		/* This code compares the contiguous memory layout of the
 		 * volumes by using an iterator for ITK and pointer for ORION. */
 		bool same_volume_by_iterator = true;
@@ -78,6 +78,16 @@ int main(void) {
 		}
 
 		ok( same_volume_by_iterator, "The volume read by ITK and ORION are the same when compared using pointer access.");
+	}
+
+	{/* 2 tests */
+		ok( vol_orion->has_spacing, "ORION MHD read handles spacing" );
+
+		bool all_spacing_same = true;
+		for( int dim_idx = 0; dim_idx < PIXEL_NDIMS && all_spacing_same; dim_idx++ ) {
+			all_spacing_same &= vol_itk->GetSpacing()[dim_idx] == vol_orion->spacing[dim_idx];
+		}
+		ok( all_spacing_same, "The spacing read in by both ITK and ORION are the same" );
 	}
 
 	ndarray3_free( vol_orion );
