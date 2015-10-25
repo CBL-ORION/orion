@@ -13,6 +13,10 @@ ifdef BUILD_GCOV
 	mv `basename $@ $(EXEEXT)`.gcno `dirname $@`
 endif
 
+$(BUILDTESTDIR)/%$(EXEEXT): $(TESTDIR)/%.cxx
+	mkdir -p `dirname $@`
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
 $(BINDIR)/%$(EXEEXT): $(SRCDIR)/%.c
 	@$(MKDIR_DEPEND.c)
 	@$(MKDIR_BIN)
