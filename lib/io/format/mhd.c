@@ -219,6 +219,12 @@ ndarray3* orion_read_mhd(char* mhd_filename) {
 			array_get_int(meta->DimSize, 1),
 			array_get_int(meta->DimSize, 2) );
 
+	/* set ElementSpacing metadata */
+	n->has_spacing = true;
+	for( int i = 0; i < meta->NDims; i++ ) {
+		n->spacing[i] = array_get_float( meta->ElementSpacing, i );
+	}
+
 	orion_filepath_free( mhd_file_fp );
 	orion_filepath_free( raw_file_fp );
 	orion_filepath_free( path_to_raw_fp );
