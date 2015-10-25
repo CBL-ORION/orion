@@ -37,10 +37,6 @@ int main(void) {
 	array_add_float( scales, 4.00 );
 
 	array_orion_eig_feat_result* r = orion_computeEigenvaluesGaussianFilter(n, EIG_FEAT_METHOD_SORT_SATO, false, scales);
-	array_ndarray3* r1 = orion_filter_method_sato(n, 3.0);
-	ndarray3* n1 = orion_read_mhd("test-data/ITK/HeadMRVolume/HeadMRVolume.EigVal1.Sigma.3.0.mhd");
-	printf("sum-orion_filter_method_sato(n) = %f\n", ndarray3_sum_over_all_float64(array_get_ndarray3(r1,0)));
-	printf("sum-compute-filter-then-read-back-in(n) = %f\n", ndarray3_sum_over_all_float64(n1));
 
 	size_t r_len = array_length_orion_eig_feat_result(r);
 
