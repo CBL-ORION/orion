@@ -40,7 +40,7 @@ int main(void) {
 
 	size_t r_len = array_length_orion_eig_feat_result(r);
 
-	/*DEBUG*/for( size_t r_idx = 0; r_idx < r_len; r_idx++ ) {
+	/*[>DEBUG<]for( size_t r_idx = 0; r_idx < r_len; r_idx++ ) {
 		orion_eig_feat_result* e = array_get_orion_eig_feat_result(r, r_idx);
 		ndarray3* n_e = array_get_ndarray3(e->eig_feat,0);
 		printf("i = %d; scale = %f; nd = %d; with sum for first = %f\n",
@@ -53,7 +53,7 @@ int main(void) {
 				ndarray3_get(n_e, 0,0,0)
 				);
 		ndarray3_dump(n_e);
-	}
+	}*/
 
 	is_int( array_length_float(scales)  ,  array_length_orion_eig_feat_result(r), "there are as many results as there are scales");
 
