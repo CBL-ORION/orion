@@ -4,7 +4,7 @@ include make/config-dir.mk
 LIBORION.A := $(BUILDDIR)/.lib/liborion.a
 
 # initialise CXXFLAGS
-CXXFLAGS :=
+CXXFLAGS ?=
 
 # need to point to the headers under the $(LIBDIR)/ directory
 CPPFLAGS += -I$(LIBDIR)
