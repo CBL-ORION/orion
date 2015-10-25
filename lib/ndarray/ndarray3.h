@@ -10,8 +10,11 @@
 
 typedef struct {
 	pixel_type* p;
-	size_t sz[3];
+	size_t sz[3]; /* PIXEL_NDIMS */
 	bool wrap;
+
+	bool has_spacing;
+	pixel_type spacing[3]; /* PIXEL_NDIMS */
 } ndarray3;
 
 #ifdef __cplusplus

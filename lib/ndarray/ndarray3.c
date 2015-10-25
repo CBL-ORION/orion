@@ -4,46 +4,46 @@
 
 #include "util/string.h"
 
-ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
+ndarray3* _ndarray3_init_sz(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
 	ndarray3* n;
 	NEW(n, ndarray3);
-
-	n->wrap = true; /* we do not own this buffer, so we can not free it */
-
-	n->p = p;
 
 	n->sz[0] = sz_x;
 	n->sz[1] = sz_y;
 	n->sz[2] = sz_z;
+
+	n->has_spacing = 0;
+	/* default spacing */
+	n->spacing[0] = 1;
+	n->spacing[1] = 1;
+	n->spacing[2] = 1;
+
+	return n;
+}
+
+ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
+	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
+
+	n->p = p;
+	n->wrap = true; /* we do not own this buffer, so we can not free it */
 
 	return n;
 }
 
 ndarray3* ndarray3_buffer( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
-	ndarray3* n;
-	NEW(n, ndarray3);
-
-	n->wrap = false; /* we own this buffer and will free it ourselves */
+	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
 
 	n->p = p;
-
-	n->sz[0] = sz_x;
-	n->sz[1] = sz_y;
-	n->sz[2] = sz_z;
+	n->wrap = false; /* we own this buffer and will free it ourselves */
 
 	return n;
 }
 
 ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
-	ndarray3* n;
-	NEW(n, ndarray3);
+	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
 
 	NEW_COUNT( n->p, pixel_type, sz_x * sz_y * sz_z );
 	n->wrap = false;
-
-	n->sz[0] = sz_x;
-	n->sz[1] = sz_y;
-	n->sz[2] = sz_z;
 
 	return n;
 }
