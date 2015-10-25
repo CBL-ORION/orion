@@ -26,14 +26,12 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-array_orion_eig_feat_result* orion_computeEigenvaluesGaussianFilter(
+extern array_orion_eig_feat_result* orion_computeEigenvaluesGaussianFilter(
 		ndarray3* input_volume,
 		orion_eigenvalue_feature_method method,
 		bool apply_log,
 		array_float* scales
 	);
-
-
 
 #ifdef __cplusplus
 };
