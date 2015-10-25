@@ -13,6 +13,7 @@ install:
   - ./tool/external/c-tap-harness/download && ./tool/external/c-tap-harness/build
 script:
   # version of gcc on Travis-CI does not support ASAN flag
+  - if [ "$CC" = "clang" ]; then export CXX="clang++"; fi
   - if [ "$CC" = "gcc" ]; then export BUILD_ENABLE_ASAN=0; else export BUILD_ENABLE_ASAN=1; fi
   - make && make test
 branches:
