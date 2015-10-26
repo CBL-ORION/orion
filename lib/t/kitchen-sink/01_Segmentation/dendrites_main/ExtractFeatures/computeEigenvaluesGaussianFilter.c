@@ -87,12 +87,17 @@ int main(void) {
 				   - array_get_float(sums, r_idx)
 				) < eps;
 
-			/*[>DEBUG<]printf("i = %d; scale = %f; with sum for first = %f and expect %f\n",
+			/*[>DEBUG<]{
+			float64 n_e_sum_got = ndarray3_sum_over_all_float64(n_e);
+			float64 n_e_sum_expected = array_get_float(sums, r_idx);
+			printf("i = %d; scale = %f; with sum for first eigenvalue: got = %f and expect %f : expected / got: %f\n",
 					r_idx,
 					array_get_orion_eig_feat_result(r, r_idx)->scale,
-					ndarray3_sum_over_all_float64(n_e),
-					array_get_float(sums, r_idx)
-					);*/
+					n_e_sum_got,
+					n_e_sum_expected,
+					n_e_sum_expected / n_e_sum_got
+					);
+			}*/
 		}
 
 		ok( all_sums_expect, "The sum of the first eigenvalue is as is expected");
