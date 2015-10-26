@@ -78,6 +78,12 @@ ndarray3* _orion_convert_itkImage_to_ndarray3( InternalImageType::Pointer vol_it
 	cont->SetContainerManageMemory(false);
 	ndarray3* n = ndarray3_buffer( pixel_data, sz[0], sz[1], sz[2] );
 
+	const InternalImageType::SpacingType& vol_itk_spacing = vol_itk->GetSpacing();
+	n->has_spacing = true;
+	for( int idx = 0; idx < PIXEL_NDIMS; idx++ ) {
+		n->spacing[idx] = vol_itk_spacing[idx];
+	}
+
 	return n;
 }
 
