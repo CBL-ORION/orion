@@ -6,6 +6,7 @@ orion_segmentation_param* orion_segmentation_param_new() {
 	NEW( param, orion_segmentation_param );
 	param->scales = array_new_float( 10 );
 	param->percentage_threshold_intensity = ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT;
+	param->bins = ORION_SEGMENTATION_BINS_DEFAULT;
 	return param;
 }
 
