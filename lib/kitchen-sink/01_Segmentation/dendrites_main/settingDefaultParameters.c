@@ -29,6 +29,10 @@ void orion_settingDefaultParameters( orion_segmentation_param* param ) {
 		param->training = 0.999;
 	}
 
+	if( !param->has_threshold ) {
+		param->threshold = 0.5;
+	}
+
 	if( !param->has_min_conn_comp_to_remove) {
 		if( param->multiscale ) {
 			float64 max_scale = -INFINITY;
