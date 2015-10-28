@@ -8,6 +8,8 @@
 #define ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT_SINGLE_SCALE 1.5
 #define ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT_MULTISCALE 0.9
 #define ORION_SEGMENTATION_BINS_DEFAULT 500
+#define ORION_SEGMENTATION_TRAINING_DEFAULT 0.999
+#define ORION_SEGMENTATION_THRESHOLD_DEFAULT 0.5
 
 void orion_settingDefaultParameters( orion_segmentation_param* param ) {
 	if( 0 == array_length_float( param->scales ) ) {
@@ -25,11 +27,11 @@ void orion_settingDefaultParameters( orion_segmentation_param* param ) {
 	}
 
 	if( !param->has_training ) {
-		param->training = 0.999;
+		param->training = ORION_SEGMENTATION_TRAINING_DEFAULT;
 	}
 
 	if( !param->has_threshold ) {
-		param->threshold = 0.5;
+		param->threshold = ORION_SEGMENTATION_THRESHOLD_DEFAULT;
 	}
 
 	if( !param->has_min_conn_comp_to_remove) {
