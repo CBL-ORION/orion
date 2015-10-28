@@ -57,7 +57,7 @@ int main(void) {
 
 		orion_settingDefaultParameters(param_ms);
 
-		is_int( true     , param_ms->multiscale, "single scale" );
+		is_int( true     , param_ms->multiscale, "multiscale" );
 		is_double(0.9000 , param_ms->percentage_threshold_intensity, 0, "%% threshold intensity");
 		is_int( false    , param_ms->release, "is not release" );
 		is_int( false    , param_ms->apply_log, "do not apply log" );
