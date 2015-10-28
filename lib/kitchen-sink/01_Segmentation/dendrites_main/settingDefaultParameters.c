@@ -21,6 +21,10 @@ void orion_settingDefaultParameters( orion_segmentation_param* param ) {
 		param->release = false;
 	}
 
+	if( !param->has_apply_log ) {
+		param->apply_log = false;
+	}
+
 	if( !param->has_training ) {
 		param->training = 0.999;
 	}
