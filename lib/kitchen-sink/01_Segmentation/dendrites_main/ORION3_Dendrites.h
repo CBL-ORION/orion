@@ -1,26 +1,24 @@
-#ifndef TODO_H /* TODO */
-#define TODO_H 1 /* TODO */
+#ifndef ORION3_DENDRITES_H
+#define ORION3_DENDRITES_H 1
 
 /* system headers */
 #include <stdlib.h>
 #include <stdbool.h>
 
 /* local headers */
-/* TODO */
-
-/* structs, enums */
+#include "param/segmentation.h"
+#include "ndarray/ndarray3.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-/* TODO */
-
+extern void orion_ORION3_Dendrites(orion_segmentation_param* param, ndarray3* vol);
 
 
 #ifdef __cplusplus
 };
 #endif /* __cplusplus */
 
-#endif /* TODO_H */ /* TODO */
+#endif /* ORION3_DENDRITES_H */
