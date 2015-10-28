@@ -5,8 +5,10 @@
 
 #include <math.h>
 
-#define ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT_SINGLE_SCALE 1.5
-#define ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT_MULTISCALE 0.9
+/* percentage_threshold_intensity (single or multiscale) */
+#define ORION_SEGMENTATION_PTI_SINGLE 1.5
+#define ORION_SEGMENTATION_PTI_MULTI 0.9
+
 #define ORION_SEGMENTATION_BINS_DEFAULT 500
 #define ORION_SEGMENTATION_TRAINING_DEFAULT 0.999
 #define ORION_SEGMENTATION_THRESHOLD_DEFAULT 0.5
@@ -54,10 +56,10 @@ void orion_settingDefaultParameters( orion_segmentation_param* param ) {
 	if( !param->has_percentage_threshold_intensity ) {
 		if( param->multiscale ) {
 			orion_segmentation_param_set_percentage_threshold_intensity(param,
-					ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT_MULTISCALE);
+					ORION_SEGMENTATION_PTI_MULTI);
 		} else {
 			orion_segmentation_param_set_percentage_threshold_intensity(param,
-					ORION_SEGMENTATION_PERCENTAGE_THRESHOLD_INTENSITY_DEFAULT_SINGLE_SCALE);
+					ORION_SEGMENTATION_PTI_SINGLE);
 		}
 	}
 
