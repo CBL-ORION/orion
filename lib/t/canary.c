@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include <tap/basic.h>
+#include <tap/float.h>
 
+/*
+Canary test
+*/
 int main(void) {
 	plan(2);
 
