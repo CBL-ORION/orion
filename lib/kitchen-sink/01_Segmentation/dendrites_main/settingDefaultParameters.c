@@ -1,5 +1,4 @@
-/* TODO
- *
+/*
  * Refactor: settingDefaultParameters
  */
 #include "kitchen-sink/01_Segmentation/dendrites_main/settingDefaultParameters.h"
