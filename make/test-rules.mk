@@ -2,6 +2,7 @@ ITK_MHD_TEST := $(BUILDTESTDIR)/integration/itk/mhd$(EXEEXT)
 ITK_INTEGRATION_TESTS := \
 	$(BUILDTESTDIR)/integration/itk/itk$(EXEEXT) \
 	$(BUILDTESTDIR)/kitchen-sink/01_Segmentation/dendrites_main/ExtractFeatures/computeEigenvaluesGaussianFilter$(EXEEXT) \
+	$(BUILDTESTDIR)/kitchen-sink/01_Segmentation/dendrites_main/ORION3_Dendrites$(EXEEXT) \
 	$(ITK_MHD_TEST)
 
 $(ITK_INTEGRATION_TESTS): CPPFLAGS += $(ITK_CPPFLAGS)
