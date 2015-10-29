@@ -1,5 +1,4 @@
-/* TODO
- *
+/*
  * Refactor: Makefilter
  */
 
