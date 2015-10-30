@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+mkdir -p kiss-fft; cd kiss-fft
+
+if [ ! -d "kiss-fft" ]; then
+	git clone -b build https://github.com/CBL-ORION/kiss-fft.git
+fi

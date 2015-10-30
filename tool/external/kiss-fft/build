@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+TOP=`pwd -P`
+
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+cd kiss-fft/kiss-fft
+
+make
+
+# "CFLAGS+=-fsanitize=address"
+
+# vim: fdm=marker
