@@ -1,7 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include "ndarray/ndarray3_fft.h"
 
-ndarray3* ndarray3_fftn( ndarray3* n ) {
+ndarray3_complex* ndarray3_fftn( ndarray3* n ) {
 	WARN_UNIMPLEMENTED;
 }
 
