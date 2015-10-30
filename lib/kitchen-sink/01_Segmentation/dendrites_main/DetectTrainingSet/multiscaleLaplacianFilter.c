@@ -18,14 +18,6 @@ float64 _orion_ConstantToNormalizeFilter( float64 sigma ) {
 	return SQUARED( sigma );
 }
 
-ndarray3* ndarray3_fftn( ndarray3* n ) {
-	WARN_UNIMPLEMENTED;
-}
-
-ndarray3* ndarray3_ifftn_symmetric( ndarray3* n ) {
-	WARN_UNIMPLEMENTED;
-}
-
 void orion_multiscale_laplacian_output_free(orion_multiscale_laplacian_output* r) {
 	if( r->laplacian )
 		ndarray3_free( r->laplacian );

@@ -1,7 +1,18 @@
 include make/platform.mk
 include make/config-dir.mk
 
+### Project deps ###
+
 LIBORION.A := $(BUILDDIR)/.lib/liborion.a
+
+## Kiss-FFT needs to be linked in ##
+CFLAGS   += $(KISS_FFT_CFLAGS)
+CPPFLAGS += $(KISS_FFT_CPPFLAGS)
+LDFLAGS  += $(KISS_FFT_LDFLAGS)
+LDLIBS   += $(KISS_FFT_LDLIBS)
+
+
+### Generic build options
 
 # initialise CXXFLAGS
 CXXFLAGS ?=
