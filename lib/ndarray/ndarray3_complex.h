@@ -9,6 +9,8 @@
 /* local headers */
 #include "config/datatype.h"
 
+#include "ndarray/ndarray3_generic.h"
+
 /* structs, enums */
 typedef struct {
 	complex_pixel_type* p;
@@ -26,6 +28,11 @@ extern "C" {
 /* Function prototypes */
 
 
+#define ndarray3_complex_set              ndarray3_generic_set
+#define ndarray3_complex_get              ndarray3_generic_get
+#define ndarray3_complex_elems            ndarray3_generic_elems
+#define NDARRAY3_COMPLEX_LOOP_OVER_START  NDARRAY3_GENERIC_LOOP_OVER_START
+#define NDARRAY3_COMPLEX_LOOP_OVER_END    NDARRAY3_GENERIC_LOOP_OVER_END
 
 #ifdef __cplusplus
 };
