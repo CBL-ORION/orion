@@ -5,10 +5,10 @@
 #include <tap/basic.h>
 #include <tap/float.h>
 
-#include "ndarray/ndarray3_fft.h"
-
 #include <kiss_fft.h>
 #include <kiss_fftr.h>
+
+#include "util/util.h"
 
 kiss_fft_cpx* copycpx(float *mat, int nframe) {
 	int i;
