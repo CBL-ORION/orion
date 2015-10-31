@@ -3,6 +3,9 @@
 
 /* type used for calculations */
 typedef float             pixel_type;
+#ifdef complex
+typedef float complex     complex_pixel_type;
+#endif
 
 /* type used for reading in files */
 typedef unsigned short       input_pixel_type;
