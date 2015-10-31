@@ -6,7 +6,6 @@
 
 #include "config/datatype.h"
 #include "util/util.h"
-#include "util/likely.h"
 
 #include "ndarray/ndarray3_generic.h"
 
@@ -75,6 +74,11 @@ extern bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps );
 
 extern float64 ndarray3_sum_over_all_float64( const ndarray3* n );
 
+#define ndarray3_set              ndarray3_generic_set
+#define ndarray3_get              ndarray3_generic_get
+#define ndarray3_elems            ndarray3_generic_elems
+#define NDARRAY3_LOOP_OVER_START  NDARRAY3_GENERIC_LOOP_OVER_START
+#define NDARRAY3_LOOP_OVER_END    NDARRAY3_GENERIC_LOOP_OVER_END
 
 
 #ifdef __cplusplus
