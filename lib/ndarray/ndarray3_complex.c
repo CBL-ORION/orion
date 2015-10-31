@@ -25,3 +25,8 @@ ndarray3_complex* ndarray3_complex_new(const size_t sz_x, const size_t sz_y, con
 
 	return n;
 }
+
+void ndarray3_complex_free( ndarray3_complex* n ) {
+	if( ! n->wrap ) free( n->p );
+	free( n );
+}
