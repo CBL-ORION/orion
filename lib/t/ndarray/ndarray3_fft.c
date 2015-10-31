@@ -8,6 +8,11 @@
 #include "util/util.h"
 #include "ndarray/ndarray3_fft.h"
 
+/*
+% MATLAB
+x = single(reshape([0:63], [4 4 4]));
+abs( ifftn( fftn( x ) ) -  x )
+*/
 int main(void) {
 	plan(1);
 
@@ -54,6 +59,7 @@ int main(void) {
 	diag( "RMS: %g", sqrt(square_error/n_nelems) );
 	diag( "error [infinity norm]: %g", max_diff );
 #endif
+	/*[>DEBUG<]ndarray3_complex_printf(freq_data, "f", "%8.3f", "%8.3f");*/
 	ok( all_same, "ifft(fft(x)) == x");
 
 	ndarray3_free(n);

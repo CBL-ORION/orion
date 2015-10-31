@@ -31,6 +31,11 @@ extern ndarray3_complex* ndarray3_complex_new(const size_t sz_x, const size_t sz
 extern void ndarray3_complex_free( ndarray3_complex* n );
 
 
+extern void ndarray3_complex_printf(ndarray3_complex* n,
+		const char* variable_name,
+		const char* real_format,
+		char* imag_format);
+
 #define ndarray3_complex_set              ndarray3_generic_set
 #define ndarray3_complex_get              ndarray3_generic_get
 #define ndarray3_complex_elems            ndarray3_generic_elems
