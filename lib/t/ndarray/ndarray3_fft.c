@@ -26,7 +26,9 @@ kiss_fft_cpx* copycpx(float *mat, int nframe) {
 int main(void) {
 	plan(1);
 
-	const float64 eps = 9e-8;
+	/* an epsilon of 1e-7 is expected when dealing with
+	 * single-precision FFT */
+	const float64 eps = 1e-7;
 
 	int i, size = 12;
 	int isinverse = 1;
