@@ -33,8 +33,8 @@ int main(void) {
 	float buf[size];
 	float array[] =
 		{ 0.1, 0.6, 0.1, 0.4,
-		  0.5, 0, 0.8, 0.7, 0.8,
-		  0.6, 0.1,0 };
+		  0.5, 0  , 0.8, 0.7,
+		  0.8, 0.6, 0.1, 0 };
 
 	kiss_fft_cpx out_cpx[size],out[size],*cpx_buf;
 
@@ -58,12 +58,28 @@ int main(void) {
 	}*/
 
 	bool all_same = true;
-
+#ifdef ORION_DEBUG
+	float64 max_diff = -INFINITY;
+	float64 square_error;
+#endif
 	for( int i = 0; i < size && all_same; i++ ) {
 		/*[>DEBUG<]printf("[%d] : %g\n", i, fabs(array[i] - buf[i]));*/
+
 		all_same = all_same && fabs(array[i] - buf[i]) < eps ;
+
+#ifdef ORION_DEBUG
+		float64 diff = array[i] - buf[i];
+		square_error += SQUARED(diff);
+		if( max_diff < fabs(diff) ) {
+			max_diff = fabs(diff);
+		}
+#endif
 	}
 
+#ifdef ORION_DEBUG
+	diag( "RMS: %g", sqrt(square_error/size) );
+	diag( "error [infinity norm]: %g", max_diff );
+#endif
 	ok( all_same, "ifft(fft(x)) == x");
 
 	kiss_fft_cleanup();
