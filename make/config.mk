@@ -1,7 +1,18 @@
 include make/platform.mk
 include make/config-dir.mk
 
+### Project deps ###
+
 LIBORION.A := $(BUILDDIR)/.lib/liborion.a
+
+## Kiss-FFT needs to be linked in ##
+CFLAGS   += $(KISS_FFT_CFLAGS)
+CPPFLAGS += $(KISS_FFT_CPPFLAGS)
+LDFLAGS  += $(KISS_FFT_LDFLAGS)
+LDLIBS   += $(KISS_FFT_LDLIBS)
+
+
+### Generic build options
 
 # initialise CXXFLAGS
 CXXFLAGS ?=
@@ -32,7 +43,7 @@ CXXFLAGS.ASAN += $(CFLAGS.ASAN)
 CFLAGS.OPT := -O2
 
 # DEBUGFLAGS, CMAKEDEBUGFLAGS: used when BUILD_DEBUG variable exists
-DEBUGFLAGS := -g -DNDARRAY3_ASSERT_BOUNDS_ACCESS
+DEBUGFLAGS := -g -DORION_DEBUG -DNDARRAY3_ASSERT_BOUNDS_ACCESS
 CMAKEDEBUGFLAGS := -DCMAKE_BUILD_TYPE=debug
 
 # GCOVFLAGS: used when BUILD_GCOV variable exists
