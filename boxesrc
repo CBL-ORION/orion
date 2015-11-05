@@ -1,0 +1,27 @@
+# boxes configuration file
+# vim:fdm=marker
+# 
+# Author:	Zaki Mughal
+#
+# ============================================================================
+
+BOX orion-matlab
+
+author "Zakariyya Mughal"
+revision "1.0"
+created "October 28, 2015 (Wednesday 00:58)"
+
+sample
+     code         % false
+     code another % false
+ends
+
+shapes {
+     e ("% false")
+}
+
+padding { right 4 }
+
+elastic (e)
+
+END orion-matlab
