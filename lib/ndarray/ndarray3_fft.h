@@ -27,7 +27,7 @@ extern "C" {
  *
  *     ndarray3_ifftn_c2r( ndarray3_fftn_r2c( x ) ) == x
  *
- * modulo numerical errors. 
+ * modulo numerical errors.
  *
  * See also:
  *    Kiss-FFT:
