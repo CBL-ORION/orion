@@ -82,6 +82,8 @@ tags:
 	ctags --exclude=external -R .
 	# add the ORION 3 code to the tags so that it is easy to jump to the other codebase
 	ctags -R -a ${ORION3MAT_PATH}
+sloccount:
+	sloccount $(LIBDIR)/ $(SRCDIR)/ tool/ make/
 
 include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk
