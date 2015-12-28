@@ -11,10 +11,7 @@ before_install:
   # path for CMake to search for built ITK
   - export ITK_DIR="`( cd external/ITK/usr/local/lib/cmake/ITK-4.9 && pwd )`"
 install:
-  - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
-  - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-deploy.git external/liborion3mat
-  - git clone https://github.com/CBL-ORION/test-data.git test-data
-  - make dep.external
+  - make dep.test-data dep.external
 script:
   # version of gcc on Travis-CI does not support ASAN flag
   - if [ "$CC" = "clang" ]; then export CXX="clang++"; fi

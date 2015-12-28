@@ -85,6 +85,13 @@ tags:
 sloccount:
 	sloccount $(LIBDIR)/ $(SRCDIR)/ tool/ make/
 
+dep.liborion3mat:
+	mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
+	mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-deploy.git external/liborion3mat
+
+dep.test-data:
+	git clone https://github.com/CBL-ORION/test-data.git test-data
+
 dep.external: dep.external.c-tap-harness dep.external.kiss-fft
 
 dep.external.c-tap-harness:
