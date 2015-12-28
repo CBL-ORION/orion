@@ -85,6 +85,13 @@ tags:
 sloccount:
 	sloccount $(LIBDIR)/ $(SRCDIR)/ tool/ make/
 
+dep.external: dep.external.c-tap-harness dep.external.kiss-fft
+
+dep.external.c-tap-harness:
+	./tool/external/c-tap-harness/download && ./tool/external/c-tap-harness/build
+dep.external.kiss-fft:
+	./tool/external/kiss-fft/download && ./tool/external/kiss-fft/build
+
 include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk
 include make/vaa3d-plugin-rules.mk
