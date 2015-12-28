@@ -10,12 +10,11 @@ before_install:
   - git clone https://github.com/CBL-ORION/ITK-builds.git external/ITK
   # path for CMake to search for built ITK
   - export ITK_DIR="`( cd external/ITK/usr/local/lib/cmake/ITK-4.9 && pwd )`"
-install:
-  - make dep.test-data dep.external
 script:
   # version of gcc on Travis-CI does not support ASAN flag
   - if [ "$CC" = "clang" ]; then export CXX="clang++"; fi
   - if [ "$CC" = "gcc" ]; then export BUILD_ENABLE_ASAN=0; else export BUILD_ENABLE_ASAN=1; fi
+  - make dep.test-data dep.external
   - make && make test
 branches:
   except:
