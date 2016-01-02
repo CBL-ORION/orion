@@ -15,8 +15,12 @@
 typedef struct {
 	/* each element contains the maximum response of the Laplacian over the
 	 * scales in `laplacian_scales`.
+	 *
+	 * The elements of this are not complex because we are operating on
+	 * only real-data and this means that the Fourier domain values are
+	 * conjugate symmetric.
 	 */
-	ndarray3_complex* laplacian;
+	ndarray3* laplacian;
 
 	/* each element of scale_for_max_response contains the index of the
 	 * scale in `laplacian_scales` for which the response is maximised

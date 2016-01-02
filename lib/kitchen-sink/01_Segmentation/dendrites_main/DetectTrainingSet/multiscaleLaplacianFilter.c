@@ -85,16 +85,15 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 
 	}*/
 	output->laplacian
-		= ndarray3_complex_new(
-			input_volume->sz[0],
-			input_volume->sz[1],
-			input_volume->sz[2] );
+		= ndarray3_new_with_size_from_ndarray3(input_volume);
 	output->max_response_at_scale_idx
 		= ndarray3_new_with_size_from_ndarray3(input_volume);
 
 	int nx = v_fft->sz[0], ny = v_fft->sz[1], nz = v_fft->sz[2];
 
-	/* used to hold the Laplacian for a given scale */
+	/* used to hold the Laplacian response in the Fourier domain for a
+	 * given scale
+	 */
 	ndarray3_complex* cur_scale_laplacian =
 		ndarray3_complex_new(
 			input_volume->sz[0],
@@ -137,15 +136,20 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 		} NDARRAY3_LOOP_OVER_END;
 
 		/* Now apply the inverse Fourier transform to bring the
-		 * filtered volume back to the spatial domain */
+		 * filtered volume back to the spatial domain.
+		 *
+		 * Again, note that the response is real because the input data
+		 * is real and we treat the data in `cur_scale_laplacian` after
+		 * applying the filter as conjugate symmetric.
+		 * */
 		ndarray3* cur_scale_filt_vol =
 			ndarray3_ifftn_c2r( cur_scale_laplacian );
 
 		/* check for maximum response across all scales */
 		if( !recorded_maximum_scale ) {
-			NDARRAY3_LOOP_OVER_START( cur_scale_laplacian, i,j,k) {
-				ndarray3_complex_set( output->laplacian, i,j,k,
-					ndarray3_get(cur_scale_laplacian, i,j,k)
+			NDARRAY3_LOOP_OVER_START( cur_scale_filt_vol, i,j,k) {
+				ndarray3_set( output->laplacian, i,j,k,
+					ndarray3_get(cur_scale_filt_vol, i,j,k)
 				    );
 				ndarray3_set( output->max_response_at_scale_idx, i,j,k,
 					lap_idx
@@ -156,22 +160,22 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 		} else {
 			if( p->multiscale ) {
 				/* Multiscale approach */
-				NDARRAY3_LOOP_OVER_START( cur_scale_laplacian, i,j,k) {
-					complex_pixel_type* cur = &ndarray3_get(cur_scale_laplacian, i,j,k);
-					complex_pixel_type* lap = &ndarray3_get(output->laplacian, i,j,k);
-					if(   cabsf(*cur) >= cabsf(*lap) ) {
+				NDARRAY3_LOOP_OVER_START( cur_scale_filt_vol, i,j,k) {
+					pixel_type cur = ndarray3_get(cur_scale_filt_vol, i,j,k);
+					pixel_type lap = ndarray3_get(output->laplacian, i,j,k);
+					if(   fabs(cur) >= fabs(lap) ) {
 						/* the current scale is recorded as the maximum at this point */
-						*lap = *cur;
-						ndarray3_set( output->scales, i,j,k,  lap_idx);
+						ndarray3_set(output->laplacian, i,j,k, lap);
+						ndarray3_set(output->max_response_at_scale_idx, i,j,k,  lap_idx);
 					}
 				} NDARRAY3_LOOP_OVER_END;
 			} else {
 				/* ISBI 2014 */
-				NDARRAY3_LOOP_OVER_START( cur_scale_laplacian, i,j,k) {
-					complex_pixel_type* cur = &ndarray3_get(cur_scale_laplacian, i,j,k);
-					complex_pixel_type* lap = &ndarray3_get(output->laplacian, i,j,k);
-					if( *cur > *lap ) {
-						*lap = *cur;
+				NDARRAY3_LOOP_OVER_START( cur_scale_filt_vol, i,j,k) {
+					pixel_type cur = ndarray3_get(cur_scale_filt_vol, i,j,k);
+					pixel_type lap = ndarray3_get(output->laplacian, i,j,k);
+					if( cur > lap ) {
+						ndarray3_set(output->laplacian, i,j,k, cur);
 					}
 				} NDARRAY3_LOOP_OVER_END;
 			}
