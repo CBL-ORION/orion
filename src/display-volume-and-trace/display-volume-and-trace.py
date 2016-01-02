@@ -39,7 +39,7 @@ def main(argv):
 			r.Update()
 			centerline_mapper = vtk.vtkPolyDataMapper()
 			for m in [centerline_mapper]:
-				m.SetInputData( centerline.GetOutput() )
+				m.SetInput( centerline.GetOutput() )
 			centreline_actor = vtk.vtkActor()
 			for a in [centreline_actor]:
 				a.SetMapper( centerline_mapper )
@@ -74,7 +74,7 @@ def main(argv):
 
 		segmentation_outline_filter = vtk.vtkOutlineFilter()
 		for f in [segmentation_outline_filter]:
-			f.SetInputData( segmentation.GetOutput() )
+			f.SetInput( segmentation.GetOutput() )
 		segmentation_outline_mapper = vtk.vtkPolyDataMapper()
 		for m in [segmentation_outline_mapper]:
 			m.SetInputConnection( segmentation_outline_filter.GetOutputPort() )
@@ -84,7 +84,7 @@ def main(argv):
 
 		segmentation_mapper = vtk.vtkSmartVolumeMapper()
 		for m in [segmentation_mapper]:
-			m.SetInputData( segmentation.GetOutput() )
+			m.SetInput( segmentation.GetOutput() )
 		segmentation_actor = vtk.vtkVolume()
 		for a in [segmentation_actor]:
 			a.SetMapper( segmentation_mapper )
