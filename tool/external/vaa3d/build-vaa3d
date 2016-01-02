@@ -50,7 +50,7 @@ cd $TOP/external/dep
 # Qt {{{
 # Alternative on Debian:
 #     apt-get install libqt4-dev
-if ! which qmake > /dev/null || [ $VAA3D_USE_OWN_QT = 1 ] ; then
+if ! which qmake > /dev/null || [ "$VAA3D_USE_OWN_QT" = 1 ] ; then
 	#qt_version_down_install '4.8.6' 'https://download.qt.io/archive/qt/4.8/4.8.6/qt-everywhere-opensource-src-4.8.6.tar.gz'
 	#qt_version_down_install '4.8.7' 'https://download.qt.io/official_releases/qt/4.8/4.8.7/qt-everywhere-opensource-src-4.8.7.tar.gz'
 	qt_version_down_install '4.7.4' "https://download.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz"
@@ -59,7 +59,7 @@ if ! which qmake > /dev/null || [ $VAA3D_USE_OWN_QT = 1 ] ; then
 	# Pre-built Qt-4.7.1#{{{
 	# This is for Mac OSX
 	# --strip-components=3 :  usr/local/Trolltech/Qt-4.7.1 -> Qt-4.7.1
-	if [ "$(uname)" == "Darwin" ]; then
+	if [ "$(uname)" = "Darwin" ]; then
 		cd $QT_DIR
 		wget -c 'http://home.penglab.com/tmp/qt7.tar.gz'
 		QT_BUILT_4_7_1_DIR=$QT_DIR/Qt-4.7.1
@@ -88,7 +88,21 @@ ln -fs -T ../vaa3d_tools/released_plugins released_plugins_more
 export LD_LIBRARY_PATH="$QT_BUILT_DIR/lib:$LD_LIBRARY_PATH"
 cd $TOP/external/vaa3d/src/v3d_external
 #./build.linux -B -j4
-./build.linux -j4
+CXX_FOUND="g++"
+# g++-5 does not work with Boost Graph Library so we need something in the 4.x
+# series
+for cxx_test in g++-4.9 g++-4.8 g++-4.7 g++-4.6 g++-4.5 g++-4.4; do
+	echo -n "Testing for CXX=$cxx_test : ";
+	if which $cxx_test 2>&1 >/dev/null; then
+		echo "yes"
+		CXX_FOUND="$cxx_test"
+		break
+	else
+		echo "no"
+	fi
+done
+echo "CXX=$CXX_FOUND"
+./build.linux -j4 CXX="$CXX_FOUND"
 #}}}
 
 # vim: fdm=marker
