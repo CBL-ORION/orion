@@ -21,7 +21,7 @@ ndarray3* _ndarray3_init_sz(const size_t sz_x, const size_t sz_y, const size_t s
 	return n;
 }
 
-ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
+ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
 	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
 
 	n->p = p;
