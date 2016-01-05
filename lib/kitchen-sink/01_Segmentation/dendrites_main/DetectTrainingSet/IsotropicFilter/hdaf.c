@@ -18,8 +18,8 @@
  *
  */
 ndarray3* orion_hdaf(
-		const int hdaf_approx_degree,
-		const float scaling_constant,
+		int hdaf_approx_degree,
+		float scaling_constant,
 		ndarray3* x) {
 	ndarray3* x_scale = ndarray3_new_with_size_from_ndarray3( x );
 	ndarray3* out = ndarray3_new_with_size_from_ndarray3( x );
