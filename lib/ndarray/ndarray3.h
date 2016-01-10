@@ -25,10 +25,10 @@ extern "C" {
 /***** CONSTRUCTORS *****/
 
 /** TODO document
-    ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z)
+    ndarray3* ndarray3_new(size_t sz_x, size_t sz_y, size_t sz_z)
  */
 
-extern ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
+extern ndarray3* ndarray3_new(size_t sz_x, size_t sz_y, size_t sz_z);
 
 /* TODO document
  *
@@ -37,13 +37,13 @@ extern ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t
 extern ndarray3* ndarray3_new_with_size_from_ndarray3(ndarray3* that);
 
 /** TODO document
-    ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z )
+    ndarray3* ndarray3_wrap( pixel_type* p, size_t sz_x, size_t sz_y, size_t sz_z )
  */
-extern ndarray3* ndarray3_wrap( pixel_type* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
+extern ndarray3* ndarray3_wrap( pixel_type* p, size_t sz_x, size_t sz_y, size_t sz_z );
 
 /** TODO document
  */
-extern ndarray3* ndarray3_buffer( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z );
+extern ndarray3* ndarray3_buffer( float* p, size_t sz_x, size_t sz_y, size_t sz_z );
 
 /***** DESTRUCTORS *****/
 
@@ -70,7 +70,7 @@ extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, cons
 
 /* testing functions */
 extern bool ndarray3_is_same_size( ndarray3* a, ndarray3* b );
-extern bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps );
+extern bool ndarray3_is_isotropic( const ndarray3* n, pixel_type eps );
 
 extern float64 ndarray3_sum_over_all_float64( const ndarray3* n );
 

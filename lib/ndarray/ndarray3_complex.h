@@ -26,8 +26,8 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-extern ndarray3_complex* _ndarray3_complex_init_sz(const size_t sz_x, const size_t sz_y, const size_t sz_z);
-extern ndarray3_complex* ndarray3_complex_new(const size_t sz_x, const size_t sz_y, const size_t sz_z);
+extern ndarray3_complex* _ndarray3_complex_init_sz(size_t sz_x, size_t sz_y, size_t sz_z);
+extern ndarray3_complex* ndarray3_complex_new(size_t sz_x, size_t sz_y, size_t sz_z);
 extern void ndarray3_complex_free( ndarray3_complex* n );
 
 

@@ -1,6 +1,6 @@
 #include "ndarray/ndarray3_complex.h"
 
-ndarray3_complex* _ndarray3_complex_init_sz(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
+ndarray3_complex* _ndarray3_complex_init_sz(size_t sz_x, size_t sz_y, size_t sz_z) {
 	ndarray3_complex* n;
 	NEW(n, ndarray3_complex);
 
@@ -17,7 +17,7 @@ ndarray3_complex* _ndarray3_complex_init_sz(const size_t sz_x, const size_t sz_y
 	return n;
 }
 
-ndarray3_complex* ndarray3_complex_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
+ndarray3_complex* ndarray3_complex_new(size_t sz_x, size_t sz_y, size_t sz_z) {
 	ndarray3_complex* n = _ndarray3_complex_init_sz(sz_x, sz_y, sz_z);
 
 	NEW_COUNT( n->p, complex_pixel_type, sz_x * sz_y * sz_z );
