@@ -1,6 +1,6 @@
 #include "container/vector_impl.h"
-#include "assert.h"
-#include "stdio.h"
+#include <assert.h>
+#include <stdio.h>
 
 TYPED_NAME(vector)* TYPED_NAME(vector_new)( size_t length ) {
 	TYPED_NAME(vector)* vector;
