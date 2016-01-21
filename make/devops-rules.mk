@@ -13,15 +13,15 @@ test.build-gcov:
 check-gcov-quick:
 	$(MAKE) .gcov-note
 	mkdir -p $(GCOVDIR)
-	find $(BINDIR) $(BUILDDIR) -name "*.gcda" \
+	find $(BINDIR) $(BUILDDIR) -path $(BUILDDIR)/t -prune -o -name "*.gcda" -print \
 		| xargs $(GCOV) --no-output --preserve-paths \
 		> $(GCOVDIR)/gcov-report
 	@echo "See gcov report in $(GCOVDIR)/gcov-report"
 check-gcov-full:
 	$(MAKE) .gcov-note
 	mkdir -p $(GCOVDIR)
-	find $(BINDIR) $(BUILDDIR) -name "*.gcda" \
-		| xargs $(GCOV) --preserve-paths
+	find $(BINDIR) $(BUILDDIR) -path $(BUILDDIR)/t -prune -o -name "*.gcda" -print \
+		| xargs $(GCOV) -r --preserve-paths
 	mv *.gcov $(GCOVDIR)
 check-lcov:
 	$(MAKE) .gcov-note
