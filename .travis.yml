@@ -20,7 +20,7 @@ script:
   - make dep.test-data dep.external
   - make && make test
 after_success:
-  - if [ "$COVERAGE" = 1 ]; then coveralls  -b . -i lib -e lib/t --gcov-options '\-r';  fi
+  - if [ "$COVERAGE" = 1 ]; then coveralls  -b . -i lib -e lib/t --gcov-options '\-lp';  fi
 branches:
   except:
     - /^wip\//
