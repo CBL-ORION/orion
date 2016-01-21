@@ -21,6 +21,10 @@ script:
   - make && make test
 after_success:
   - if [ "$COVERAGE" = 1 ]; then coveralls  -b . -i lib -e lib/t --gcov-options '\-lp';  fi
+matrix:
+  exclude:
+    - compiler: clang
+      env: PROD=1 TEST_VERBOSE=1 COVERAGE=1
 branches:
   except:
     - /^wip\//
