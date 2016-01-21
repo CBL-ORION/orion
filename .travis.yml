@@ -2,6 +2,7 @@ language: c
 sudo: false
 env:
   - PROD=1 TEST_VERBOSE=1
+  - PROD=1 TEST_VERBOSE=1 COVERAGE=1
 compiler:
   - gcc
   - clang
@@ -10,12 +11,16 @@ before_install:
   - git clone https://github.com/CBL-ORION/ITK-builds.git external/ITK
   # path for CMake to search for built ITK
   - export ITK_DIR="`( cd external/ITK/usr/local/lib/cmake/ITK-4.9 && pwd )`"
+  - if [ "$COVERAGE" = 1 ]; then pip install --user cpp-coveralls;  fi
 script:
   # version of gcc on Travis-CI does not support ASAN flag
   - if [ "$CC" = "clang" ]; then export CXX="clang++"; fi
   - if [ "$CC" = "gcc" ]; then export BUILD_ENABLE_ASAN=0; else export BUILD_ENABLE_ASAN=1; fi
+  - if [ "$COVERAGE" = 1 ]; then export BUILD_GCOV=1;  fi
   - make dep.test-data dep.external
   - make && make test
+after_success:
+  - if [ "$COVERAGE" = 1 ]; then coveralls -b . -i .build -i bin;  fi
 branches:
   except:
     - /^wip\//
