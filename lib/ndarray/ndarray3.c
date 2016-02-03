@@ -4,7 +4,7 @@
 
 #include "util/string.h"
 
-ndarray3* _ndarray3_init_sz(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
+ndarray3* _ndarray3_init_sz(size_t sz_x, size_t sz_y, size_t sz_z) {
 	ndarray3* n;
 	NEW(n, ndarray3);
 
@@ -21,7 +21,7 @@ ndarray3* _ndarray3_init_sz(const size_t sz_x, const size_t sz_y, const size_t s
 	return n;
 }
 
-ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
+ndarray3* ndarray3_wrap( pixel_type* p, size_t sz_x, size_t sz_y, size_t sz_z ) {
 	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
 
 	n->p = p;
@@ -30,7 +30,7 @@ ndarray3* ndarray3_wrap( float* p, const size_t sz_x, const size_t sz_y, const s
 	return n;
 }
 
-ndarray3* ndarray3_buffer( float* p, const size_t sz_x, const size_t sz_y, const size_t sz_z ) {
+ndarray3* ndarray3_buffer( float* p, size_t sz_x, size_t sz_y, size_t sz_z ) {
 	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
 
 	n->p = p;
@@ -39,7 +39,7 @@ ndarray3* ndarray3_buffer( float* p, const size_t sz_x, const size_t sz_y, const
 	return n;
 }
 
-ndarray3* ndarray3_new(const size_t sz_x, const size_t sz_y, const size_t sz_z) {
+ndarray3* ndarray3_new(size_t sz_x, size_t sz_y, size_t sz_z) {
 	ndarray3* n = _ndarray3_init_sz(sz_x, sz_y, sz_z);
 
 	NEW_COUNT( n->p, pixel_type, sz_x * sz_y * sz_z );
@@ -113,7 +113,7 @@ bool ndarray3_is_same_size( ndarray3* a, ndarray3* b ) {
 	       && a->sz[2] == b->sz[2];
 }
 
-bool ndarray3_is_isotropic( const ndarray3* n, const pixel_type eps ) {
+bool ndarray3_is_isotropic( const ndarray3* n, pixel_type eps ) {
 	bool is_isotropic = true;
 	const size_t ndim = 3;
 	size_t sz_half[ndim];

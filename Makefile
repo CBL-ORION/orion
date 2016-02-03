@@ -52,7 +52,7 @@ else
 endif
 
 ## Rules
-all: $(CONFIG_HEADER_FILE) $(OUTPUT_DIRS) $(LIB_OBJ) \
+all: $(CONFIG_HEADER_FILE) $(OUTPUT_DIRS) $(LIBORION.A) $(LIB_OBJ) \
 	$(BIN_BIN.c) \
 	$(BIN_BIN.cc) \
 	$(DEV_TARGETS)
@@ -82,6 +82,22 @@ tags:
 	ctags --exclude=external -R .
 	# add the ORION 3 code to the tags so that it is easy to jump to the other codebase
 	ctags -R -a ${ORION3MAT_PATH}
+sloccount:
+	sloccount $(LIBDIR)/ $(SRCDIR)/ tool/ make/
+
+dep.liborion3mat:
+	mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
+	mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-deploy.git external/liborion3mat
+
+dep.test-data:
+	git clone https://github.com/CBL-ORION/test-data.git test-data
+
+dep.external: dep.external.c-tap-harness dep.external.kiss-fft
+
+dep.external.c-tap-harness:
+	./tool/external/c-tap-harness/download && ./tool/external/c-tap-harness/build
+dep.external.kiss-fft:
+	./tool/external/kiss-fft/download && ./tool/external/kiss-fft/build
 
 include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk

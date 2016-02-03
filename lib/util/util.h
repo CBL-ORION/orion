@@ -17,7 +17,9 @@ extern "C" {
 #endif /* __cplusplus */
 
 extern void _real_die(const char* msg_fmt, const char* origin, ...);
+#ifndef die
 #define die(_msg_fmt, ...) _real_die(_msg_fmt, SHOWORIGIN, __VA_ARGS__)
+#endif
 
 #ifdef __cplusplus
 };

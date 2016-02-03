@@ -4,6 +4,14 @@
 /* type used for calculations */
 typedef float             pixel_type;
 
+#ifndef __cplusplus
+#include <complex.h>
+/* complex is only valid in C99, not C++ */
+
+/* type used for complex number calculations (e.g., FFT) */
+typedef float complex     complex_pixel_type;
+#endif /* __cplusplus */
+
 /* type used for reading in files */
 typedef unsigned short       input_pixel_type;
 

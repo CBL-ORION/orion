@@ -32,3 +32,5 @@ gmon.out
 
 /report-gcov
 /report-lcov
+
+*.pyc

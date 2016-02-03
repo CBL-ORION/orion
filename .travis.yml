@@ -2,6 +2,7 @@ language: c
 sudo: false
 env:
   - PROD=1 TEST_VERBOSE=1
+  - PROD=1 TEST_VERBOSE=1 COVERAGE=1
 compiler:
   - gcc
   - clang
@@ -10,16 +11,20 @@ before_install:
   - git clone https://github.com/CBL-ORION/ITK-builds.git external/ITK
   # path for CMake to search for built ITK
   - export ITK_DIR="`( cd external/ITK/usr/local/lib/cmake/ITK-4.9 && pwd )`"
-install:
-  - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-mcr-minimal.git external/liborion3mat-mcr-minimal
-  - mkdir external; git clone https://github.com/CBL-ORION/liborion3mat-deploy.git external/liborion3mat
-  - git clone https://github.com/CBL-ORION/test-data.git test-data
-  - ./tool/external/c-tap-harness/download && ./tool/external/c-tap-harness/build
+  - if [ "$COVERAGE" = 1 ]; then pip install --user cpp-coveralls;  fi
 script:
   # version of gcc on Travis-CI does not support ASAN flag
   - if [ "$CC" = "clang" ]; then export CXX="clang++"; fi
   - if [ "$CC" = "gcc" ]; then export BUILD_ENABLE_ASAN=0; else export BUILD_ENABLE_ASAN=1; fi
+  - if [ "$COVERAGE" = 1 ]; then export BUILD_GCOV=1;  fi
+  - make dep.test-data dep.external
   - make && make test
+after_success:
+  - if [ "$COVERAGE" = 1 ]; then coveralls  -b . -i lib -e lib/t --gcov-options '\-lp';  fi
+matrix:
+  exclude:
+    - compiler: clang
+      env: PROD=1 TEST_VERBOSE=1 COVERAGE=1
 branches:
   except:
     - /^wip\//
