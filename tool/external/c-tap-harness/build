@@ -12,7 +12,7 @@ cd c-tap-harness/c-tap-harness
 if ! which autoconf >/dev/null; then
 	sudo apt-get install autoconf
 fi
-./autogen && ./configure && make
+./bootstrap && ./configure && make
 
 # "CFLAGS+=-fsanitize=address"
 
