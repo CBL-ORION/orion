@@ -24,7 +24,7 @@ extern "C" {
 /* Function prototypes */
 extern void orion_readNegativeSamples(
 		orion_segmentation_param* param,
-		ndarray3* input_volume );
+		ndarray3* vol );
 
 #ifdef __cplusplus
 };

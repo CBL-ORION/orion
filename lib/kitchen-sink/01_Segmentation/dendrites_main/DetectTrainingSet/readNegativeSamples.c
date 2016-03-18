@@ -6,7 +6,7 @@
  */
 void orion_readNegativeSamples(
 		orion_segmentation_param* param,
-		ndarray3* input_volume ) {
+		ndarray3* vol ) {
 	WARN_UNIMPLEMENTED;
 
 	LOG_INFO("%s", "Detecting training set of background samples...");
