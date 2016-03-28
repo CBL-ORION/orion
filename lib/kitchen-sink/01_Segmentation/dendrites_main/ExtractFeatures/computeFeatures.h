@@ -10,7 +10,6 @@
 #include "container/vector.h"
 #include "param/segmentation.h"
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
