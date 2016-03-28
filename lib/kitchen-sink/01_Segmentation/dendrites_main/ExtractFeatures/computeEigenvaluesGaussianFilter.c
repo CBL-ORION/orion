@@ -28,8 +28,7 @@ array_orion_eig_feat_result* orion_computeEigenvaluesGaussianFilter(
 		die("Please refactor and remove use of apply_log as it is orthogonal to the eigenvalue filtering ( apply_log == %c )", apply_log);
 	}
 
-	/* TODO loop over all scales */
-
+	/* loop over all scales */
 	size_t n_scales = array_length_float(scales);
 	array_orion_eig_feat_result* all_results = array_new_orion_eig_feat_result(n_scales);
 	for( size_t scale_idx = 0; scale_idx < n_scales; scale_idx++ ) {
