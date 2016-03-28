@@ -11,18 +11,16 @@
 #include "ndarray/ndarray3.h"
 #include "simple-log/simplelog.h"
 
-/* structs, enums */
-typedef struct {
-	bool multiscale;
-	vector_float spacing;
-} orion_readNegativeSamples_param;
+#include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/multiscaleLaplacianFilter.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-extern void orion_readNegativeSamples(
+extern
+orion_multiscale_laplacian_output*
+orion_readNegativeSamples(
 		orion_segmentation_param* param,
 		ndarray3* vol );
 
