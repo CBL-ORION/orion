@@ -1,4 +1,5 @@
-/* TODO
+/*
+ * Get the Eigenvalues of the Hessian matrix as features.
  *
  * Refactor: getFeatures
  */
