@@ -29,12 +29,17 @@ orion_readNegativeSamples(
 
 	/* Only the positive values are background voxels.
 	 *
-	 * We set the `laplacian` member to 1.0 or 0.0 depending on if it is in
-	 * the background.
+	 * We set the `is_background` member to 1.0 or 0.0 depending on if it is in
+	 * the background based on the response in `laplacian`.
+	 *
+	 * We are working in-place to save memory, so we transfer the contents
+	 * from `laplacian` to `is_background`.
 	 */
-	NDARRAY3_LOOP_OVER_START( lap_out->laplacian, i,j,k) {
-		ndarray3_set( lap_out->laplacian, i,j,k,
-			ndarray3_get( lap_out->laplacian, i,j,k) > 0 );
+	lap_out->is_background = lap_out->laplacian;
+	lap_out->laplacian = NULL;
+	NDARRAY3_LOOP_OVER_START( lap_out->is_background, i,j,k) {
+		ndarray3_set( lap_out->is_background, i,j,k,
+			ndarray3_get( lap_out->is_background, i,j,k) > 0 );
 	} NDARRAY3_LOOP_OVER_END;
 
 	return lap_out;

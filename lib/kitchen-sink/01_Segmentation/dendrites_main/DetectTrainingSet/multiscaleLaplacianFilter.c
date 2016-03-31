@@ -27,6 +27,9 @@ void orion_multiscale_laplacian_output_free(orion_multiscale_laplacian_output* r
 	if( r->max_response_at_scale_idx )
 		ndarray3_free( r->max_response_at_scale_idx );
 
+	if( r->is_background )
+		ndarray3_free( r->is_background );
+
 	free(r);
 }
 
@@ -35,6 +38,7 @@ orion_multiscale_laplacian_output* orion_multiscale_laplacian_output_new() {
 	NEW(r, orion_multiscale_laplacian_output);
 	r->laplacian = NULL;
 	r->max_response_at_scale_idx = NULL;
+	r->is_background = NULL;
 	return r;
 }
 

@@ -29,6 +29,13 @@ typedef struct {
 	 * `pixel_type` for convenience.
 	 */
 	ndarray3* max_response_at_scale_idx;
+
+	/* Each element indicates if the Laplacian response at that voxel
+	 * should be classified as in in the background.
+	 *
+	 * Element is either 0.0 or 1.0.
+	 */
+	ndarray3* is_background;
 } orion_multiscale_laplacian_output;
 
 #ifdef __cplusplus
