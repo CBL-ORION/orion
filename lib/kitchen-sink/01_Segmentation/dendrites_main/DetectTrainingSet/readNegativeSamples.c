@@ -20,7 +20,7 @@ orion_readNegativeSamples(
 	size_t n_scales = array_length_float( param->scales );
 	array_float* Lap =  array_new_float( n_scales );
 	for( size_t Lap_idx = 0; Lap_idx < n_scales; Lap_idx++ ) {
-		array_set_float( Lap, Lap_idx,
+		array_add_float( Lap,
 			0.66 / array_get_float( param->scales, Lap_idx ) );
 	}
 
