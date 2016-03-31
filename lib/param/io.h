@@ -7,6 +7,8 @@
 typedef struct {
 	char* input_filename;
 	char* output_filename;
+
+	char* orion3_config_filename;
 } orion_io_param;
 
 #ifdef __cplusplus
