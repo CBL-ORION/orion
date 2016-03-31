@@ -33,6 +33,8 @@ extern void TYPED_NAME(array_add) ( TYPED_NAME(array)* array, TYPE data );
 
 /* ==== memory management ==== */
 extern void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t new_capacity );
+/* Resets the length of the array to zero. Does not free elements! */
+extern void TYPED_NAME(array_reset) ( TYPED_NAME(array)* array );
 
 #ifdef __cplusplus
 };
