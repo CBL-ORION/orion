@@ -58,6 +58,7 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 	int n = ORION_LAPLACIAN_HDAF_APPROX_DEGREE;
 
 	/* Fourier transform the input image */
+	LOG_DEBUG("Computing Fourier transform of input volume");
 	ndarray3_complex* v_fft = ndarray3_fftn_r2c(input_volume);
 
 	output->laplacian
@@ -88,6 +89,7 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 		ndarray3* filt = orion_Makefilter( nx,ny,nz,
 			n, laplacian_scale_factor, orion_Makefilter_FLAG_A);
 
+		LOG_DEBUG("Applying Laplacian filter");
 		NDARRAY3_LOOP_OVER_START( filt, i,j,k) {
 			/* normalise the generated Laplacian filter
 			 *
@@ -118,6 +120,7 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 		 * is real and we treat the data in `cur_scale_laplacian` after
 		 * applying the filter as conjugate symmetric.
 		 * */
+		LOG_DEBUG("Inverse Fourier transform for scale %f", laplacian_scale_factor);
 		ndarray3* cur_scale_filt_vol =
 			ndarray3_ifftn_c2r( cur_scale_laplacian );
 
