@@ -41,7 +41,11 @@ void usage(char* program_name) {
 
 void parse_arguments( int argc, char * argv[], param_parse* param ) {
 	int arg_idx = 0;
-	for( arg_idx = 0; arg_idx < argc; arg_idx++ ) {
+	if( argc == 1 ) {
+		usage( argv[0] );
+		exit(EXIT_SUCCESS);
+	}
+	for( arg_idx = 1; arg_idx < argc; arg_idx++ ) {
 		if( strcmp( argv[arg_idx], "--help" ) == 0 ) {
 			usage( argv[0] );
 			exit(EXIT_SUCCESS);
