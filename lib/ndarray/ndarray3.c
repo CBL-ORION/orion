@@ -19,6 +19,8 @@ ndarray3* _ndarray3_init_sz(size_t sz_x, size_t sz_y, size_t sz_z) {
 	n->spacing[1] = 1;
 	n->spacing[2] = 1;
 
+	n->has_zero_padding_on_last_dim = 0;
+
 	return n;
 }
 

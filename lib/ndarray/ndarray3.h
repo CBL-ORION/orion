@@ -16,6 +16,8 @@ typedef struct {
 
 	bool has_spacing;
 	pixel_type spacing[3]; /* PIXEL_NDIMS */
+
+	bool has_zero_padding_on_last_dim;
 } ndarray3;
 
 #ifdef __cplusplus
