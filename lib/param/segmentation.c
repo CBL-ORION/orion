@@ -6,6 +6,7 @@ orion_segmentation_param* orion_segmentation_param_new() {
 	orion_segmentation_param* param;
 	NEW( param, orion_segmentation_param );
 	param->scales = array_new_float( 10 );
+	param->multiscale = 0;
 
 	/* all attributes are unset at build */
 #define ATTR( NAME, TYPE ) \
