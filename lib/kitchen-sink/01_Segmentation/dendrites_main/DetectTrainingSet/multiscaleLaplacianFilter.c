@@ -75,7 +75,7 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 
 	size_t lap_scale_len = array_length_float(laplacian_scales);
 	bool recorded_maximum_scale = false;
-	for( int lap_idx = 0; lap_idx < lap_scale_len; lap_idx++ ) {
+	for( size_t lap_idx = 0; lap_idx < lap_scale_len; lap_idx++ ) {
 		/* compute the Laplacian for each scale */
 		float laplacian_scale_factor = array_get_float( laplacian_scales, lap_idx );
 		LOG_INFO("Computing Laplacian using scale: %f", laplacian_scale_factor);

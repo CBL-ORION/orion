@@ -24,6 +24,9 @@ typedef struct {
 
 	/* each element of scale_for_max_response contains the index of the
 	 * scale in `laplacian_scales` for which the response is maximised
+	 *
+	 * NOTE: Elements of this are of type `size_t`, but are stored in a
+	 * `pixel_type` for convenience.
 	 */
 	ndarray3* max_response_at_scale_idx;
 } orion_multiscale_laplacian_output;

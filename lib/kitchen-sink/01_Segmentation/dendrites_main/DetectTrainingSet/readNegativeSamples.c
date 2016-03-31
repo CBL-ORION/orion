@@ -27,7 +27,11 @@ orion_readNegativeSamples(
 	orion_multiscale_laplacian_output* lap_out = orion_multiscaleLaplacianFilter( vol, Lap, param );
 
 
-	/* Only the positive values are background voxels */
+	/* Only the positive values are background voxels.
+	 *
+	 * We set the `laplacian` member to 1.0 or 0.0 depending on if it is in
+	 * the background.
+	 */
 	NDARRAY3_LOOP_OVER_START( lap_out->laplacian, i,j,k) {
 		ndarray3_set( lap_out->laplacian, i,j,k,
 			ndarray3_get( lap_out->laplacian, i,j,k) > 0 );
