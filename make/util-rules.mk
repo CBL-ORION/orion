@@ -3,9 +3,11 @@ $(BINDIR)/subsample-volume/SubsampleVolume$(EXEEXT): $(SRCDIR)/subsample-volume/
 	$(CMAKE.generate) -B$(BINDIR)/subsample-volume -H$(SRCDIR)/subsample-volume
 	$(MAKE) -C$(BINDIR)/subsample-volume
 
-$(BINDIR)/segmentation/orion-segmentation$(EXEEXT): $(SRCDIR)/segmentation/orion-segmentation.c \
-		$(BUILDDIR)/simple-log/simplelog.o \
-		$(BUILDDIR)/util/util.o $(BUILDDIR)/util/string.o \
-		$(BUILDDIR)/param/segmentation.o $(BUILDDIR)/param/io.o \
-		$(BUILDDIR)/param/param.o \
-		$(BUILDDIR)/container/array.o
+BIN_ORION_SEGMENTATION := $(BINDIR)/segmentation/orion-segmentation$(EXEEXT)
+$(BIN_ORION_SEGMENTATION): CPPFLAGS += $(ITK_CPPFLAGS)
+$(BIN_ORION_SEGMENTATION): LDFLAGS  += $(ITK_LDFLAGS)
+$(BIN_ORION_SEGMENTATION): LDLIBS   += $(ITK_LDLIBS)
+$(BIN_ORION_SEGMENTATION): LDLIBS   += -lstdc++ # needs to add C++ library to link
+$(BIN_ORION_SEGMENTATION): \
+	$(SRCDIR)/segmentation/orion-segmentation.c \
+	$(LIBORION.A)

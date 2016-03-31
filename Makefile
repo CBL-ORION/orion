@@ -29,6 +29,7 @@ include make/vaa3d-plugin-config.mk
 include make/test-config.mk
 include make/liborion3mat-config.mk
 include make/misc-config.mk
+include make/liborion-config.mk
 
 ## Generate the targets
 LIB_OBJ:= $(call OBJ_PATHSUBST.c,$(LIB_SRC.c))
