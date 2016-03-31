@@ -67,6 +67,8 @@ extern void ndarray3_dump( ndarray3* n );
 extern void ndarray3_printf( ndarray3* n, const char* variable_name, const char* format );
 extern void ndarray3_printf_matlab( ndarray3* n, const char* variable_name, const char* format );
 
+/* TODO document */
+extern void ndarray3_minmax( ndarray3* n, pixel_type* min, pixel_type* max );
 
 /* testing functions */
 extern bool ndarray3_is_same_size( ndarray3* a, ndarray3* b );

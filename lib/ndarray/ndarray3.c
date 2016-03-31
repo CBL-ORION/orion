@@ -1,6 +1,7 @@
 #include "ndarray/ndarray3.h"
 
 #include <math.h>
+#include <float.h>
 
 #include "util/string.h"
 
@@ -167,4 +168,19 @@ float64 ndarray3_sum_over_all_float64( const ndarray3* n ) {
 		sum += n->p[n_idx];
 	}
 	return sum;
+}
+
+void ndarray3_minmax( ndarray3* n, pixel_type* min, pixel_type* max ) {
+	size_t nelem = ndarray3_elems( n );
+	*min = FLT_MAX;
+	*max = -FLT_MAX;
+	for( size_t idx = 0; idx < nelem; idx++ ) {
+		if( n->p[idx] < *min ) {
+			*min = n->p[idx];
+		}
+
+		if( n->p[idx] > *max ) {
+			*max = n->p[idx];
+		}
+	}
 }
