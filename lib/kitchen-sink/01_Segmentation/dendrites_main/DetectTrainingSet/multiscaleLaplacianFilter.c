@@ -59,7 +59,7 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 
 	/* Fourier transform the input image */
 	LOG_DEBUG("Computing Fourier transform of input volume");
-	ndarray3_complex* v_fft = ndarray3_fftn_r2c(input_volume);
+	ndarray3_complex* v_fft = ndarray3_fftn_real(input_volume);
 
 	output->laplacian
 		= ndarray3_new_with_size_from_ndarray3(input_volume);
@@ -122,7 +122,7 @@ orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 		 * */
 		LOG_DEBUG("Inverse Fourier transform for scale %f", laplacian_scale_factor);
 		ndarray3* cur_scale_filt_vol =
-			ndarray3_ifftn_c2r( cur_scale_laplacian );
+			ndarray3_ifftn_real( cur_scale_laplacian );
 
 		/* check for maximum response across all scales */
 		if( !recorded_maximum_scale ) {
