@@ -8,6 +8,8 @@ orion_features* orion_features_new( size_t instances ) {
 	for( size_t f_idx = 0; f_idx < f->number_of_features; f_idx++ ) {
 		f->features[f_idx] = vector_new_float( instances );
 	}
+
+	return f;
 }
 
 void orion_features_free( orion_features* f ) {

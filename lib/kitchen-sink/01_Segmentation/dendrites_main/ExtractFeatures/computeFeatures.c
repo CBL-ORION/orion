@@ -30,7 +30,7 @@ orion_features* orion_computeFeatures(
 	/* adjust the scales by the spacing of the first dimension */
 	adjusted_scales = array_new_float( number_of_scales );
 	for( size_t s_idx = 0 ; s_idx < number_of_scales; s_idx++ ) {
-		array_set_float( adjusted_scales, s_idx,
+		array_add_float( adjusted_scales,
 			spacing_0dim * array_get_float( param->scales, s_idx )
 		);
 	}
