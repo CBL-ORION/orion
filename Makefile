@@ -92,12 +92,14 @@ dep.liborion3mat:
 dep.test-data:
 	git clone https://github.com/CBL-ORION/test-data.git test-data
 
-dep.external: dep.external.c-tap-harness dep.external.kiss-fft
+dep.external: dep.external.c-tap-harness dep.external.kiss-fft dep.external.sfmt
 
 dep.external.c-tap-harness:
 	./tool/external/c-tap-harness/download && ./tool/external/c-tap-harness/build
 dep.external.kiss-fft:
 	./tool/external/kiss-fft/download && ./tool/external/kiss-fft/build
+dep.external.sfmt:
+	./tool/external/sfmt/download && ./tool/external/sfmt/build
 
 include make/filter-vesselness-rules.mk
 include make/liborion3mat-rules.mk

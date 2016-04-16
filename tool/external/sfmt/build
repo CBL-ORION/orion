@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+TOP=`pwd -P`
+
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+cd SFMT/SFMT
+
+cat > Makefile.custom <<'MAKE'
+
+CPPFLAGS += -DSFMT_MEXP=19937
+CFLAGS += -O3
+libSFMT.a: SFMT.o
+	$(AR) $(ARFLAGS) $@ $^
+
+MAKE
+
+make -f Makefile.custom
+
+# "CFLAGS+=-fsanitize=address"
+
+# vim: fdm=marker

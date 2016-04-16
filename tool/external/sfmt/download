@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR/../../.."
+[ -d external -o -L external ] || mkdir external
+cd external/ || ( echo "Need external/ symlink/directory" && exit )
+mkdir -p SFMT; cd SFMT
+
+if [ ! -d "SFMT" ]; then
+	git clone -b master https://github.com/CBL-ORION/SFMT.git
+fi
