@@ -28,6 +28,10 @@ kiss99_rng_state* kiss99_rng_state_new() {
 	return state;
 }
 
+void kiss99_rng_state_free(kiss99_rng_state* state) {
+	free(state);
+}
+
 /*-----------------------------------------------------
 Write your own calling program and try one or more of
 the above, singly or in combination, when you run a

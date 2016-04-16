@@ -55,7 +55,7 @@ extern "C" {
 /* Function prototypes */
 extern void kiss99_rng_set_table(kiss99_rng_state* state, uint32_t i1,uint32_t i2,uint32_t i3,uint32_t i4,uint32_t i5,uint32_t i6);
 extern kiss99_rng_state* kiss99_rng_state_new();
-
+extern void kiss99_rng_state_free(kiss99_rng_state* state);
 
 #ifdef __cplusplus
 };
