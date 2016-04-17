@@ -60,4 +60,6 @@ array_int* array_random_sample_int(
 		}
 
 	}
+
+	return samples;
 }
