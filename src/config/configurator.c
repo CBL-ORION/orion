@@ -1,3 +1,5 @@
+#include "config/platform.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -9,11 +11,6 @@
 
 #define COMMAND_LINE_BUFFER_LENGTH 16384 /* pow(2,14) */
 
-/* the extension used for executables */
-#ifndef PLATFORM_EXE_EXT
-#define PLATFORM_EXE_EXT ""
-#endif /* PLATFORM_EXE_EXT */
-
 #define DEFAULT_CC "cc"
 #define DEFAULT_CFLAGS "-g3 -ggdb -Wall -Wundef -Wmissing-prototypes -Wmissing-declarations -Wstrict-prototypes -Wold-style-definition"
 
@@ -24,6 +21,7 @@
 #define CONFIG_HEADER_START \
 	"#ifndef CONFIG_H\n" \
 	"#define CONFIG_H 1\n\n" \
+	"#include \"config/platform.h\"\n\n" \
 
 #define CONFIG_HEADER_END \
 	"\n\n" \
