@@ -1,3 +1,6 @@
+# set to empty in order to print commands
+NOECHO := @
+
 MAKEFLAGS += --warn-undefined-variables
 SHELL := bash
 .SHELLFLAGS := -eu -o pipefail -c
