@@ -19,13 +19,14 @@ uint32_t _orion_rand_seeds() {
 #if OS_UNIX
 	/* read from /dev/urandom */
 	int fn;
-	fn = open("/dev/urandom", O_RDONLY);
+	char random_device[] = "/dev/urandom";
+	fn = open(random_device, O_RDONLY);
 	if (fn == - 1)
-		exit( -1 );
-	/* Failed ! */
+		/* Failed ! */
+		die("Could not open %s for seeding RNG", random_device);
 	if ( read(fn, &r, 4) != 4)
-		exit( - 1) ;
-	/* Failed ! */
+		/* Failed ! */
+		die("Could not read %s for seeding RNG", random_device);
 	close(fn);
 #elif defined(_CRT_RAND_S)
 	rand_s( &r );
