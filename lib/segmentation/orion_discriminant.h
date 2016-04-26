@@ -14,18 +14,18 @@
 /*TODO(Define struct members)*/
 
 /* TODO document */
-#define orion_histogram_elems( discrim ) ( discrim->m * discrim->n )
+#define orion_histogram_elems( discrim ) ( discrim->bin_sz[0] * discrim->bin_sz[1] )
 
-#define _orion_histogram_index(discrim, bin_m, bin_n) (bin_m * discrim->m + bin_n)
+#define _orion_histogram_index(discrim, bin_row, bin_col) (bin_row * discrim->bin_sz[1] + bin_col)
 
 /* TODO document */
-#define orion_histogram_increment(discrim, bin_m, bin_n) \
-	( ++( discrim->histogram[ _orion_histogram_index(discrim, bin_m, bin_n)  ] ) )
+#define orion_histogram_increment(discrim, bin_row, bin_col) \
+	( ++( discrim->histogram[ _orion_histogram_index(discrim, bin_row, bin_col)  ] ) )
 
 typedef struct {
-	size_t m; /* number of bins in the first dimension */
-	size_t n; /* number of bins in the second dimension */
-	size_t* histogram; /* dimensions: [m, n] */
+	/* number of bins in each dimension */
+	size_t bin_sz[ORION_NUMBER_OF_SEGMENTATION_FEATURES];
+	size_t* histogram; /* dimensions: [bin_sz[0], bin_sz[1]] */
 
 
 	/* store the minimum and maximum value for each feature */
