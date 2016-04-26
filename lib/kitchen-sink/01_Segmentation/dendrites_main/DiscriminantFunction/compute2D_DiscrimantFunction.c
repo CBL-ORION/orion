@@ -125,10 +125,7 @@ void orion_hist3(
 
 	/* NOTE: histogram is allocated here: if the size of the bins change
 	 * for each dimension, then this will need to change */
-	discrim->histogram = ndarray3_new( param->bins, param->bins, 1);
-	NDARRAY3_LOOP_OVER_START( discrim->histogram, i,j,k ) {
-		ndarray3_set( discrim->histogram, i,j,k, 0.0 );
-	} NDARRAY3_LOOP_OVER_END;
+	orion_histogram_init( discrim, (param->bins + 1), (param->bins + 1) );
 
 	for( int indices_idx = 0; indices_idx < indices_sz; indices_idx++ ) {
 		size_t feat_instance_idx = array_get_int( indices, indices_idx );
@@ -142,9 +139,7 @@ void orion_hist3(
 					);
 		}
 		/* increment by 1 */
-		ndarray3_set( discrim->histogram, feat_bin_idx[0], feat_bin_idx[1], 0,
-				1.0 + ndarray3_get(discrim->histogram, feat_bin_idx[0], feat_bin_idx[1], 0)
-				);
+		orion_histogram_increment( discrim, feat_bin_idx[0], feat_bin_idx[1] );
 	}
 }
 

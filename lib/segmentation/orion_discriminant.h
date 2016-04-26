@@ -12,9 +12,20 @@
 
 /* structs, enums */
 /*TODO(Define struct members)*/
-typedef struct {
 
-	ndarray3* histogram; /* dimensions: [m, n, 1] */
+/* TODO document */
+#define orion_histogram_elems( discrim ) ( discrim->m * discrim->n )
+
+#define _orion_histogram_index(discrim, bin_m, bin_n) (bin_m * discrim->m + bin_n)
+
+/* TODO document */
+#define orion_histogram_increment(discrim, bin_m, bin_n) \
+	( ++( discrim->histogram[ _orion_histogram_index(discrim, bin_m, bin_n)  ] ) )
+
+typedef struct {
+	size_t m; /* number of bins in the first dimension */
+	size_t n; /* number of bins in the second dimension */
+	size_t* histogram; /* dimensions: [m, n] */
 
 
 	/* store the minimum and maximum value for each feature */
@@ -32,8 +43,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* Function prototypes */
-
-
+extern void orion_histogram_init(orion_discriminant_function* discrim, size_t m, size_t n);
 
 #ifdef __cplusplus
 };
