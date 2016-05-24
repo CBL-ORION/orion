@@ -9,6 +9,7 @@ ITKIOFactoryRegistration
 cmake_install.cmake
 
 /make/itk/itk-config.mk.gen
+/make/vtk/vtk-config.mk.gen
 
 /ComputeFrangi/Makefile
 /ComputeFrangi/ComputeEigenValue_Sorted_Frangi
