@@ -1,4 +1,4 @@
-VTK_CONFIG_MK := make/vtk/vtk-config.mk.gen
+VTK_CONFIG_MK := $(BUILDDIR)/.make/vtk/vtk-config.mk.gen
 include $(VTK_CONFIG_MK)
 
 BIN_VTK_IMAGE_MAPPER := $(BINDIR)/vtk-image-mapper/ImageMapper$(EXEEXT)

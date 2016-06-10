@@ -29,7 +29,7 @@ foreach (lib ${VTK_LIBRARIES})
 	#set(VTK_LDLIBS "${VTK_LDLIBS} -l${lib}")
 endforeach()
 
-set(VTK_CONFIG_MK_GEN "vtk-config.mk.gen" )
+set(VTK_CONFIG_MK_GEN "${CMAKE_BINARY_DIR}/vtk-config.mk.gen" )
 file(WRITE ${VTK_CONFIG_MK_GEN} "VTK_CPPFLAGS := ${VTK_CPPFLAGS}\n")
 file(APPEND ${VTK_CONFIG_MK_GEN} "VTK_LDFLAGS := ${VTK_LDFLAGS}\n")
 file(APPEND ${VTK_CONFIG_MK_GEN} "VTK_LDLIBS := ${VTK_LDLIBS}\n")
