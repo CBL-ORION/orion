@@ -1,5 +1,9 @@
 language: c
 sudo: false
+addons:
+  apt:
+    packages:
+      - libvtk5-dev
 env:
   - PROD=1 TEST_VERBOSE=1
   - PROD=1 TEST_VERBOSE=1 COVERAGE=1
