@@ -1,9 +1,15 @@
 ### Implict rules
 $(BUILDDIR)/%.o : $(LIBDIR)/%.c
 	@$(MKDIR_DEPEND.c)
-	@$(MKDIR_BUILD)
+	@$(MKDIR_BUILD.c)
 	@echo "  [ CC SRC $@ ]"
 	$(NOECHO)$(COMPILE.c) -o $@ $<
+
+$(BUILDDIR)/%.o : $(LIBDIR)/%.cxx
+	@$(MKDIR_DEPEND.cc)
+	@$(MKDIR_BUILD.cc)
+	@echo "  [ CXX SRC $@ ]"
+	$(NOECHO)$(COMPILE.cc) -o $@ $<
 
 $(BUILDTESTDIR)/%$(EXEEXT): $(TESTDIR)/%.c
 	@$(MKDIR_DEPEND.c)

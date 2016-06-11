@@ -14,7 +14,7 @@ $(BIN_VTK_IMAGE_MAPPER): make/vtk/ImageMapper.cxx
 
 $(VTK_CONFIG_MK):  make/vtk/CMakeLists.txt \
 		| $(BUILDDIR)
-	@$(MKDIR_BUILD)
+	@$(MKDIR_BUILD.c)
 	$(CMAKE.generate) -B$(BUILDDIR)/.make/vtk -Hmake/vtk
 	echo "VTK_LDLIBS += `./tool/script/extract-linker-flags.pl < $(BUILDDIR)/.make/vtk/CMakeFiles/ImageMapper.dir/link.txt`" >> $@
 
