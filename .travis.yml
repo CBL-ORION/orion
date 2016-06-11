@@ -5,7 +5,8 @@ sudo: required
 addons:
   apt:
     packages:
-      - libvtk5-dev
+      - libvtk6-dev
+      - libinsighttoolkit4-dev
 env:
   - PROD=1 TEST_VERBOSE=1
   - PROD=1 TEST_VERBOSE=1 COVERAGE=1
@@ -13,10 +14,6 @@ compiler:
   - gcc
   - clang
 before_install:
-  - mkdir build
-  - git clone https://github.com/CBL-ORION/ITK-builds.git external/ITK
-  # path for CMake to search for built ITK
-  - export ITK_DIR="`( cd external/ITK/usr/local/lib/cmake/ITK-4.9 && pwd )`"
   - if [ "$COVERAGE" = 1 ]; then pip install --user cpp-coveralls;  fi
 script:
   # version of gcc on Travis-CI does not support ASAN flag
