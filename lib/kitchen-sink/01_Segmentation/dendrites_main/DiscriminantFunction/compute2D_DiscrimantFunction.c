@@ -97,6 +97,7 @@ void orion_compute2D_DiscrimantFunction(
 
 	/* compute the 2D histogram for edges */
 	orion_hist3(param, features, non_isolated_instance_indices, discrim);
+	orion_discriminant_function_display( discrim );
 
 	/* normalise the histogram in order to compute the cost function */
 	orion_normaliseHistogram(param, discrim);
@@ -125,7 +126,7 @@ void orion_hist3(
 
 	/* NOTE: histogram is allocated here: if the size of the bins change
 	 * for each dimension, then this will need to change */
-	orion_histogram_init( discrim, (param->bins + 1), (param->bins + 1) );
+	orion_histogram_init( discrim, param->bins, param->bins );
 
 	for( int indices_idx = 0; indices_idx < indices_sz; indices_idx++ ) {
 		size_t feat_instance_idx = array_get_int( indices, indices_idx );
@@ -137,6 +138,10 @@ void orion_hist3(
 					( cur_feature - discrim->min_value[feat_idx] )
 					/ ( discrim->step_size[feat_idx] )
 					);
+			if( feat_bin_idx[feat_idx] >= discrim->bin_sz[feat_idx] ) {
+				/* max value goes in the last bin */
+				feat_bin_idx[feat_idx] = discrim->bin_sz[feat_idx] - 1;
+			}
 		}
 		/* increment by 1 */
 		orion_histogram_increment( discrim, feat_bin_idx[0], feat_bin_idx[1] );
@@ -147,5 +152,14 @@ void orion_normaliseHistogram(
 		orion_segmentation_param* param,
 		orion_discriminant_function* discrim
 		) {
-	WARN_UNIMPLEMENTED;
+	/* parameter for the smoothing of the Histogram */
+	pixel_type sigma = 5;
+
+	/* Apply sigmoid function to normalize the volume. Just in case that we
+	 * are not using the multiscale approach */
+	for( int hist_idx = 0; hist_idx < orion_histogram_elems(discrim); hist_idx++) {
+		/* 1 / (1 + exp(-h)) */
+		discrim->norm_histogram[hist_idx] =
+			1.0 / ( 1.0 + expf( -(discrim->histogram[hist_idx]) ) );
+	}
 }

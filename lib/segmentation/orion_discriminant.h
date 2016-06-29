@@ -25,7 +25,11 @@
 typedef struct {
 	/* number of bins in each dimension */
 	size_t bin_sz[ORION_NUMBER_OF_SEGMENTATION_FEATURES];
+	/* stores count */
 	size_t* histogram; /* dimensions: [bin_sz[0], bin_sz[1]] */
+
+	/* histogram after normalisation */
+	pixel_type* norm_histogram; /* dimensions: [bin_sz[0], bin_sz[1]] */
 
 
 	/* store the minimum and maximum value for each feature */
