@@ -1,8 +1,3 @@
-/* TODO
- *
- * Refactor: multiscaleLaplacianFilter
- */
-
 #include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/multiscaleLaplacianFilter.h"
 
 #include "util/util.h"
@@ -42,7 +37,10 @@ orion_multiscale_laplacian_output* orion_multiscale_laplacian_output_new() {
 	return r;
 }
 
-/*
+/* MATLAB version: multiscaleLaplacianFilter */
+
+/* TODO document better
+ *
  * function that allows to get the maximum reponse of the Laplacian
  *
  * laplacian_scales: scales to use for calculating the Laplacian. These are

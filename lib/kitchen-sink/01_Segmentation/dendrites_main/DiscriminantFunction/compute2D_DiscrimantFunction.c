@@ -2,14 +2,11 @@
 
 #include "kitchen-sink/01_Segmentation/dendrites_main/DiscriminantFunction/removeIsolatedResponses.h"
 
-/* TODO
- *
- * Refactor: compute2D_DiscrimantFunction
- */
-
 #define MAX_NUMBER_OF_HISTOGRAM_SAMPLES 1E6
 
 #include "numeric/sample.h"
+#include "vis/vis.hxx"
+
 #include <math.h>
 #include <float.h>
 #include <assert.h>
@@ -27,6 +24,9 @@ void orion_normaliseHistogram(
 		orion_discriminant_function* discrim
 		);
 
+/* MATLAB version: compute2D_DiscrimantFunction */
+
+/* TODO document */
 void orion_compute2D_DiscrimantFunction(
 		orion_segmentation_param* param,
 		orion_features* features,
@@ -107,7 +107,7 @@ void orion_compute2D_DiscrimantFunction(
 
 /* Creates a 2D histogram
  *
- * TODO
+ * TODO document
  *
  * See also: MATLAB's hist3 function
  */

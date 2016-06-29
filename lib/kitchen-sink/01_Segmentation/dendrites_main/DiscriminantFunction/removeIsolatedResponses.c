@@ -1,12 +1,10 @@
 #include "kitchen-sink/01_Segmentation/dendrites_main/DiscriminantFunction/removeIsolatedResponses.h"
-/* TODO
- *
- * Refactor: removeIsolatedResponses
- */
 
 #include "numeric/sample.h"
 #include <float.h>
 #include "simple-log/simplelog.h"
+
+/* MATLAB version: removeIsolatedResponses */
 
 /* orion_removeIsolatedResponses
  *

@@ -1,8 +1,8 @@
 #include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/readNegativeSamples.h"
 
-/* TODO
- *
- * Refactor: readNegativeSamples
+/* MATLAB version: Refactor: readNegativeSamples */
+
+/* TODO document
  */
 orion_multiscale_laplacian_output*
 orion_readNegativeSamples(
