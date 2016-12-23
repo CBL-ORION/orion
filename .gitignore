@@ -19,6 +19,7 @@ ComputeFilter
 /.build
 /.deps
 /bin
+/doxygen-doc
 
 *~
 *.a

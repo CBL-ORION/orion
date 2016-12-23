@@ -55,7 +55,7 @@ CONFIG_HEADER_FILE := $(LIBDIR)/config/config.h
 $(CONFIG_HEADER_FILE): $(BIN_BIN_CONFIG.c)
 	$(BIN_BIN_CONFIG.c) > $@
 
-.PHONY: tags
+.PHONY: tags $(DOXYGENDIR)
 
 ifdef PROD
   DEV_TARGETS :=
@@ -78,6 +78,7 @@ clean:
 	-find . -type f -name '*.o' -delete
 	-find . -type f \( -name '*.gcda' -o -name '*.gcno' -o -name '*.gcov' \) -delete
 	-rm -Rf $(OUTPUT_DIRS)
+	-rm -Rf $(DOXYGENDIR)
 	-rm -Rf $(ITK_CONFIG_MK)
 	-rm -Rf $(GCOVDIR) $(LCOVDIR)
 	-rm -Rf $(CONFIG_HEADER_FILE)
@@ -90,6 +91,10 @@ include make/00-implicit-rules.mk
 -include $(LIB_SRC.c:$(LIBDIR)/%.c=$(DEPDIR)/$(LIBDIR)/%.P)
 -include $(TEST.c:$(TESTDIR)/%.c=$(DEPDIR)/$(TESTDIR)/%.P)
 
+doc: $(DOXYGENDIR)
+
+$(DOXYGENDIR): make/Doxyfile
+	doxygen $<
 tags:
 	ctags --exclude=external -R .
 	# add the ORION 3 code to the tags so that it is easy to jump to the other codebase

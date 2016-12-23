@@ -10,6 +10,7 @@ TESTDIR  := lib/t
 # output of ${LIBDIR} and ${TESTDIR}
 BUILDDIR := .build
 BUILDTESTDIR := $(BUILDDIR)/t
+DOXYGENDIR := doxygen-doc
 
 # output used to build deps information for make(1)
 DEPDIR   := .deps
