@@ -26,7 +26,7 @@ foreach (lib ${ITK_LIBRARIES})
 	#set(ITK_LDLIBS "${ITK_LDLIBS} -l${lib}-4.8")
 endforeach()
 
-set(ITK_CONFIG_MK_GEN "itk-config.mk.gen" )
+set(ITK_CONFIG_MK_GEN "${CMAKE_BINARY_DIR}/itk-config.mk.gen" )
 file(WRITE ${ITK_CONFIG_MK_GEN} "ITK_CPPFLAGS := ${ITK_CPPFLAGS}\n")
 file(APPEND ${ITK_CONFIG_MK_GEN} "ITK_LDFLAGS := ${ITK_LDFLAGS}\n")
 file(APPEND ${ITK_CONFIG_MK_GEN} "ITK_LDLIBS := ${ITK_LDLIBS}\n")

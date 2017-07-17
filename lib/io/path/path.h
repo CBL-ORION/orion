@@ -39,6 +39,7 @@ extern char* orion_filepath_to_string(orion_filepath* fp);
 extern orion_filepath* orion_filepath_base( orion_filepath* fp );
 extern orion_filepath* orion_filepath_dir( orion_filepath* fp );
 
+extern orion_filepath* orion_filepath_cat( orion_filepath* fp1, orion_filepath* fp2 );
 extern orion_filepath* orion_filepath_sibling( orion_filepath* base, orion_filepath* relative);
 
 #ifdef __cplusplus

@@ -1,7 +1,4 @@
-ITK_INTEGRATION_OBJ := $(EIGEN_FRANGI_LIB_OBJ) $(EIGEN_SATO_LIB_OBJ) \
-	$(ITK_INTEGRATION_LIB_OBJ)
-
 $(LIBORION.A): $(LIB_OBJ) $(ITK_INTEGRATION_OBJ)
-	mkdir -p `dirname $@`
-	$(AR) $(ARFLAGS) $@ $^
-
+	@mkdir -p `dirname $@`
+	@echo "  [ AR $@ ]"
+	$(NOECHO)$(AR) $(ARFLAGS) $@ $^

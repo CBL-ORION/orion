@@ -1,4 +1,3 @@
-set path+=lib
 let g:syntastic_c_include_dirs = [
 			\ 'lib',
 			\ 'external/c-tap-harness/c-tap-harness/tests',
@@ -38,4 +37,18 @@ function! ORION_GotoCorresponding()
 	endif
 endfunction
 
-nmap ,gg :call ORION_GotoCorresponding()<Return>
+augroup ORION_project
+	au!
+	exe "autocmd BufRead ". expand("<sfile>:p:h")."/* call ORION_project_settings()"
+augroup END
+
+function! ORION_project_settings()
+setl path+=lib
+
+compiler gcc
+let &l:makeprg='export CFLAGS="$CFLAGS -fPIC -Wall"; make PROD=1 BUILD_DEBUG=1 BUILD_ENABLE_ASAN=0 -j4'
+
+nmap <buffer> <F5> :make<Return>
+nmap <buffer> ,gg :call ORION_GotoCorresponding()<Return>
+
+endfunction

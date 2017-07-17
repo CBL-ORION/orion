@@ -21,7 +21,6 @@ orion_filepath* orion_filepath_new_from_string(const char* fp_string) {
 	char* fp_string_norm;
 	size_t fp_string_norm_len;
 	safe_malloc_and_strcpy(&fp_string_norm, fp_string);
-	size_t fp_string_len = strlen( fp_string );
 
 	orion_filepath* fp = _orion_filepath_init();
 

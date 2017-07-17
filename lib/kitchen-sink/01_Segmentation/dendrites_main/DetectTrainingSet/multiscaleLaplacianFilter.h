@@ -7,6 +7,7 @@
 
 /* local headers */
 #include "ndarray/ndarray3.h"
+#include "ndarray/ndarray3_complex.h"
 #include "container/array.h"
 #include "param/segmentation.h"
 
@@ -14,13 +15,27 @@
 typedef struct {
 	/* each element contains the maximum response of the Laplacian over the
 	 * scales in `laplacian_scales`.
+	 *
+	 * The elements of this are not complex because we are operating on
+	 * only real-data and this means that the Fourier domain values are
+	 * conjugate symmetric.
 	 */
 	ndarray3* laplacian;
 
 	/* each element of scale_for_max_response contains the index of the
 	 * scale in `laplacian_scales` for which the response is maximised
+	 *
+	 * NOTE: Elements of this are of type `size_t`, but are stored in a
+	 * `pixel_type` for convenience.
 	 */
 	ndarray3* max_response_at_scale_idx;
+
+	/* Each element indicates if the Laplacian response at that voxel
+	 * should be classified as in in the background.
+	 *
+	 * Element is either 0.0 or 1.0.
+	 */
+	ndarray3* is_background;
 } orion_multiscale_laplacian_output;
 
 #ifdef __cplusplus
@@ -32,6 +47,9 @@ extern orion_multiscale_laplacian_output* orion_multiscaleLaplacianFilter(
 		ndarray3* input_volume,
 		array_float* laplacian_scales,
 		orion_segmentation_param* p );
+
+extern orion_multiscale_laplacian_output* orion_multiscale_laplacian_output_new();
+extern void orion_multiscale_laplacian_output_free(orion_multiscale_laplacian_output* r);
 
 #ifdef __cplusplus
 };

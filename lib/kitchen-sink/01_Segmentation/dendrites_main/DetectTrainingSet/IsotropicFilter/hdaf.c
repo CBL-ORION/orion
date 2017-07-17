@@ -1,11 +1,10 @@
-/*
- * Refactor: hdaf
- */
 #include "hdaf.h"
 
 #include <math.h>
 
 #include "numeric/func.h"
+
+/* MATLAB version: hdaf */
 
 /*
  * orion_hdaf( hdaf_approx_degree, scaling_constant, x)

@@ -75,6 +75,30 @@
 
 
 /** TODO document
+ *
+ *  ndarray3_increment( ndarray3* n, size_t i, size_t j, size_t k              )
+ */
+#define _real_ndarray3_generic_increment(_n, _n_i, _n_j, _n_k) \
+	do { \
+		++( *_ndarray3_generic_index( (_n), (_n_i), (_n_j), (_n_k) ) ); \
+	} while(0)
+#ifdef NDARRAY3_ASSERT_BOUNDS_ACCESS
+  #define ndarray3_generic_increment(_n, _n_i, _n_j, _n_k) \
+	do { \
+		if( likely(_ndarray3_generic_assert_bounds(_n, _n_i, _n_j, _n_k)) ) { \
+			_real_ndarray3_generic_increment(_n, _n_i, _n_j, _n_k); \
+		} else { \
+			die("ndarray3 (%p) access [%d,%d,%d]", _n, _n_i,_n_j,_n_k); \
+		} \
+	} while(0)
+#else
+  #define ndarray3_generic_increment(_n, _n_i, _n_j, _n_k) \
+	_real_ndarray3_generic_increment(_n, _n_i, _n_j, _n_k)
+#endif /* NDARRAY3_ASSERT_BOUNDS_ACCESS */
+
+
+
+/** TODO document
  *  NDARRAY3_GENERIC_LOOP_OVER_START( ndarray3* n, size_t i, size_t j, size_t k ) {
  *      / * code body * /
  *  } NDARRAY3_GENERIC_LOOP_OVER_END;

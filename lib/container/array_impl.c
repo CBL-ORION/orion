@@ -67,3 +67,8 @@ void TYPED_NAME(array_resize) ( TYPED_NAME(array)* array, size_t new_capacity ) 
 	RESIZE_COUNT(array->data, TYPE, new_capacity);
 	array->capacity = new_capacity;
 }
+
+void TYPED_NAME(array_reset) ( TYPED_NAME(array)* array ) {
+	assert( array != NULL );
+	array->length = 0;
+}

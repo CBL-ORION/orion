@@ -1,6 +1,3 @@
-/*
- * Refactor: Makefilter
- */
 
 #include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/Makefilter.h"
 
@@ -11,6 +8,10 @@
 
 #include "kitchen-sink/01_Segmentation/dendrites_main/DetectTrainingSet/IsotropicFilter/hdaf.h"
 
+/* MATLAB version: Makefilter */
+
+/* TODO document
+ */
 ndarray3* orion_Makefilter(
 		size_t nx, size_t ny, size_t nz,
 		int hdaf_approx_degree,

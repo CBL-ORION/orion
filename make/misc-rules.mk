@@ -11,6 +11,12 @@ $(BUILDDIR)/integration/itk/libIntegrationITK.a: \
 		$(FILTER_OBJ) \
 		$(BUILDDIR)/ndarray/array_ndarray3.o \
 		$(BUILDDIR)/ndarray/ndarray3.o
-	@$(MKDIR_BUILD)
+	@$(MKDIR_BUILD.cc)
 	$(CMAKE.generate) -B$(BUILDDIR)/integration/itk -H$(LIBDIR)/integration/itk
 	$(MAKE) -C$(BUILDDIR)/integration/itk
+
+$(VTK_VIS_LIB_OBJ): CPPFLAGS += $(VTK_CPPFLAGS)
+$(VTK_VIS_LIB_OBJ): CXXFLAGS += -std=c++11
+$(VTK_VIS_LIB_OBJ): LDFLAGS += $(VTK_LDFLAGS)
+$(VTK_VIS_LIB_OBJ): LDLIBS += $(VTK_LDLIBS)
+$(VTK_VIS_LIB_OBJ): $(LIBDIR)/vis/vis.cxx

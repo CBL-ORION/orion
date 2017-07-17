@@ -29,6 +29,8 @@ extern "C" {
  *
  * modulo numerical errors.
  *
+ * The data must have even dimensions.
+ *
  * See also:
  *    Kiss-FFT:
  *        kiss_fftndr, kiss_fftndri
@@ -39,6 +41,9 @@ extern "C" {
 extern ndarray3_complex* ndarray3_fftn_r2c( ndarray3* n );
 extern ndarray3* ndarray3_ifftn_c2r( ndarray3_complex* n );
 
+/* These functions allocate memory, but do not require even dimensions */
+extern ndarray3_complex* ndarray3_fftn_real( ndarray3* n );
+extern ndarray3* ndarray3_ifftn_real( ndarray3_complex* n );
 
 #ifdef __cplusplus
 };

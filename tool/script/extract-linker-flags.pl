@@ -6,5 +6,5 @@ use warnings;
 use Text::ParseWords;
 
 my @words = shellwords(<>);
-my @ldlibs = grep { /(^-l)|\.a$/ } @words;
+my @ldlibs = grep { /(^-l)|\.a$|\.so/ } @words;
 print "@ldlibs";
